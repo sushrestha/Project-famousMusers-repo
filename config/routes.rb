@@ -39,15 +39,15 @@ get 'ratings/:id/new' => 'ratings#new', :as => 'new_rating'
 post 'ratings' => 'ratings#create'
   #get 'musing', to: 'musing#index' as: 'musing'
 
-  root 'users#new'
+  root 'musers#new'
 
-  get 'signup' => 'users#new'
+  get 'signup' => 'musers#new'
 
   get    'login'  => 'sessions#new'
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  resources :users
+  resources :musers
 
   # for musing
   # get '/theaters', to: 'theaters#index', as:'theaters'

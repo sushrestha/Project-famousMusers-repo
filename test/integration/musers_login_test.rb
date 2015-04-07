@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class UsersLoginTest < ActionDispatch::IntegrationTest
+class MusersLoginTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:homer)
+    @muser = musers(:homer)
   end
 
   test "login with invalid information" do
@@ -18,32 +18,32 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "login with valid information" do
     get login_path
-    post login_path, session: { email: @user.email, password: 'password' }
-    assert_redirected_to @user
+    post login_path, session: { email: @muser.email, password: 'password' }
+    assert_redirected_to @muser
     follow_redirect!
-    assert_template 'users/show'
+    assert_template 'musers/show'
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
-    #assert_select "a[href=?]", user_path(@user)
+    #assert_select "a[href=?]", muser_path(@muser)
   end
 
   test "login with valid information followed by logout" do
     get login_path
-    post login_path, session: { email: @user.email, password: 'password' }
+    post login_path, session: { email: @muser.email, password: 'password' }
     assert is_logged_in?
-    assert_redirected_to @user
+    assert_redirected_to @muser
     follow_redirect!
-    assert_template 'users/show'
+    assert_template 'musers/show'
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
-    #assert_select "a[href=?]", user_path(@user)
+    #assert_select "a[href=?]", muser_path(@muser)
     delete logout_path
     assert_not is_logged_in?
     assert_redirected_to root_url
     follow_redirect!
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", logout_path,      count: 0
-    assert_select "a[href=?]", user_path(@user), count: 0
+    assert_select "a[href=?]", muser_path(@muser), count: 0
   end
 
 end

@@ -1,25 +1,25 @@
 require 'test_helper'
 
-class UsersSignupTest < ActionDispatch::IntegrationTest
+class MusersSignupTest < ActionDispatch::IntegrationTest
 
   test "invalid signup information" do
     get signup_path
-    assert_no_difference 'User.count' do
-      post users_path, user: { email: "user@invalid",
+    assert_no_difference 'Muser.count' do
+      post musers_path, muser: { email: "user@invalid",
                                password:              "foo",
                                password_confirmation: "bar" }
     end
-    assert_template 'users/new'
+    assert_template 'musers/new'
   end
 
   test "valid signup information" do
     get signup_path
-    assert_difference 'User.count', 1 do
-      post_via_redirect users_path, user: { email: "user@example.com",
+    assert_difference 'Muser.count', 1 do
+      post_via_redirect musers_path, muser: { email: "user@example.com",
                                             password:              "password",
                                             password_confirmation: "password" }
     end
-    assert_template 'users/show'
+    assert_template 'musers/show'
     assert is_logged_in?
   end
 

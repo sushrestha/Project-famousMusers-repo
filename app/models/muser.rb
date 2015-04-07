@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: musers
 #
 #  id              :integer          not null, primary key
 #  email           :string
@@ -9,8 +9,14 @@
 #  password_digest :string
 #
 
-class User < ActiveRecord::Base
-  before_save { self.email = email.downcase }
+class Muser < ActiveRecord::Base
+  attr_accessor :isModerator
+  
+  before_save do
+    #0 is false, 1 is true
+    self.isModerator = 0
+    self.email = email.downcase
+  end
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,
             presence: true,
@@ -19,9 +25,13 @@ class User < ActiveRecord::Base
             uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: { minimum: 6 }
+  #validates :isModerator, presence: true
+  
+ 
+  #validates :isModerator, :inclusion => { :in => [true, false] }
 
   # Returns the hash digest of the given string.
-  def User.digest(string)
+  def Muser.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ?
            BCrypt::Engine::MIN_COST :
            BCrypt::Engine.cost

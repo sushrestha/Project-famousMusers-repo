@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: musers
 #
 #  id              :integer          not null, primary key
 #  email           :string
@@ -13,4 +13,4 @@
 
 homer:
   email: homer@example.com
-  password_digest: <%= User.digest('password') %>
+  password_digest: <%= Muser.digest('password') %>
