@@ -1,5 +1,44 @@
 Rails.application.routes.draw do
 
+
+
+  
+
+  #get 'musings/index'
+
+  #get 'ratings/index'
+
+  #post 'ratings/'
+ #get 'ratings' => 'ratings#index', :as => 'ratings'
+ #get 'ratings'
+  #post 'ratings' => 'musings#rate'
+
+  
+  #get '/musing', to: 'musing#index' as: 'musing'
+  # to list all musings
+  get 'musings' => 'musings#index', :as => 'musings'
+
+  #to create new musing
+  get 'musings/new' => 'musings#new', :as => 'new_musing'
+  post 'musings' => 'musings#create'
+
+  # to show particular musing via id
+  get 'musings/:id' => 'musings#show', :as => 'musing'
+
+  # to edit particular musing via id
+  get 'musings/:id/edit' => 'musings#edit', :as => 'edit_musing'
+  # patch for update
+  patch 'musings/:id' => 'musings#update'
+  put 'musings/:id' => 'musings#update'
+
+  # to delete or destroy
+  delete 'musings/:id' => 'musings#destroy'
+
+  # to rate musing
+get 'ratings/:id/new' => 'ratings#new', :as => 'new_rating'
+post 'ratings' => 'ratings#create'
+  #get 'musing', to: 'musing#index' as: 'musing'
+
   root 'users#new'
 
   get 'signup' => 'users#new'
@@ -9,6 +48,21 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   resources :users
+
+  # for musing
+  # get '/theaters', to: 'theaters#index', as:'theaters'
+
+  # get '/theaters/new', to: 'theaters#new', as:'new_theater'
+  # post '/theaters', to: 'theaters#create'
+
+  # get '/theaters/:id', to: 'theaters#show', as:'theater'
+  # get '/theaters/:id/edit', to: 'theaters#edit', as:'edit_theater'
+
+  # patch '/theaters/:id', to: 'theaters#update'
+  # put '/theaters/:id', to: 'theaters#update'
+
+  # delete '/theaters/:id', to: 'theaters#destroy'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

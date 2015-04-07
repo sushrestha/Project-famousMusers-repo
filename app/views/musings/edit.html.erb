@@ -1,0 +1,37 @@
+<% provide(:title, 'Musings-Edit') %>
+<h1>Musing#edit</h1>
+<p>Find me in app/views/musing/edit.html.erb</p>
+
+
+<% flash.each do |message_type, message| %>
+	<div>Error:<%= message %></div>
+<% end %>
+
+<%= form_for(@musing) do |f| %>
+	<table>
+		<ul>
+			<tr>
+		    	<td><li><%= f.label :title %>:</li></td>
+		    	<td><%= f.text_field :title %></td>
+		    </tr>
+
+			<tr>
+		    	<td><li><%= f.label :content %>:</li></td>
+		    	<td><%= f.text_area :content %></td>
+		    </tr>
+
+			<tr>
+		    	<td><li><%= f.label :isPrivate %>:</li></td>
+		    	<td><%= f.check_box :isPrivate %></td>
+		    </tr>
+
+		    <tr>
+		    	<td><%= f.submit  "Update" %></td>
+		    	<td><%= submit_tag "Cancel"  %></td>
+		    </tr>
+		</ul>
+	</table>
+
+
+
+<% end %>

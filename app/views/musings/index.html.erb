@@ -1,0 +1,38 @@
+<% provide(:title, 'Musings-Index') %>
+<h1>Musing#index</h1>
+<p>Find msse in app/views/musing/index.html.erb</p>
+
+<table border="2px solid black" >
+ <tr><th colspan="5">All Musings </th></tr>
+  <tr>
+    <th>Title</th>	
+    <th>content</th>
+    <th>is Private</th>
+    <th>Average Rating</th>
+    <th>Actions</th>
+  </tr>
+  <% @musings.each do |musing| %>
+	<tr>
+		<td><%=   musing.title %> </td>
+		<td><%= musing.content %></td>
+    <td><%= musing.isPrivate %></td>
+    <td>
+        <% sum = 0.0 %>
+        <% i = 1.0 %>
+        <% musing.stars.each do |s| %>
+        <% (s.stars != nil) ? (star = s.stars) : (star = 0.0) %>
+          <% sum = sum + star %>
+          <% i = i + 1 %>
+        <% end %>
+        <%= (sum == 0.0) ? 0 : (sum/(i-1)).round(1) %>  
+         
+       
+    </td>
+    	 <td>[<%= link_to " Rate ", new_rating_path(musing)%>|<%= link_to " Show ", musing_path(musing)%>|<%= link_to " Edit ", edit_musing_path(musing)%>|<%= link_to " Delete ", musing, method: :delete, data: { confirm: 'Are you sure you want to delete?'}%>]</td>
+	</tr>
+  <% end %>
+
+</table>
+
+  <hr>
+  	<p style="text-align:center" ><%= link_to "Create New Musing", new_musing_path %><h3><%= link_to "Home", root_path %><h3></p>
