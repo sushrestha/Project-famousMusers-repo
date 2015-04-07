@@ -13,7 +13,8 @@ class MusersController < ApplicationController
 
   def create
     @muser = Muser.new(muser_params)
-    #@muser.isModerator = false
+    #by default users aren't moderators
+    @muser.isModerator = false
     if @muser.save
       log_in @muser
       flash[:success] = "Welcome to the Sample App!"

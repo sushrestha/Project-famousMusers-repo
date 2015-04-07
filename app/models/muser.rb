@@ -10,11 +10,11 @@
 #
 
 class Muser < ActiveRecord::Base
-  attr_accessor :isModerator
+  #attr_accessor :isModerator
   
   before_save do
     #0 is false, 1 is true
-    self.isModerator = 0
+    #self.isModerator = false
     self.email = email.downcase
   end
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -25,10 +25,7 @@ class Muser < ActiveRecord::Base
             uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: { minimum: 6 }
-  #validates :isModerator, presence: true
-  
- 
-  #validates :isModerator, :inclusion => { :in => [true, false] }
+  validates :isModerator, :inclusion => { :in => [true, false] }
 
   # Returns the hash digest of the given string.
   def Muser.digest(string)
