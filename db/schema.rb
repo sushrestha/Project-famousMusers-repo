@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20150407204713) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
-    t.integer  "isModerator"
+    t.boolean  "isModerator"
   end
 
   add_index "musers", ["email"], name: "index_musers_on_email", unique: true
