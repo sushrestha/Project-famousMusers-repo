@@ -10,11 +10,8 @@
 #
 
 class Muser < ActiveRecord::Base
-  #attr_accessor :isModerator
   
   before_save do
-    #0 is false, 1 is true
-    #self.isModerator = false
     self.email = email.downcase
   end
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

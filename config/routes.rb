@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
-
-
   
 
-  #get 'musings/index'
+  get 'messages/new' => 'messages#new'
+  post 'messages' => 'messages#create'
 
+  #get 'musings/index'
+ 
   #get 'ratings/index'
 
   #post 'ratings/'
