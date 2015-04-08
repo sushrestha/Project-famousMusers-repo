@@ -8,10 +8,13 @@
 #  isPrivate  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  muser_id   :integer
 #
 
 class Musing < ActiveRecord::Base
 
+	belongs_to :muser # 1 musing belongs to 1 muser
+	default_scope -> { order(created_at: :desc) } #listing the musings in most recently created.
 	# 1 musing has 0..* stars
 	has_many :stars,
 				class_name: 'Rating',

@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407033428) do
+ActiveRecord::Schema.define(version: 20150407204713) do
 
   create_table "musers", force: :cascade do |t|
     t.string   "email"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
-    t.boolean  "isModerator"
+    t.integer  "isModerator"
   end
 
   add_index "musers", ["email"], name: "index_musers_on_email", unique: true
@@ -29,7 +29,10 @@ ActiveRecord::Schema.define(version: 20150407033428) do
     t.integer  "isPrivate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "muser_id"
   end
+
+  add_index "musings", ["muser_id"], name: "index_musings_on_muser_id"
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "stars",      default: 0

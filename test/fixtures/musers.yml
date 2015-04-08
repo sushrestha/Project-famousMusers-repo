@@ -7,10 +7,15 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  password_digest :string
+#  isModerator     :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 homer:
   email: homer@example.com
+  password_digest: <%= Muser.digest('password') %>
+
+sujit:
+  email: sujit@example.com
   password_digest: <%= Muser.digest('password') %>

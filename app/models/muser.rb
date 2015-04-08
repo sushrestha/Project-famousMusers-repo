@@ -7,10 +7,14 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  password_digest :string
+#  isModerator     :integer
 #
 
 class Muser < ActiveRecord::Base
   attr_accessor :isModerator
+
+
+  has_many :musings
   
   before_save do
     #0 is false, 1 is true

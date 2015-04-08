@@ -3,7 +3,7 @@
 # Table name: ratings
 #
 #  id         :integer          not null, primary key
-#  stars      :integer
+#  stars      :integer          default("0")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  musing_id  :integer
