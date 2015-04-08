@@ -4,17 +4,7 @@ Rails.application.routes.draw do
 
   
 
-  #get 'musings/index'
-
-  #get 'ratings/index'
-
-  #post 'ratings/'
- #get 'ratings' => 'ratings#index', :as => 'ratings'
- #get 'ratings'
-  #post 'ratings' => 'musings#rate'
-
   
-  #get '/musing', to: 'musing#index' as: 'musing'
   # to list all musings
   get 'musings' => 'musings#index', :as => 'musings'
 

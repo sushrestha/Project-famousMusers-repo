@@ -5,6 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Muser.create(email: "abc@xyz.com",
+             password_digest: "password",
+             password_confirmation: "password",
+             isModerator: false,
+#             activated: true,
+ #            activated_at: Time.zone.now
+	)
+
 Musing.create( title: 'Title 1',
 			   content: 'This is content 1.',
 			   isPrivate: 0,
