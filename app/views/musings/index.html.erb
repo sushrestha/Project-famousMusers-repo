@@ -36,3 +36,26 @@
 
   <hr>
   	<p style="text-align:center" ><%= link_to "Create New Musing", new_musing_path %><h3><%= link_to "Home", root_path %><h3></p>
+
+<div id="MuseofDay">
+  <ol class="microposts">
+  <h3>Muse of Day</h3>
+  <% randId = (rand(6-1)+1)%>
+  <% @musing = Musing.find(randId) %>
+  <span class="title"><%= @musing.title %></span>
+  <span class="content"><%= @musing.content %></span>
+</ol>
+</div>
+
+<h3>All Musings</h3>
+<ol class="microposts">
+   <% @musings.each do |musing| %>
+  <li id="micropost-<%= musing.id %>">
+  <span class="title"><%= musing.title %></span>
+  <span class="content"><%= musing.content %>
+    <%= link_to " Rate ", new_rating_path(musing)%>
+  </span>
+  
+</li>
+ <% end %>
+</ol>
