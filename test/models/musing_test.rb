@@ -32,10 +32,10 @@ class MusingTest < ActiveSupport::TestCase
   end
 
         # for user id required field "Why its not working .... must check"
-  # test "user id must be present" do
-  #   @musing.muser_id = nil
-  #   assert_not @musing.valid?
-  # end
+  test "user id must be present" do
+    @musing.muser_id = nil
+    assert_not @musing.valid?
+  end
 
       # for title required field
   test "title must be required" do
