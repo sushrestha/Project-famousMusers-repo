@@ -47,10 +47,7 @@ class MusersController < ApplicationController
   # Confirms the correct muser.
   def correct_muser
     @muser = Muser.find(params[:id])
-    unless current_muser?(@muser)
-         flash[:danger] = "Please log in."
-        redirect_to login_url
-    end
+    redirect_to(root_url) unless current_muser?(@muser)
   end
 
 end
