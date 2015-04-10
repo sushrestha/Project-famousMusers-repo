@@ -1,0 +1,9 @@
+
+
+  <li id="micropost-<%= musing.id %>">
+  <span class="title"><%= musing.title %></span>
+  <span class="content"><%= musing.content %>
+    <%= link_to " Rate ", new_rating_path(musing)%>
+  </span>
+</li>
+

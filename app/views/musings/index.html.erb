@@ -9,6 +9,8 @@
     <th>content</th>
     <th>is Private</th>
     <th>Average Rating</th>
+    <th>Muser ID</th>
+    <th>Current Muser</th>
     <th>Actions</th>
   </tr>
   <% @musings.each do |musing| %>
@@ -28,24 +30,25 @@
          
        
     </td>
-    	 <td>[<%= link_to " Rate ", new_rating_path(musing)%>|<%= link_to " Show ", musing_path(musing)%>|<%= link_to " Edit ", edit_musing_path(musing)%>|<%= link_to " Delete ", musing, method: :delete, data: { confirm: 'Are you sure you want to delete?'}%>]</td>
+    <td><%= musing.muser_id %></td>
+    <td><%= (current_muser == nil) ?  "No User logged_in" : current_muser.id %></td>
+    <% if logged_in? %>
+    	 <td>[<%= link_to " Rate ", new_rating_path(musing)%>|<%= link_to " Show ", musing_path(musing)%>|
+        <% if current_muser.id == musing.muser_id %>
+        <%= link_to " Edit ", edit_musing_path(musing)%>|<%= link_to " Delete ", musing, method: :delete, data: { confirm: 'Are you sure you want to delete?'}%>
+        <% end %>
+        ]
+      </td>
+      <% end %>
 	</tr>
   <% end %>
 
 </table>
 
   <hr>
-  	<p style="text-align:center" ><%= link_to "Create New Musing", new_musing_path %><h3><%= link_to "Home", root_path %><h3></p>
+  	<p style="text-align:center" ><% if logged_in? %><%= link_to "Create New Musing", new_musing_path %><% end %><h3><%= link_to "Home", root_path %><h3></p>
 
-<div id="MuseofDay">
-  <ol class="microposts">
-  <h3>Muse of Day</h3>
-  <% randId = (rand(6-1)+1)%>
-  <% @musing = Musing.find(randId) %>
-  <span class="title"><%= @musing.title %></span>
-  <span class="content"><%= @musing.content %></span>
-</ol>
-</div>
+
 
 <h3>All Musings</h3>
 <ol class="microposts">
@@ -53,7 +56,7 @@
   <li id="micropost-<%= musing.id %>">
   <span class="title"><%= musing.title %></span>
   <span class="content"><%= musing.content %>
-    <%= link_to " Rate ", new_rating_path(musing)%>
+    <% if logged_in? %><%= link_to " Rate ", new_rating_path(musing)%> <% end %>
   </span>
   
 </li>

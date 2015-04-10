@@ -1,12 +1,12 @@
 class RatingsController < ApplicationController
 
 
-
-before_filter :check_for_cancel, :only => [:create, :update]
+before_action :logged_in_muser
+before_filter :check_for_cancel
 
 
   def index
-  	@ratings = Rating.all
+  	#@ratings = Rating.all
   end
 
   def new

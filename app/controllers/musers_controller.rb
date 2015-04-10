@@ -5,6 +5,7 @@ class MusersController < ApplicationController
 
   def show
     @muser = Muser.find(params[:id])
+    #@musings = Musings.All
   end
 
   def new
@@ -46,7 +47,10 @@ class MusersController < ApplicationController
   # Confirms the correct muser.
   def correct_muser
     @muser = Muser.find(params[:id])
-    redirect_to(root_url) unless current_muser?(@muser)
+    unless current_muser?(@muser)
+         flash[:danger] = "Please log in."
+        redirect_to login_url
+    end
   end
 
 end
