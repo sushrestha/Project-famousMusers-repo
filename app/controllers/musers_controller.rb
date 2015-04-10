@@ -5,7 +5,6 @@ class MusersController < ApplicationController
 
   def show
     @muser = Muser.find(params[:id])
-    #@musings = Musings.All
   end
 
   def new
