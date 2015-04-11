@@ -11,4 +11,9 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+  
+  # Returns the current logged-in muser (if any).
+  def current_muser
+    @current_muser ||= Muser.find_by(id: session[:muser_id])
+  end
 end

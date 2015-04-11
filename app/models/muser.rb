@@ -12,6 +12,9 @@
 
 class Muser < ActiveRecord::Base
   has_many :musings  
+  has_one :sender, :class_name => "Message", :foreign_key => 'author_id'
+  has_one :receiver, :class_name => "Message", :foreign_key => 'recipient_id'
+  
   before_save do
     self.email = email.downcase
   end

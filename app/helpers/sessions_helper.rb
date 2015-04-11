@@ -11,9 +11,9 @@ module SessionsHelper
   end
 
   # Returns the current logged-in muser (if any).
-  def current_muser
-    @current_muser ||= Muser.find_by(id: session[:muser_id])
-  end
+  #def current_muser
+  #  @current_muser ||= Muser.find_by(id: session[:muser_id])
+  #end
 
   # Returns true if the muser is logged in, false otherwise.
   def logged_in?
