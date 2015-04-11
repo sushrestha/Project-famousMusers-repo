@@ -36,12 +36,12 @@ class MusersController < ApplicationController
   # Before filters
 
   # Confirms a logged-in muser.
-  def logged_in_muser
-    unless logged_in?
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
-  end
+  #def logged_in_muser
+  #  unless logged_in?
+  #    flash[:danger] = "Please log in."
+  #    redirect_to login_url
+  #  end
+  #end
 
   # Confirms the correct muser.
   def correct_muser

@@ -1,0 +1,30 @@
+<% provide(:title, 'Messaging') %>
+
+<h1>Messages#new</h1>
+
+<table border="1" width="100%">
+  <!-- #Pull messages from database -->
+  <% @messages.each do |message| %>
+    <tr>
+      <td style="text-align:center"><%= message.content %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p>New Message:</p>
+
+<%= form_for(@message,:action => 'postMessage') do |f| %>
+<table>
+	<tr>
+		<td style="text-align:center"><%= f.label :content, "Content" %></td>
+	</tr>
+	<tr>
+		<td style="text-align:center"><%= f.text_field :content %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td style="text-align:center"><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
+		<td></td>
+	</tr>
+</table>
+<% end %>
