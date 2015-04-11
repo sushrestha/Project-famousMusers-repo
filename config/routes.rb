@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   
-  get 'messages' => 'messages#new'
-  get 'messages/new' => 'messages#new'
-  post 'messages' => 'messages#create'
+  get 'messages' => 'messages#index'
+  #get 'messages/new' => 'messages#new', :as => 'message'
+  post 'messages' => 'messages#postMessage'
 
   #get 'musings/index'
  

@@ -13,7 +13,7 @@
 
 <p>New Message:</p>
 
-<%= form_for(@message) do |f| %>
+<%= form_for(@message,:action => 'postMessage') do |f| %>
 <table>
 	<tr>
 		<td style="text-align:center"><%= f.label :content, "Content" %></td>
