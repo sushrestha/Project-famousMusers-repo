@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   
-
+  get 'messages' => 'messages#new'
   get 'messages/new' => 'messages#new'
   post 'messages' => 'messages#create'
 
