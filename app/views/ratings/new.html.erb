@@ -8,6 +8,7 @@
 			<tr><td><li>Title:</td><td><%= @rating.musing.title %></li></td></tr>
 			<tr><td><li>Content:</td><td><%= @rating.musing.content %></li></td></tr>
 			<tr><td><%= f.hidden_field :id, :value => @rating.musing.id %></tr></td>
+			
 			<tr>
 		    	<td><li><%= f.label :stars %>:</li></td>
 		    	<td><%= f.select(:stars, options_for_select([['1 Star',1],['2 Star',2],['3 Star', 3],['4 Star',4],['5 Star',5]])) %></td>
