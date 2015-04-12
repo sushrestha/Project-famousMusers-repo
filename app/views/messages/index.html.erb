@@ -1,0 +1,38 @@
+<% provide(:title, 'Messaging') %>
+
+<h1>Conversation with <%= @receiver_muser.name %></h1>
+
+
+<table class="table table-striped" border="0">
+  <tbody class="messages">
+  <!-- #Pull messages from database -->
+  <% @messages.each do |message| %>
+    <tr>
+      <td><% if message.author.name == @receiver_muser.name then %>
+      		<font color='firebrick'>
+      	<% else %>
+      		<font color='mediumblue'>
+      	<% end %>
+      	<%= message.author.name %>:</font></td>
+      <td style="text-align:right">
+      	<% if message.author.name == @receiver_muser.name then %>
+      		<font color='firebrick'>
+      	<% else %>
+      		<font color='mediumblue'>
+      	<% end %>
+      	<%= message.content %></font></td>
+    </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+  	<%= form_for(@message,:action => 'postMessage') do |f| %>
+	<%= f.hidden_field :post_id, :value => @receiver_id %>
+		<tr>
+			<td><%= f.text_area :content %></td>
+		</tr>
+		<tr>
+			<td><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
+		</tr>
+	<% end %>
+  </tfoot>
+</table>

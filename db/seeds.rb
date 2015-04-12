@@ -5,12 +5,24 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+first = Muser.create( email: 'fake4@fake.com',
+              name: 'bob',
+              password: 'password',
+              isModerator: 'f')
+              
+second = Muser.create( email: 'fake3@fake.com',
+              name: 'alice',
+              password: 'password',
+              isModerator: 'f')
+
+@myMessage = Message.create( content: 'test message',
+                             author_id: first.id,
+                             recipient_id: second.id)           
+
 Muser.create(email: "abc@xyz.com",
              password_digest: "password",
-             password_confirmation: "password",
-             isModerator: false,
-#             activated: true,
- #            activated_at: Time.zone.now
+             isModerator: 'f'
 	)
 
 Musing.create( title: 'Title 1',

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
-
-
   
+  get 'messages' => 'messages#index'
+  #get 'messages/new' => 'messages#new', :as => 'message'
+  post 'messages' => 'messages#postMessage'
+
 
   
   # to list all musings
@@ -25,9 +27,8 @@ Rails.application.routes.draw do
   delete 'musings/:id' => 'musings#destroy'
 
   # to rate musing
-get 'ratings/:id/new' => 'ratings#new', :as => 'new_rating'
-post 'ratings' => 'ratings#create'
-  #get 'musing', to: 'musing#index' as: 'musing'
+  get 'ratings/:id/new' => 'ratings#new', :as => 'new_rating'
+  post 'ratings' => 'ratings#create'
 
   root 'musers#new'
 
@@ -38,21 +39,6 @@ post 'ratings' => 'ratings#create'
   delete 'logout' => 'sessions#destroy'
 
   resources :musers
-
-  # for musing
-  # get '/theaters', to: 'theaters#index', as:'theaters'
-
-  # get '/theaters/new', to: 'theaters#new', as:'new_theater'
-  # post '/theaters', to: 'theaters#create'
-
-  # get '/theaters/:id', to: 'theaters#show', as:'theater'
-  # get '/theaters/:id/edit', to: 'theaters#edit', as:'edit_theater'
-
-  # patch '/theaters/:id', to: 'theaters#update'
-  # put '/theaters/:id', to: 'theaters#update'
-
-  # delete '/theaters/:id', to: 'theaters#destroy'
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

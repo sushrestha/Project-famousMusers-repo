@@ -1,12 +1,40 @@
-/* universal */
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
-html {
-  overflow-y: scroll;
-  width: 100%;
+$gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
 }
 
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* universal */
+
+/*html {
+  overflow-y: scroll;
+  width: 100%;
+}*/
+
 body {
-  padding-top: 60px;
+  padding-top: 143px;
   width: 100%;
 
 }
@@ -16,7 +44,12 @@ section {
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
+  border: 1px solid #bbb;
+  width: 98%;
+  padding: 10px;
+  height: auto !important;
+  /*margin-bottom: 15px;*/
 }
 
 .center {
@@ -54,9 +87,9 @@ p {
 }
 
 /* header */
-header{
+/*header{
   background-color: cyan;
-}
+}*/
 
 /* Container 
 .container{

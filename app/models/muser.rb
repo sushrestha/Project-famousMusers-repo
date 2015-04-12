@@ -11,12 +11,11 @@
 #
 
 class Muser < ActiveRecord::Base
-
-  #attr_accessor :isModerator
   has_many :musings  
+  has_one :sender, :class_name => "Message", :foreign_key => 'author_id'
+  has_one :receiver, :class_name => "Message", :foreign_key => 'recipient_id'
+  
   before_save do
-    #0 is false, 1 is true
-    #self.isModerator = false
     self.email = email.downcase
   end
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -27,6 +26,7 @@ class Muser < ActiveRecord::Base
             uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: { minimum: 6 }
+  validates :name, presence: true
   validates :isModerator, :inclusion => { :in => [true, false] }
 
   # Returns the hash digest of the given string.
