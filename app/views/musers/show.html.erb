@@ -3,6 +3,7 @@
 <p>isModerator:<%= @muser.isModerator %>|</p>
 <p>id:<%= @muser.id %>|</p>
 <p>email:<%= @muser.email %>|</p>
+<p>name: <%= @muser.name %></p>
 <p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
 <p>
   <%= link_to "Log out", logout_path, method: "delete" %>

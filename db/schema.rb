@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411160714) do
+ActiveRecord::Schema.define(version: 20150411231126) do
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150411160714) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.boolean  "isModerator"
+    t.string   "name"
   end
 
   add_index "musers", ["email"], name: "index_musers_on_email", unique: true

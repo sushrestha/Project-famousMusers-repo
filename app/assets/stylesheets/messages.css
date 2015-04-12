@@ -3,7 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 table {
-    width: 100%;
+    margin: auto;
+}
+
+table td {
+    border-top: none !important;
 }
 
 thead, tbody, tr, td, th { display: block; }
@@ -15,13 +19,7 @@ tr:after {
     clear: both;
 }
 
-tbody {
-    height: 200px;
-    overflow-y: auto;
-}
-
-
-tbody td, thead th {
-    width: 19.2%;
-    float: left;
+.messages {
+	height: 400px;
+	overflow-y: auto;
 }

@@ -7,26 +7,18 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 first = Muser.create( email: 'fake4@fake.com',
+              name: 'bob',
               password: 'password',
               isModerator: 'f')
               
 second = Muser.create( email: 'fake3@fake.com',
+              name: 'alice',
               password: 'password',
               isModerator: 'f')
-              
-#Message.create( content: 'test message',
-#                author: first,
-#                recipient: second)
 
 @myMessage = Message.create( content: 'test message',
                              author_id: first.id,
-                             recipient_id: second.id)
-#@myMessage.create_author(email: 'fake@fake.com',
-#              password: 'password',
-#              isModerator: 'f')
-#@myMessage.create_recipient(email: 'fake2@fake.com',
-#              password: 'password',
-#              isModerator: 'f')              
+                             recipient_id: second.id)           
 
 Musing.create( title: 'Title 1',
 			   content: 'This is content 1.',

@@ -1,41 +1,38 @@
 <% provide(:title, 'Messaging') %>
 
-<h1>Conversation with <%= @receiver_muser.email %></h1>
+<h1>Conversation with <%= @receiver_muser.name %></h1>
 
 
-<table class="table table-striped" border="0" width="100%">
-	<tbody>
-	<!--<tr>
-		<td>From</td>
-		<td>Content</td>
-	</tr> -->
+<table class="table table-striped" border="0">
+  <tbody class="messages">
   <!-- #Pull messages from database -->
   <% @messages.each do |message| %>
     <tr>
-      <td><%= message.author.email %>:</td>
-      <td style="text-align:right"><%= message.content %></td>
-      <!--<td><%= message.recipient.email %></td> -->
+      <td><% if message.author.name == @receiver_muser.name then %>
+      		<font color='firebrick'>
+      	<% else %>
+      		<font color='mediumblue'>
+      	<% end %>
+      	<%= message.author.name %>:</font></td>
+      <td style="text-align:right">
+      	<% if message.author.name == @receiver_muser.name then %>
+      		<font color='firebrick'>
+      	<% else %>
+      		<font color='mediumblue'>
+      	<% end %>
+      	<%= message.content %></font></td>
     </tr>
   <% end %>
   </tbody>
+  <tfoot>
+  	<%= form_for(@message,:action => 'postMessage') do |f| %>
+	<%= f.hidden_field :post_id, :value => @receiver_id %>
+		<tr>
+			<td><%= f.text_area :content %></td>
+		</tr>
+		<tr>
+			<td><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
+		</tr>
+	<% end %>
+  </tfoot>
 </table>
-
-<p>New Message from <%= @current_muser.email %>:</p>
-<p>Message to <%= @receiver_muser.email %></p>
-
-<%= form_for(@message,:action => 'postMessage') do |f| %>
-<%= f.hidden_field :post_id, :value => @receiver_id %>
-<table>
-	<tr>
-		<td style="text-align:center"><%= f.label :content, "Content" %></td>
-	</tr>
-	<tr>
-		<td style="text-align:center"><%= f.text_field :content %></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td style="text-align:center"><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
-		<td></td>
-	</tr>
-</table>
-<% end %>

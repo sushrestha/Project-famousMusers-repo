@@ -17,7 +17,7 @@ class MusersController < ApplicationController
     @muser.isModerator = false
     if @muser.save
       log_in @muser
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Signed up successfully!"
       redirect_to @muser
     else
       render 'new'
@@ -32,16 +32,6 @@ class MusersController < ApplicationController
                                  :password,
                                  :password_confirmation)
   end
-
-  # Before filters
-
-  # Confirms a logged-in muser.
-  #def logged_in_muser
-  #  unless logged_in?
-  #    flash[:danger] = "Please log in."
-  #    redirect_to login_url
-  #  end
-  #end
 
   # Confirms the correct muser.
   def correct_muser
