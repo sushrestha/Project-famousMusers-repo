@@ -2,15 +2,9 @@
 <h1>Rating#new</h1>
 <p>Find me in app/views/rating/new.html.erb</p>
 
-
-<% flash.each do |message_type, message| %>
-	<div>Error:<%= message %></div>
-<% end %>
-
 <%= form_for(@rating) do |f| %>
 	<table>
-		<ul> 
-			
+		<ul> 			
 			<tr><td><li>Title:</td><td><%= @rating.musing.title %></li></td></tr>
 			<tr><td><li>Content:</td><td><%= @rating.musing.content %></li></td></tr>
 			<tr><td><%= f.hidden_field :id, :value => @rating.musing.id %></tr></td>
@@ -22,7 +16,6 @@
 		    	<td><%= f.submit  "Rate" %></td>
 		    	<td><%= submit_tag "Cancel"  %></td>
 		    </tr>
-
 		</ul>
 	</table>
 

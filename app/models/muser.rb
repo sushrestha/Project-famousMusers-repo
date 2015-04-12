@@ -7,7 +7,8 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  password_digest :string
-#  isModerator     :boolean
+#  isModerator     :boolean          default("f"), not null
+#  name            :string
 #
 
 class Muser < ActiveRecord::Base

@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
+
   
   get 'messages' => 'messages#index'
   #get 'messages/new' => 'messages#new', :as => 'message'
   post 'messages' => 'messages#postMessage'
 
 
-  
   # to list all musings
   get 'musings' => 'musings#index', :as => 'musings'
 
@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   resources :musers
+
+  #resources :musings
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

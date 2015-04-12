@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20150411231126) do
 
   create_table "musers", force: :cascade do |t|
     t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "password_digest"
-    t.boolean  "isModerator"
+    t.boolean  "isModerator",     default: false, null: false
     t.string   "name"
   end
 

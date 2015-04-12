@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
 first = Muser.create( email: 'fake4@fake.com',
               name: 'bob',
               password: 'password',
@@ -20,12 +21,14 @@ second = Muser.create( email: 'fake3@fake.com',
                              author_id: first.id,
                              recipient_id: second.id)           
 
+
 Muser.create(email: "abc@xyz.com",
              password_digest: "password",
              isModerator: 'f'
 	)
 
-Musing.create( title: 'Title 1',
+Musing.create( muser_id: 1,
+				title: 'Title 1',
 			   content: 'This is content 1.',
 			   isPrivate: 0,
 			   stars: Rating.create([

@@ -3,8 +3,21 @@
 <p>isModerator:<%= @muser.isModerator %>|</p>
 <p>id:<%= @muser.id %>|</p>
 <p>email:<%= @muser.email %>|</p>
+
 <p>name: <%= @muser.name %></p>
 <p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
+
+
+
+<% if @muser.musings.any? %>
+<h3>Musings: ( <%= @muser.musings.count %> )</h3>
+<ol class="microposts">
+		<%= render @musings %>
+ </ol>
+<% end %>
+
+<p><%= link_to "Create New Musing", new_musing_path %></p>
+
 <p>
   <%= link_to "Log out", logout_path, method: "delete" %>
 </p>

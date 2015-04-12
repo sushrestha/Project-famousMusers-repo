@@ -2,11 +2,6 @@
 <h1>Musing#show</h1>
 <p>Find msse in app/views/musing/show.html.erb</p>
 
-
-
-
-
-
 <ul>
 	<li>Title: <%= @musing.title%></li>
 	<li>Content: <%= @musing.content%></li>
@@ -22,13 +17,12 @@
         <%= (sum == 0.0) ? 0 : (sum/(i-1)).round(1) %> 
 
 	</li>
-		
-
-	
-
-
-	
 </ul>
 
 <%= link_to "Show All Musings", musings_path() %>
-<%= link_to " | Edit Theater", edit_musing_path(@musing) %>
+<% if logged_in? %>
+	<%= link_to " | Show My Musings", muser_path(@current_muser.id)%>
+	<% if @current_muser.id == @musing.muser_id %>
+		<%= link_to " | Edit Musing", edit_musing_path(@musing) %>
+	<% end %>
+<% end %>

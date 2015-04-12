@@ -1,0 +1,12 @@
+
+
+<li id="micropost-<%= musing.id %>">
+  
+  <span class="title"><%= musing.title %></span>
+  <span class="content"><%= musing.content %>
+ 
+    <% if current_muser?(musing.muser) %>
+      [<%= link_to " Show ", musing_path(musing)%>|<%= link_to " Edit ", edit_musing_path(musing)%>|<%= link_to " Delete ", musing, method: :delete, data: { confirm: 'Are you sure you want to delete?'}%>]
+    <% end %>
+  </span>
+</li>
