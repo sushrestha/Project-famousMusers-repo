@@ -5,6 +5,7 @@ class MusersController < ApplicationController
 
   def show
     @muser = Muser.find(params[:id])
+    @musings = @muser.musings # aded to show muser's musings on his page too.
   end
 
   def new

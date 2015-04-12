@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
 
-
-
-  
-
-  
+ 
   # to list all musings
   get 'musings' => 'musings#index', :as => 'musings'
 
@@ -39,19 +35,9 @@ post 'ratings' => 'ratings#create'
 
   resources :musers
 
-  # for musing
-  # get '/theaters', to: 'theaters#index', as:'theaters'
+  #resources :musings
 
-  # get '/theaters/new', to: 'theaters#new', as:'new_theater'
-  # post '/theaters', to: 'theaters#create'
 
-  # get '/theaters/:id', to: 'theaters#show', as:'theater'
-  # get '/theaters/:id/edit', to: 'theaters#edit', as:'edit_theater'
-
-  # patch '/theaters/:id', to: 'theaters#update'
-  # put '/theaters/:id', to: 'theaters#update'
-
-  # delete '/theaters/:id', to: 'theaters#destroy'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
