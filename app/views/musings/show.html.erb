@@ -9,11 +9,11 @@
 			<span class="title"><%= @musing.title %></span>
 			<span class="content"><%= @musing.content %></br>
     		Average Rating: <b><%= (average_ratings(@musing) == 0) ? 0: "*"*average_ratings(@musing) %></b>
-    		</br><%= link_to "Show All Musings", musings_path() %>
+    		</br><%= link_to " Show All Musings ", musings_path(),:class=> "btn btn-default" %>
 			<% if logged_in? %>
-			<%= link_to " | Show My Musings", muser_path(@current_muser.id)%>
+			<%= link_to " Show My Musings ", muser_path(@current_muser.id), :class=> "btn btn-default"%>
 			<% if @current_muser.id == @musing.muser_id %>
-				<%= link_to " | Edit Musing", edit_musing_path(@musing) %>
+				<%= link_to " Edit Musing ", edit_musing_path(@musing) ,:class=> "btn btn-default" %>
 			<% end %>
 		<% end %>
 	</span>
