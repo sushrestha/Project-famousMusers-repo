@@ -7,8 +7,15 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
 
 
   def index
-  	@musings = Musing.all
-    @musing_of_the_day = Musing.last(1)
+  	   @musings = Musing.all
+   #@musings = Musing.find(4)
+ 
+    #@id = 0
+    #@musings = Musing.where("isPrivate = ?", @id)
+    #@public_musing  = Musing.find(4)
+
+    #@musing_of_the_day = Musing.find(2)
+   @musing_of_the_day = Musing.last!
  
   end
 
