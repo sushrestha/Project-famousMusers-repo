@@ -16,4 +16,5 @@ class Rating < ActiveRecord::Base
 	belongs_to :muser,  :class_name => "Muser", :foreign_key => 'muser_id'
 	validates :stars, presence: true, inclusion:{in: 0..5}
 	validates :musing_id, presence: true
+	validates :muser_id, presence: true
 end

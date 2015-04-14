@@ -13,8 +13,8 @@
 
 class Muser < ActiveRecord::Base
 
-  has_many :musings, dependent: :destroy 
-  has_one :rate, dependent: :destroy 
+  has_many :musings, :class_name => "Musing", :foreign_key => 'muser_id', dependent: :destroy 
+  has_one :rate, :class_name => "Rating", :foreign_key => 'muser_id', dependent: :destroy 
 
   has_one :sender, :class_name => "Message", :foreign_key => 'author_id'
   has_one :receiver, :class_name => "Message", :foreign_key => 'recipient_id'

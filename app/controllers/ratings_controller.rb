@@ -4,8 +4,6 @@ class RatingsController < ApplicationController
 before_action :logged_in_muser, :only => [:new, :create]
 before_filter :check_for_cancel
 
-#before_action :other_user, :only => [:new, :create]
-
 
   def index
   end
@@ -42,15 +40,6 @@ before_filter :check_for_cancel
     end      
   end
 
-
-   # checks other user
-  # def other_user
-  #   @musing = Musing.find(params[:id]) 
-  #   unless (current_muser.id != @musing.muser_id)
-  #     flash[:danger] = "No Access!!!"
-  #     redirect_to musings_url
-  #   end
-  # end
 
 
 end

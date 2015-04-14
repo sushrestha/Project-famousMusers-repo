@@ -29,7 +29,7 @@ $gray-medium-light: #eaeaea;
 
 
 body {
-  padding-top: 143px;
+  padding-top: 60px;
   width: 100%;
 
 }
@@ -82,11 +82,11 @@ p {
 }
 
 
-
+/*
 
 table {
   margin: 0 auto;
-}
+} */
 
 /* microposts */
 
@@ -145,4 +145,30 @@ span.picture {
 
 .MuseofDay{
   text-align: center
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $gray-medium-light;
+  color: $gray-light;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
 }

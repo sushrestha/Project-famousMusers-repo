@@ -1,24 +1,51 @@
 <% provide(:title, 'Musings-Rate') %>
-<h1>Rating#new</h1>
-<p>Find me in app/views/rating/new.html.erb</p>
 
-<%= form_for(@rating) do |f| %>
+<div class = "jumbotron">
+<h1>Rating#new</h1>
+
+<%= form_for(@rating, html: {class: 'form-horizontal'}) do |f| %>
 	<table>
 		<ul> 			
 			<tr><td><li>Title:</td><td><%= @rating.musing.title %></li></td></tr>
-			<tr><td><li>Content:</td><td><%= @rating.musing.content %></li></td></tr>
-			<tr><td><%= f.hidden_field :id, :value => @rating.musing.id %></tr></td>
+
 			
 			<tr>
 		    	<td><li><%= f.label :stars %>:</li></td>
 		    	<td><%= f.select(:stars, options_for_select([['1 Star',1],['2 Star',2],['3 Star', 3],['4 Star',4],['5 Star',5]])) %></td>
 		    </tr>
-  			<tr>
-		    	<td><%= f.submit  "Rate" %></td>
-		    	<td><%= submit_tag "Cancel"  %></td>
-		    </tr>
 		</ul>
 	</table>
 
 
+	<ol class="microposts">
+		<li id="micropost-<%= @rating.musing_id %>">
+			<span class="title"><%= @rating.musing.title  %></span>
+			<span class="content"><%= @rating.musing.content %></br>
+				<%= f.hidden_field :id, :value => @rating.musing.id %>
+			</span>
+		</li>
+ 
+
+
+
+
+ 	<div class="field form-group">
+ 		<label class="col-sm-3 control-label" for="musing_title"><%= @rating.musing.title  %></label>
+ 	</div>
+ 	<div class="field form-group">
+ 		<label class="col-sm-3 control-label" for="musing_title"><%= @rating.musing.content  %></label>
+ 	</div>
+	<div class="actions form-group">
+     <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit  "Rate", :class=> "btn btn-default" %>
+      <%= submit_tag "Cancel", :class=> "btn btn-default"  %>    
+     </div>
+  </div>
+
+	</ol>
+
+
+
+
 <% end %>
+</div>

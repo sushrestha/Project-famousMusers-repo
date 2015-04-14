@@ -8,6 +8,8 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
 
   def index
   	@musings = Musing.all
+    @musing_of_the_day = Musing.last(1).content
+ 
   end
 
   def new 
@@ -20,10 +22,7 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
       flash[:success] = "musing was successfully created."
   		redirect_to musings_url()
   	else
-      @musing.errors.full_messages.each do |m|
-        flash[:failure] = m
-      end
-      redirect_to new_musing_path
+      render 'new'
    	end
   end
 
@@ -45,16 +44,11 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
       #flash[:success] = "Musing was successfully updated."+"musing"+@musing1.id.to_s+"by"+@musing1.muser_id.to_s
   		redirect_to musing_url(@musing)
   	else
-      @musing.errors.full_messages.each do |m|
-        flash[:failure] = m #+@musing1.muser_id.to_s
-      end
-  	  redirect_to edit_musing_path(@musing)  	  		
+  	 render 'edit' 	  		
   	end
   end
 
  def destroy
-  	#delete the particular musing
-  	#@musing  = Musing.find(params[:id])
   	@musing.destroy
   	flash[:success] = " Musing '"+@musing.title+"' deleted"
   	redirect_to musings_url
@@ -66,6 +60,7 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
       redirect_to musings_url
     end      
   end
+
 
 
   #DRY up code 
@@ -88,6 +83,20 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
       redirect_to musings_url
     end
   end
+
+  def random_musing
+    @musings = Musing.find_by isPrivate: 0
+    @min = 0
+    @max = @musings.id.size
+    @list = Array.new(@max)
+    @musings.each do |musing|
+      @list.push(musing.id)
+    end
+    @randnum = Random.rand(@min,@max)
+    @id = @list[@randnum]
+    @random_musing = Musing.fing_by(@id)
+  end
+  helper_method :random_musing
 
 
 
