@@ -1,7 +1,7 @@
 class RatingsController < ApplicationController
 
 
-before_action :logged_in_muser
+before_action :logged_in_muser, :only => [:new, :create]
 before_filter :check_for_cancel
 
 
@@ -11,13 +11,15 @@ before_filter :check_for_cancel
   def new
     @rating = Rating.new
     @rating.musing = Musing.find(params[:id])
+ 
   end
 
   def create
 		@rating = Rating.new(rating_params)
     @rating.musing = Musing.find(params[:rating][:id])
+    @rating.muser = current_muser
   	if @rating.save
-      flash[:success] = "rating was successfully created."
+      flash[:success] = "Musing succesfully rated"
   		redirect_to musings_url()
   	else
       @rating.errors.full_messages.each do |m|
@@ -37,6 +39,7 @@ before_filter :check_for_cancel
       redirect_to musings_url
     end      
   end
+
 
 
 end

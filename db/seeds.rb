@@ -22,49 +22,26 @@ second = Muser.create( email: 'fake3@fake.com',
                              recipient_id: second.id)           
 
 
-Muser.create(email: "abc@xyz.com",
-             password_digest: "password",
+Muser.create(email: 'abc@xyz.com',
+			 name: 'abc',
+             password_digest: 'password',
              isModerator: 'f'
 	)
 
-Musing.create( muser_id: 1,
+Musing.create( muser_id: first.id,
 				title: 'Title 1',
 			   content: 'This is content 1.',
 			   isPrivate: 0,
 			   stars: Rating.create([
-			   	{stars: 2, musing_id: 1},
-			   	{stars: 4, musing_id: 1}
+			   	{stars: 2, musing_id: 1, muser_id: second.id}
 			   	])
 
 	)
-Musing.create( title: 'Title 2',
+Musing.create( muser_id: second.id,
+			   title: 'Title 2',
 			   content: 'This is content 2.',
 			   isPrivate: 1,
  				stars: Rating.create([
-			   	{stars: 1, musing_id: 2},
-			   	{stars: 5, musing_id: 2}
+			   	{stars: 1, musing_id: 2, muser_id: first.id}
 			   	])
-	)
-Musing.create( title: 'Title 3',
-			   content: 'This is content 3.',
-			   isPrivate: 0,
- 				stars: Rating.create([
-			   	{stars: 1, musing_id: 3},
-			   	{stars: 2, musing_id: 3},
-			   	{stars: 3, musing_id: 3},
-			   	{stars: 4, musing_id: 3},
-			    {stars: 5, musing_id: 3}
-			   	])
-	)
-Musing.create( title: 'Title 4',
-			   content: 'This is content 4.',
-			   isPrivate: 0
-	)
-Musing.create( title: 'Title 5',
-			   content: 'This is content 5.',
-			   isPrivate: 1
-	)
-Musing.create( title: 'Title 6',
-			   content: 'This is content 6.',
-			   isPrivate: 0
 	)

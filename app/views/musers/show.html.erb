@@ -10,13 +10,23 @@
 
 
 <% if @muser.musings.any? %>
-<h3>Musings: ( <%= @muser.musings.count %> )</h3>
-<ol class="microposts">
-		<%= render @musings %>
- </ol>
+	<div class = "jumbotron">
+		<div class="row">
+			<div class="col-xs-9">
+			<h3>Musings: ( <%= @muser.musings.count %> )</h3>
+			<ol class="microposts">
+				<%= render @musings %>
+ 			</ol>
+ 			</div>
+ 			<div class="col-xs-3">
+ 				<h2> <%= link_to "Create New Musing", new_musing_path, :class=> "btn btn-default"  %> </h2>
+
+ 			</div>
+ 		</div>	
+	</div>
 <% end %>
 
-<p><%= link_to "Create New Musing", new_musing_path %></p>
+<p></p>
 
 <p>
   <%= link_to "Log out", logout_path, method: "delete" %>

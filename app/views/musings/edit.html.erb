@@ -1,5 +1,35 @@
 <% provide(:title, 'Musings-Edit') %>
-<h1>Musing#edit</h1>
-<p>Find me in app/views/musing/edit.html.erb</p>
 
-<%= render :partial => "form" %>
+<div class = "jumbotron">
+<h1>Musing#edit</h1>
+<%= form_for(@musing, html: {class: 'form-horizontal'}) do |f| %>
+<%= render :partial => "musing_error_messages" %>
+  <div class="field form-group">
+    <%= f.label :title, :class => 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :title, :class => "form-control", placeholder: "Enter The Title"%>
+    </div>
+  </div>
+  <div class="field form-group">
+    <%= f.label :content, :class => 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_area :content, :class => "form-control", placeholder: "Enter The content"%>
+    </div>
+  </div>
+  <div class="field form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">          
+        <%= f.check_box :isPrivate %>
+        <%= f.label "Is Private" %> 
+      </div>
+    </div>
+  </div>
+  <div class="actions form-group">
+     <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit  "Update", :class=> "btn btn-default" %>
+      <%= submit_tag "Cancel", :class=> "btn btn-default"  %>    
+     </div>
+  </div>
+<% end %>
+
+</div>

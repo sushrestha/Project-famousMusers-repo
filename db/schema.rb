@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20150414003819) do
 
   create_table "categories", force: :cascade do |t|
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150414003819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
@@ -63,8 +65,10 @@ ActiveRecord::Schema.define(version: 20150414003819) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "musing_id"
+    t.integer  "muser_id"
   end
 
+  add_index "ratings", ["muser_id"], name: "index_ratings_on_muser_id"
   add_index "ratings", ["musing_id"], name: "index_ratings_on_musing_id"
 
 end
