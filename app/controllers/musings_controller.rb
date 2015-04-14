@@ -8,7 +8,7 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
 
   def index
   	@musings = Musing.all
-    @musing_of_the_day = Musing.last(1).content
+    @musing_of_the_day = Musing.last(1)
  
   end
 
