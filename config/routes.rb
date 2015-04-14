@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
 
   
+  resources :feedbacks
+
+  resources :categories
+
   get 'messages' => 'messages#index'
   #get 'messages/new' => 'messages#new', :as => 'message'
   post 'messages' => 'messages#postMessage'
