@@ -14,6 +14,10 @@
 class Muser < ActiveRecord::Base
 
   has_many :musings, :class_name => "Musing", :foreign_key => 'muser_id', dependent: :destroy 
+  has_many :active_subscribes, :class_name => "Subscribe", :foreign_key => 'follower_id', dependent: :destroy
+  has_many :passive_subscribes, :class_name=> "Subscribe", :foreign_key=> "followed_id", dependent: :destroy
+  has_many :following, through: :active_subscribes, source: :followed
+  has_many :followers, through: :passive_subscribes, source: :follower
   has_one :rate, :class_name => "Rating", :foreign_key => 'muser_id', dependent: :destroy 
 
   has_one :sender, :class_name => "Message", :foreign_key => 'author_id'
@@ -39,6 +43,21 @@ class Muser < ActiveRecord::Base
            BCrypt::Engine::MIN_COST :
            BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
+  end
+
+  # Follows a user.
+  def follow(other_muser)
+    active_subscribes.create(followed_id: other_muser.id)
+  end
+
+  # Unfollows a user.
+  def unfollow(other_muser)
+    active_subscribes.find_by(followed_id: other_muser.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_muser)
+    following.include?(other_muser)
   end
 
 end

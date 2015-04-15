@@ -45,3 +45,10 @@ Musing.create( muser_id: second.id,
 			   	{stars: 1, musing_id: 2, muser_id: first.id}
 			   	])
 	)
+# Following relationships
+#musers = Muser.all
+#muser  = musers.first
+#following = musers[2]
+#followers = musers[2]
+#following.each { |followed| muser.follow(followed) }
+#followers.each { |follower| follower.follow(muser) }

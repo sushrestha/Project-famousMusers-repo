@@ -6,13 +6,18 @@
 
 <p>name: <%= @muser.name %></p>
 <p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
-
-
+<div class="stats">
+<%= render 'shared/stats' %>
+<%= render 'follow_form'  %>
+</div>
+<%= link_to "Other Musers", musers_path(@musers) %>
+<%= link_to "Create Musings", musings_path(@musers) %>
 
 <% if @muser.musings.any? %>
 	<div class = "jumbotron">
 		<div class="row">
 			<div class="col-xs-9">
+			
 			<h3>Musings: ( <%= @muser.musings.count %> )</h3>
 			<ol class="microposts">
 				<%= render @musings %>
