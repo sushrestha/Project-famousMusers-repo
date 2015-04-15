@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20150414003819) do
+ActiveRecord::Schema.define(version: 20150414225233) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
-
-ActiveRecord::Schema.define(version: 20150414225233) do
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "competition_ratings", force: :cascade do |t|
     t.integer  "competitionstars"
@@ -34,17 +34,6 @@ ActiveRecord::Schema.define(version: 20150414225233) do
     t.string   "name"
     t.datetime "start"
     t.datetime "end"
-
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-
-  create_table "feedbacks", force: :cascade do |t|
-    t.text     "response"
-    t.integer  "musing_id"
-    t.integer  "muser_id"
-    t.time     "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -59,6 +48,14 @@ ActiveRecord::Schema.define(version: 20150414225233) do
   add_index "competitions_musings", ["competition_id"], name: "index_competitions_musings_on_competition_id"
   add_index "competitions_musings", ["musing_id"], name: "index_competitions_musings_on_musing_id"
 
+  create_table "feedbacks", force: :cascade do |t|
+    t.text     "response"
+    t.integer  "musing_id"
+    t.integer  "muser_id"
+    t.time     "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
@@ -101,5 +98,16 @@ ActiveRecord::Schema.define(version: 20150414225233) do
 
   add_index "ratings", ["muser_id"], name: "index_ratings_on_muser_id"
   add_index "ratings", ["musing_id"], name: "index_ratings_on_musing_id"
+
+  create_table "subscribes", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "subscribes", ["followed_id"], name: "index_subscribes_on_followed_id"
+  add_index "subscribes", ["follower_id", "followed_id"], name: "index_subscribes_on_follower_id_and_followed_id", unique: true
+  add_index "subscribes", ["follower_id"], name: "index_subscribes_on_follower_id"
 
 end
