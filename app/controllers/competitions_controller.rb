@@ -24,9 +24,14 @@ class CompetitionsController < ApplicationController
   
   def submitPost
     @thecompetition = Competition.find(params[:musing][:competitions])
+    #competition is already over or not yet begun
+    #if (@thecompetition.end < Time.now.to_datetime) or (@thecompetition.start > Time.now.to_datetime) then
+    #  render 'submit', :id => params[@musing.id], :competitions => @thecompetition
+    #  flash[:failure] = "Competition is not currently in progress."
+    #end
     @thecompetition.musings << @musing
     if @thecompetition.save
-        redirect_to action: "index"
+        redirect_to root_path
         flash[:success] = "Successfully submitted to competition."
     else
       render 'submit', :id => params[@musing.id], :competitions => @thecompetition
