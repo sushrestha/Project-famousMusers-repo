@@ -73,9 +73,9 @@ def muse_of_day
     end
 
     @min = 0
-    @max = @list.size-1
+    @max = @list.size
     @randnum = Random.rand(@min..@max)
-    @id = @list[@randnum]
+    (@randnum == @list.size) ? (@id = @list.size-1) : (@id = @list[@randnum])
     @musing_of_the_day = Musing.find(@id)
 end
 

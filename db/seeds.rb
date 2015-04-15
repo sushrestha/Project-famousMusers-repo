@@ -54,19 +54,16 @@ compRating2 = CompetitionRating.create([
 musing1 = Musing.create( title: 'Priorities',
 			   content: "Start by doing what's necessary; then do what's possible; and suddenly you are doing the impossible.",
 			   isPrivate: 0,
-			   stars: rating1,
 			   muser_id: muser4.id)
 
 musing2 = Musing.create( title: 'Mission',
 			   content: "My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.",
 			   isPrivate: 1,
- 				 stars: rating2,
          muser_id: muser5.id)
           
 musing3 = Musing.create( title: 'Stolen',
 			   content: 'It is one of the blessings of old friends that you can afford to be stupid with them.',
 			   isPrivate: 0,
- 				 stars: rating3,
          muser_id: muser1.id)
 
 musing4 = Musing.create( title: 'Jaden',
