@@ -34,6 +34,12 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
 
 
   def update
+    #@musing.competitions_musings.build
+    #@musing.competitions_ids.each do |cid|
+    #params[:musing][:competition_ids].each do |cid|
+      @musing.competitions << Competition.find(params[:musing][:competition_ids])
+    #end
+    
   	#update the particular musing
   	#@musing = Musing.find(params[:id])
     #@musing1 = current_muser.musings.find(params[:id]) #Finds the musing with id :musing_id and user_id equal to user.id
@@ -66,7 +72,7 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
   #DRY up code 
   #define params for musings
   def musing_params
-    params.require(:musing).permit(:title, :content, :isPrivate)
+    params.require(:musing).permit(:title, :content, :isPrivate, :competition_ids => [])
   end
 
   # find the musings by id
