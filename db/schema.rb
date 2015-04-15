@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414000803) do
-
-  create_table "categories", force: :cascade do |t|
-    t.string   "name"
-end
+ActiveRecord::Schema.define(version: 20150414225233) do
 
   create_table "competition_ratings", force: :cascade do |t|
     t.integer  "competitionstars"
@@ -32,17 +28,6 @@ end
     t.string   "name"
     t.datetime "start"
     t.datetime "end"
-
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-
-  create_table "feedbacks", force: :cascade do |t|
-    t.text     "response"
-    t.integer  "musing_id"
-    t.integer  "muser_id"
-    t.time     "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,7 +41,6 @@ end
 
   add_index "competitions_musings", ["competition_id"], name: "index_competitions_musings_on_competition_id"
   add_index "competitions_musings", ["musing_id"], name: "index_competitions_musings_on_musing_id"
-
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
