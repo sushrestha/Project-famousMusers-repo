@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 <h1><%= @muser.name %></h1>
 <% if logged_in? %>
 	<% if @muser.id == current_muser.id then %>
@@ -36,4 +37,36 @@
 	<p><%= link_to "Log out", logout_path, method: "delete" %></p>
 	
 	
+=======
+<h1><%= @muser.email %></h1>
+<p>isModerator:<%= @muser.isModerator %>|</p>
+<p>id:<%= @muser.id %>|</p>
+<p>email:<%= @muser.email %>|</p>
+
+<p>name: <%= @muser.name %></p>
+<p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
+<div class="stats">
+<%= render 'shared/stats' %>
+<%= render 'follow_form'  %>
+</div>
+<%= link_to "Other Musers", musers_path(@musers) %>
+<%= link_to "Create Musings", musings_path(@musers) %>
+
+<% if @muser.musings.any? %>
+	<div class = "jumbotron">
+		<div class="row">
+			<div class="col-xs-9">
+			
+			<h3>Musings: ( <%= @muser.musings.count %> )</h3>
+			<ol class="microposts">
+				<%= render @musings %>
+ 			</ol>
+ 			</div>
+ 			<div class="col-xs-3">
+ 				<h2> <%= link_to "Create New Musing", new_musing_path, :class=> "btn btn-default"  %> </h2>
+
+ 			</div>
+ 		</div>	
+	</div>
+>>>>>>> rashmi_14April
 <% end %>

@@ -1,11 +1,35 @@
 class MusersController < ApplicationController
+  before_action :logged_in_muser, only: [:show, :following, :followers]
+  before_action :correct_muser, only: [:show]
+
 
   before_action :logged_in_muser, only: [:show]
   #before_action :correct_muser,   only: [:show]
+  
+  def following
+    @title = "Following"
+    @muser  = Muser.find(params[:id])
+    @musers = @muser.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @muser  = Muser.find(params[:id])
+    @musers = @muser.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+
+
+  def index
+    @musers = Muser.all 
+  end
 
   def show
     @muser = Muser.find(params[:id])
     @musings = @muser.musings # aded to show muser's musings on his page too.
+    @other_muser = Muser.find_by_sql ["SELECT * FROM musers WHERE id != ?", current_muser]
   end
 
   def new

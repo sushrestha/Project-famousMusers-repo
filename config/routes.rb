@@ -54,7 +54,14 @@ Rails.application.routes.draw do
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  resources :musers
+  
+  resources :musers do
+    member do
+      get :following, :followers
+    end
+  end
+
+  resources :subscribes, only: [:create, :destroy]
 
   #resources :musings
 

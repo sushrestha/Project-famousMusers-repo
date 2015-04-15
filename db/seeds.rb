@@ -74,6 +74,7 @@ musing4 = Musing.create( title: 'Jaden',
 musing5 = Musing.create( title: 'Everyday',
 			   content: 'Wake up? But I just got out of bed yesterday',
 			   isPrivate: 1,
+
          muser_id: muser1.id)
 musing6 = Musing.create( title: 'Arthur C. Clarke/Sudden Clarity Clarence',
          content: "Magic is just science you don't know yet",
@@ -115,4 +116,17 @@ competition3 = Competition.create( name: 'Best',
                                    start: DateTime.parse("2015-03-01 08:00:00"),
                                    end: DateTime.parse("2015-03-31 11:59:59"),
                                    musings: [musing1,musing2,musing3])
+
+
+ 				stars: Rating.create([
+			   	{stars: 1, musing_id: 2, muser_id: first.id}
+			   	])
+	)
+# Following relationships
+#musers = Muser.all
+#muser  = musers.first
+#following = musers[2]
+#followers = musers[2]
+#following.each { |followed| muser.follow(followed) }
+#followers.each { |follower| follower.follow(muser) }
 

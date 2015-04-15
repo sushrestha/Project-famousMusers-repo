@@ -1,0 +1,15 @@
+<% @muser ||= current_muser %>
+<div class="stats">
+  <a href="<%= following_muser_path(@muser) %>">
+    <strong id="following" class="stat">
+      <%= @muser.following.count %>
+    </strong>
+    following
+  </a>
+  <a href="<%= followers_muser_path(@muser) %>">
+    <strong id="followers" class="stat">
+      <%= @muser.followers.count %>
+    </strong>
+    followers
+  </a>
+</div>

@@ -1,0 +1,5 @@
+<%= form_for(current_muser.active_subscribes.find_by(followed_id: @muser.id),
+             html: { method: :delete },
+             remote: true) do |f| %>
+  <%= f.submit "Unfollow", class: "btn" %>
+<% end %>
