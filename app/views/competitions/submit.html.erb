@@ -1,0 +1,18 @@
+<% provide(:title, 'Submission') %>
+<h1>Submit to Competition</h1>
+
+<%= form_for(@musing, :controller => 'competitions', :action => 'submitPost') do |f| %>
+<ul>
+	<li>Title: <%= @musing.title%></li>
+	<li>Content: <%= @musing.content%></li>
+	<% if logged_in? %>
+		<% options = options_from_collection_for_select(@competitions, 'id', 'name')%>
+		<li><%= f.label :competition_ids, "Competitions" %>
+			<%= f.collection_select :competition_ids, Competition.order(:name), :id, :name, {}, {multiple: false} %>
+			</li>
+		<li><%= f.submit  "Submit" %></li>
+	<% end %>
+</ul>
+<% end %>
+
+<%= link_to "Show All Musings", musings_path() %>

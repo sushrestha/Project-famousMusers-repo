@@ -1,34 +1,39 @@
 
-<h1><%= @muser.email %></h1>
-<p>isModerator:<%= @muser.isModerator %>|</p>
-<p>id:<%= @muser.id %>|</p>
-<p>email:<%= @muser.email %>|</p>
-
-<p>name: <%= @muser.name %></p>
-<p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
-
-
-
-<% if @muser.musings.any? %>
-	<div class = "jumbotron">
-		<div class="row">
-			<div class="col-xs-9">
-			<h3>Musings: ( <%= @muser.musings.count %> )</h3>
-			<ol class="microposts">
-				<%= render @musings %>
- 			</ol>
- 			</div>
- 			<div class="col-xs-3">
- 				<h2> <%= link_to "Create New Musing", new_musing_path, :class=> "btn btn-default"  %> </h2>
-
- 			</div>
- 		</div>	
-	</div>
+<h1><%= @muser.name %></h1>
+<% if logged_in? %>
+	<% if @muser.id == current_muser.id then %>
+		<% if @muser.isModerator then %>
+			<p>You are a moderator</p>
+		<% else %>
+			<p>You are not a moderator</p>
+		<% end %>
+		
+		<p>Your email address: <%= @muser.email %></p>
+		
+		<!-- Display the user's musings if we're on their own page -->
+	
+			<div class = "jumbotron">
+				<div class="row">
+					<div class="col-xs-12">
+					<% if @muser.musings.any? %>
+					<h3>My Musings: ( <%= @muser.musings.count %> )</h3>
+					<ol class="microposts">
+						<%= render @musings %>
+		 			</ol>
+		 			</div>
+		 		</div>	
+		 		<div class="row">
+		 			<div class="col-xs-3">
+		 				<h2> <%= link_to "Create New Musing", new_musing_path, :class=> "btn btn-default"  %> </h2>
+		 			</div>
+		 			<div class="col-xs-9"></div>
+		 		</div>
+			</div>
+		<% end %>
+	<% else %>
+		<p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
+	<% end %>
+	<p><%= link_to "Log out", logout_path, method: "delete" %></p>
+	
+	
 <% end %>
-
-<p></p>
-
-<p>
-  <%= link_to "Log out", logout_path, method: "delete" %>
-</p>
-  

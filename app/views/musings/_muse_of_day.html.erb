@@ -1,0 +1,11 @@
+  <div class="row"> 
+    <div class="col-xs-9">
+      <div class="row">
+        <div class = "center jumbotron ">
+         <h2><b>Muse of The Day </b></h2>
+          <p><h2>"<%= @musing_of_the_day.content %>"</h2></p>
+          <% if logged_in? %>
+            <h3><%= link_to " Create New Musings", new_musing_path, :class=> "btn btn-default"  %></h3>
+          <% end %>
+        </div>
+      </div>

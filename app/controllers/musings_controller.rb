@@ -1,14 +1,20 @@
 class MusingsController < ApplicationController
  
 before_action :logged_in_muser, :only => [:new, :create, :edit, :update, :destroy]
-before_action :correct_muserid,   only: [:edit, :update, :destroy]
+before_action :correct_muserid,   only: [:edit, :destroy]
 before_filter :check_for_cancel, :only => [:create, :update]
 before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
+before_filter :muse_of_day, :only => [:index, :popular, :top]
 
 
   def index
-  	@musings = Musing.all
-    @musing_of_the_day = Musing.last(1)
+    if logged_in?
+      @musings = Musing.find_by_sql ["SELECT * FROM musings WHERE isPrivate = ?
+                               UNION SELECT * FROM musings WHERE muser_id = ?",
+                               0, current_muser]
+    else
+      @musings = Musing.find_by_sql ["SELECT * FROM musings WHERE isPrivate = ?", 0]
+    end
  
   end
 
@@ -34,14 +40,11 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
 
 
   def update
-  	#update the particular musing
-  	#@musing = Musing.find(params[:id])
-    #@musing1 = current_muser.musings.find(params[:id]) #Finds the musing with id :musing_id and user_id equal to user.id
-    #if current_muser.musings.find(params[:id]).any?
-    #@musing  = current_muser.musings.build(musing_params)
+    unless params[:musing][:competition_ids].nil? then 
+      @musing.competitions << Competition.find(params[:musing][:competition_ids])
+    end
   	if @musing.update(musing_params)
       flash[:success] = "Musing was successfully updated."
-      #flash[:success] = "Musing was successfully updated."+"musing"+@musing1.id.to_s+"by"+@musing1.muser_id.to_s
   		redirect_to musing_url(@musing)
   	else
   	 render 'edit' 	  		
@@ -61,12 +64,42 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
     end      
   end
 
+def muse_of_day
+    #for muse of day
+    @musing_all = Musing.all
+    @list = Array.new
+    @musing_all.each do |l|
+      @list.push(l.id)
+    end
 
+    @min = 0
+    @max = @list.size
+    @randnum = Random.rand(@min..@max)
+    (@randnum == @list.size) ? (@id = @list.size-1) : (@id = @list[@randnum])
+    @musing_of_the_day = Musing.find(@id)
+end
+
+def popular
+@musings = Musing.find_by_sql ["SELECT A.*  FROM musings A INNER JOIN ( SELECT musing_id, avg(stars) AS avgrating FROM ratings GROUP BY musing_id ) B 
+ON A.id = B.musing_id
+WHERE A.isPrivate = 0
+ORDER BY B.avgrating DESC 
+LIMIT 10"]
+end
+
+def top
+@musings = Musing.find_by_sql ["SELECT A.*  FROM musings A INNER JOIN ( SELECT musing_id, sum(stars) AS sumrating FROM ratings GROUP BY musing_id ) B 
+ON A.id = B.musing_id
+WHERE A.isPrivate = 0
+ORDER BY B.sumrating DESC 
+LIMIT 10"]
+
+end
 
   #DRY up code 
   #define params for musings
   def musing_params
-    params.require(:musing).permit(:title, :content, :isPrivate)
+    params.require(:musing).permit(:title, :content, :isPrivate, :competition_ids => [])
   end
 
   # find the musings by id
@@ -84,19 +117,7 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
     end
   end
 
-  def random_musing
-    @musings = Musing.find_by isPrivate: 0
-    @min = 0
-    @max = @musings.id.size
-    @list = Array.new(@max)
-    @musings.each do |musing|
-      @list.push(musing.id)
-    end
-    @randnum = Random.rand(@min,@max)
-    @id = @list[@randnum]
-    @random_musing = Musing.fing_by(@id)
-  end
-  helper_method :random_musing
+
 
 
 

@@ -2,17 +2,29 @@ Rails.application.routes.draw do
 
 
   
+
   resources :feedbacks
 
   resources :categories
 
+  get 'competitions/new'
+  #see competition with :id
+  get 'competitions/:id' => 'competitions#show', :as => 'competition_show'
+  get 'competitions/edit'
+  post 'competitions/index' => 'competitionratings#create'
+  get 'competitions/index' => 'competitionratings#index', :as => 'competition_ratings'
+  get 'competitionratings/new' => 'competitionratings#new', :as => 'new_competitionrating'
+
+
   get 'messages' => 'messages#index'
-  #get 'messages/new' => 'messages#new', :as => 'message'
   post 'messages' => 'messages#postMessage'
 
+  get 'submit/:id' => 'competitions#submit', :as => 'competition_submission'
 
   # to list all musings
   get 'musings' => 'musings#index', :as => 'musings'
+  get 'musings/popular' => 'musings#popular', :as => 'popular_musings'
+  get 'musings/top' => 'musings#top', :as => 'top_musings'
 
   #to create new musing
   get 'musings/new' => 'musings#new', :as => 'new_musing'
@@ -34,7 +46,7 @@ Rails.application.routes.draw do
   get 'ratings/:id/new' => 'ratings#new', :as => 'new_rating'
   post 'ratings' => 'ratings#create'
 
-  root 'musers#new'
+  root 'musings#index'
 
   get 'signup' => 'musers#new'
 
