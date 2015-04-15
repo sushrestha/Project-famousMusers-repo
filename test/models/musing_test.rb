@@ -19,7 +19,6 @@ class MusingTest < ActiveSupport::TestCase
   # end
 
 
-
   def setup
     @muser  = musers(:homer)
     @musing = @muser.musings.build(title: "Cookie", content: "This is that. That is this.", isPrivate: 1)

@@ -5,8 +5,7 @@
         <div class = "jumbotron">        
         <ol class="microposts">
         <h1>HIVE MIND </h1>
-         <% @musings.each do |musing| %>
-          
+         <% @musings.each do |musing| %>          
           <li id="micropost-<%= musing.id %>">
           <span class="title"><%= musing.title %></span>
           <span class="content">"<%= musing.content %>"</br>

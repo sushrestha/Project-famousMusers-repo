@@ -11,10 +11,11 @@
 		<p>Your email address: <%= @muser.email %></p>
 		
 		<!-- Display the user's musings if we're on their own page -->
-		<% if @muser.musings.any? %>
+	
 			<div class = "jumbotron">
 				<div class="row">
 					<div class="col-xs-12">
+					<% if @muser.musings.any? %>
 					<h3>My Musings: ( <%= @muser.musings.count %> )</h3>
 					<ol class="microposts">
 						<%= render @musings %>
