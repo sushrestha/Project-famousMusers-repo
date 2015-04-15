@@ -20,6 +20,13 @@
 			<% @highest_average = 0.0 %>
 <!-- Sort musings by average competition rating in ascending order-->
 <!--competition.musings.order(':averageCompetitionRating').each-->
+			<% if @competition.musings.count < 1 then %>
+				<li id="micropost-1">
+					<span class="content">
+						<h2>No submissions yet</h2>
+					</span>
+				</li>
+			<% end %>
 			<% @competition.musings.each do |musing| %>
 				<li id="micropost-<%= musing.id %>">
 				  <span class="title"><%= musing.title %></span>
