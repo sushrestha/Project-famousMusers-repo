@@ -7,8 +7,28 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
 
 
   def index
-  	@musings = Musing.all
-    @musing_of_the_day = Musing.last(1)
+  	   #@musings = Musing.all
+    if logged_in?
+      @musings = Musing.find_by_sql ["SELECT * FROM musings WHERE isPrivate = ?
+                               UNION SELECT * FROM musings WHERE muser_id = ?",
+                               0, current_muser]
+    else
+      @musings = Musing.find_by_sql ["SELECT * FROM musings WHERE isPrivate = ?", 0]
+      #Musing.where(:isPrivate => 0).all
+    end
+
+    #for muse of day
+    @musing_all = Musing.all
+    @list = Array.new
+    @musing_all.each do |l|
+     @list.push(l.id)
+    end
+
+    @min = 0
+   @max = @list.size-1
+   @randnum = Random.rand(@min..@max)
+    @id = @list[@randnum]
+    @musing_of_the_day = Musing.find(@id)
  
   end
 
@@ -67,7 +87,26 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
     end      
   end
 
+def popular
+   #@musings = Musing.find_by_sql ["SELECT * FROM musings WHERE isPrivate = ?", 0]
+   @musings = Musing.all
+   #@rating = @musings.ratings
 
+   #@sum = sum_ratings(@musings)
+end
+
+def top
+   @musings = Musing.find_by_sql ["SELECT * FROM musings WHERE isPrivate = ?", 0]
+   @ratings = Rating.find_by_sql ["SELECT musing_id, sum(stars) AS sumrating FROM ratings GROUP BY musing_id "]
+
+
+# SELECT A.*, B.sumrating FROM musings A INNER JOIN ( SELECT musing_id, sum(stars) AS sumrating FROM ratings GROUP BY musing_id ) B 
+# ON A.id = B.musing_id
+# WHERE A.isPrivate = 0
+# ORDER BY B.sumrating DESC 
+# LIMIT 10
+
+end
 
   #DRY up code 
   #define params for musings
@@ -90,19 +129,7 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
     end
   end
 
-  def random_musing
-    @musings = Musing.find_by isPrivate: 0
-    @min = 0
-    @max = @musings.id.size
-    @list = Array.new(@max)
-    @musings.each do |musing|
-      @list.push(musing.id)
-    end
-    @randnum = Random.rand(@min,@max)
-    @id = @list[@randnum]
-    @random_musing = Musing.fing_by(@id)
-  end
-  helper_method :random_musing
+
 
 
 
