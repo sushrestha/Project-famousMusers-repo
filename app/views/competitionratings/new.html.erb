@@ -1,0 +1,24 @@
+<% provide(:title, 'Musings-Rate-Competition') %>
+<h1>CompetitionRating#new</h1>
+
+<%= form_for(@competitionrating, :action => 'create') do |f| %>
+	<table>
+		<ul> 			
+			<tr><td><li>Title:</td><td><%= @competitionrating.musing.title %></li></td></tr>
+			<tr><td><li>Content:</td><td><%= @competitionrating.musing.content %></li></td></tr>
+			<tr><td><%= f.hidden_field :musing_id, :value => @competitionrating.musing.id %></td>
+				<td><%= f.hidden_field :competition_id, :value => @currentcompetition %></td>
+			</tr>
+			<tr>
+		    	<td><li><%= f.label :competitionstars %>:</li></td>
+		    	<td><%= f.select(:competitionstars, options_for_select([['1 Star',1],['2 Star',2],['3 Star', 3],['4 Star',4],['5 Star',5]])) %></td>
+		    </tr>
+  			<tr>
+		    	<td><%= f.submit  "Rate" %></td>
+		    	<td><%= submit_tag "Cancel"  %></td>
+		    </tr>
+		</ul>
+	</table>
+<% end %>
+
+debug(params)

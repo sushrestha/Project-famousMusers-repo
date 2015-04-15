@@ -1,0 +1,31 @@
+<% provide(:title, 'Competition-Show') %>
+<h1><%= @competition.name %></h1>
+
+<p>Start: <%= @competition.start %><p>
+<p>End: <%= @competition.end %></p>
+
+<!-- Sort musings by average competition rating in ascending order-->
+<!--competition.musings.order(':averageCompetitionRating').each-->
+<% @competition.musings.each do |musing| %>
+	<ul>
+		<li>Title: <%= musing.title%></li>
+		<li>Content: <%= musing.content%></li>
+		<li>Is Private: <%= musing.isPrivate%></li>
+		<li>Average Rating (for this competition):
+			<% sum = 0.0 %>
+	        <% i = 1.0 %>
+	        <% musing.competitionstars.each do |s| %>
+	        <% (s.competitionstars != nil) ? (star = s.competitionstars) : (star = 0.0) %>
+	          <% sum = sum + star %>
+	          <% i = i + 1 %>
+	        <% end %>
+	        <%= (sum == 0.0) ? 0 : (sum/(i-1)).round(1) %>
+	    <!--<li>Average Rating:  musing.averageCompetitionRating </li>-->
+		<% if logged_in? %>
+			<li><%= link_to "Rate Musing", new_competitionrating_path(:musing_id => musing.id, :currentcompetition => @competition.id) %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+
+<%= link_to "Show All Musings", musings_path() %>

@@ -15,9 +15,28 @@ ActiveRecord::Schema.define(version: 20150414000803) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
+end
+
+  create_table "competition_ratings", force: :cascade do |t|
+    t.integer  "competitionstars"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "competition_id"
+    t.integer  "musing_id"
+  end
+
+  add_index "competition_ratings", ["competition_id"], name: "index_competition_ratings_on_competition_id"
+  add_index "competition_ratings", ["musing_id"], name: "index_competition_ratings_on_musing_id"
+
+  create_table "competitions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "start"
+    t.datetime "end"
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
 
   create_table "feedbacks", force: :cascade do |t|
     t.text     "response"
@@ -27,6 +46,17 @@ ActiveRecord::Schema.define(version: 20150414000803) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "competitions_musings", force: :cascade do |t|
+    t.integer  "competition_id"
+    t.integer  "musing_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "competitions_musings", ["competition_id"], name: "index_competitions_musings_on_competition_id"
+  add_index "competitions_musings", ["musing_id"], name: "index_competitions_musings_on_musing_id"
+
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
@@ -51,9 +81,10 @@ ActiveRecord::Schema.define(version: 20150414000803) do
     t.string   "title"
     t.text     "content"
     t.integer  "isPrivate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "muser_id"
+    t.float    "averageCompetitionRating", default: 0.0, null: false
   end
 
   add_index "musings", ["muser_id"], name: "index_musings_on_muser_id"
