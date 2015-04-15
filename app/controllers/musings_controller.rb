@@ -57,8 +57,9 @@ before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
     #@musing.competitions_musings.build
     #@musing.competitions_ids.each do |cid|
     #params[:musing][:competition_ids].each do |cid|
+    unless params[:musing][:competition_ids].nil? then 
       @musing.competitions << Competition.find(params[:musing][:competition_ids])
-    #end
+    end
     
   	#update the particular musing
   	#@musing = Musing.find(params[:id])

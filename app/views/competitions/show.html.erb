@@ -4,28 +4,78 @@
 <p>Start: <%= @competition.start %><p>
 <p>End: <%= @competition.end %></p>
 
+<% @isFinished = @competition.end < Time.now.to_datetime%>
+
+<% if @isFinished then %>
+	<p>Competition is over</p>
+<% else %>
+	<p>Competition is still in progress</p>
+<% end %>
+
+<div class="row">
+	<div class = "jumbotron">        
+		<ol class="microposts">
+			<h2><font size="26">Submissions</font></h2>
+			<% @highest_id %>
+			<% @highest_average = 0.0 %>
 <!-- Sort musings by average competition rating in ascending order-->
 <!--competition.musings.order(':averageCompetitionRating').each-->
-<% @competition.musings.each do |musing| %>
-	<ul>
-		<li>Title: <%= musing.title%></li>
-		<li>Content: <%= musing.content%></li>
-		<li>Is Private: <%= musing.isPrivate%></li>
-		<li>Average Rating (for this competition):
-			<% sum = 0.0 %>
-	        <% i = 1.0 %>
-	        <% musing.competitionstars.each do |s| %>
-	        <% (s.competitionstars != nil) ? (star = s.competitionstars) : (star = 0.0) %>
-	          <% sum = sum + star %>
-	          <% i = i + 1 %>
-	        <% end %>
-	        <%= (sum == 0.0) ? 0 : (sum/(i-1)).round(1) %>
-	    <!--<li>Average Rating:  musing.averageCompetitionRating </li>-->
-		<% if logged_in? %>
-			<li><%= link_to "Rate Musing", new_competitionrating_path(:musing_id => musing.id, :currentcompetition => @competition.id) %></li>
-		<% end %>
-	</ul>
-<% end %>
+			<% @competition.musings.each do |musing| %>
+				<li id="micropost-<%= musing.id %>">
+				  <span class="title"><%= musing.title %></span>
+				  <span class="content"><%= musing.content %></br>
+				  	Competition Average:
+					<% sum = 0.0 %>
+				    <% i = 1.0 %>
+				    <% musing.competitionstars.each do |s| %>
+				    <% (s.competitionstars != nil) ? (star = s.competitionstars) : (star = 0.0) %>
+				      <% sum = sum + star %>
+				      <% i = i + 1 %>
+				    <% end %>
+				    <% @average = (sum == 0.0) ? 0 : (sum/(i-1)).round(1)%>
+				    <%= @average %>
+				    
+				    <% if @average > @highest_average then %>
+				    <%   @highest_average = @average %>
+				    <%   @highest_id = musing.id %>
+				    <% end %>
+				  </span> 
+				  <span class="content">
+				  	Author: <%= link_to musing.muser.name, muser_url(musing.muser) %>
+				  </span>
+				  <span class="content">
+					<% if logged_in? %>
+						<% if not @isFinished then %>
+							<%= link_to "Rate Musing", new_competitionrating_path(:musing_id => musing.id, :currentcompetition => @competition.id), :class=> "btn btn-default" %>
+						<% end %>
+					<% end %>
+				  </span>
+				</li>
+			<% end %>
+			<% if @isFinished then %>
+			<% @winner = Musing.find(@highest_id)%>
+				<li id="micropost-<%= @winner.id %>">
+				  <span class="title">Winning Submission</span>
+				  <span class="title"><%= @winner.title %></span>
+				  <span class="content"><%= @winner.content %></br>
+				  	Competition Average:
+					<% sum = 0.0 %>
+				    <% i = 1.0 %>
+				    <% @winner.competitionstars.each do |s| %>
+				    <% (s.competitionstars != nil) ? (star = s.competitionstars) : (star = 0.0) %>
+				      <% sum = sum + star %>
+				      <% i = i + 1 %>
+				    <% end %>
+				    <% @average = (sum == 0.0) ? 0 : (sum/(i-1)).round(1)%>
+				    <%= @average %>
+				  </span> 
+				  <span class="content">
+				  	Author: <%= link_to @winner.muser.name, muser_url(@winner.muser) %>
+				  </span>
+			<% end %>
+		</ol>
+	</div>
+</div>
 
 
 <%= link_to "Show All Musings", musings_path() %>

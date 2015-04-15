@@ -1,7 +1,7 @@
 class MusersController < ApplicationController
 
   before_action :logged_in_muser, only: [:show]
-  before_action :correct_muser,   only: [:show]
+  #before_action :correct_muser,   only: [:show]
 
   def show
     @muser = Muser.find(params[:id])

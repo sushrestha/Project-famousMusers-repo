@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   get 'competitions/new'
   #see competition with :id
-  get 'competitions/:id' => 'competitions#show'
+  get 'competitions/:id' => 'competitions#show', :as => 'competition_show'
   get 'competitions/edit'
   post 'competitions/index' => 'competitionratings#create'
   get 'competitions/index' => 'competitionratings#index', :as => 'competition_ratings'
