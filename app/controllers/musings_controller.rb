@@ -1,7 +1,7 @@
 class MusingsController < ApplicationController
  
 before_action :logged_in_muser, :only => [:new, :create, :edit, :update, :destroy]
-before_action :correct_muserid,   only: [:edit, :update, :destroy]
+before_action :correct_muserid,   only: [:edit, :destroy]
 before_filter :check_for_cancel, :only => [:create, :update]
 before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
 before_filter :muse_of_day, :only => [:index, :popular, :top]

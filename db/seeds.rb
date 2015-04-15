@@ -39,9 +39,9 @@ muser5 = Muser.create( email: 'mayaangelou@gmail.com',
 
           
 compRating1 = CompetitionRating.create([
-            {competitionstars: 1, musing_id: 1, competition_id: 1},
-            {competitionstars: 3, musing_id: 2, competition_id: 1},
-            {competitionstars: 5, musing_id: 3, competition_id: 1}
+            {competitionstars: 1, musing_id: 1, competition_id: 3},
+            {competitionstars: 3, musing_id: 2, competition_id: 3},
+            {competitionstars: 5, musing_id: 3, competition_id: 3}
             ])
             
 compRating2 = CompetitionRating.create([
@@ -111,4 +111,8 @@ competition2 = Competition.create( name: 'Most Inspiring',
                                    end: DateTime.parse("2015-05-31 11:59:59"),
                                    musings: [])                               
 
+competition3 = Competition.create( name: 'Best',
+                                   start: DateTime.parse("2015-03-01 08:00:00"),
+                                   end: DateTime.parse("2015-03-31 11:59:59"),
+                                   musings: [musing1,musing2,musing3])
 
