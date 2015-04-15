@@ -7,12 +7,7 @@ def average_ratings(musing)
     return (@sum == 0.0) ? 0 : (@sum/@total).round(1)
 end
 
-def top_musings
 
-end
-
-def popular_musings
-end
 
 
 def sum_ratings(musing)
@@ -24,19 +19,6 @@ def sum_ratings(musing)
 end
 
 
-def random_muse
-	@musings = Musing.find_by isPrivate: 0
-
-    # @min = 0
-    @max = @musings.count
-    # @list = Array.new(@max)
-    # @musings.id.each do |musing|
-    #   @list.push(musing)
-    # end
-    # @randnum = Random.rand(@min,@max)
-    # @id = @list[@randnum]
-    # @random_musing = Musing.fing_by(@id)
-end
 
 
 

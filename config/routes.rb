@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   # to list all musings
   get 'musings' => 'musings#index', :as => 'musings'
+  get 'musings/popular' => 'musings#popular', :as => 'popular_musings'
+  get 'musings/top' => 'musings#top', :as => 'top_musings'
 
   #to create new musing
   get 'musings/new' => 'musings#new', :as => 'new_musing'
