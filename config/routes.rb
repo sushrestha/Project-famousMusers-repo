@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get 'ratings/:id/new' => 'ratings#new', :as => 'new_rating'
   post 'ratings' => 'ratings#create'
 
-  root 'musers#new'
+  root 'musings#index'
 
   get 'signup' => 'musers#new'
 
