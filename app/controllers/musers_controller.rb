@@ -21,18 +21,19 @@ class MusersController < ApplicationController
   end
 
   def other_musers
-    @other_musers = Muser.find(params[:id])
+    @muser = Muser.find(params[:id])
   end
 
 
   def index
     @musers = Muser.all 
+    @other_musers = Muser.find_by_sql ["SELECT * FROM musers WHERE id != ? AND id NOT IN (SELECT followed_id FROM subscribes WHERE follower_id = ?)  ", current_muser, current_muser.id]
+  
   end
 
   def show
     @muser = Muser.find(params[:id])
     @musings = @muser.musings # aded to show muser's musings on his page too.
-    @other_muser = Muser.find_by_sql ["SELECT * FROM musers WHERE id != ?", current_muser]
   end
 
   def new

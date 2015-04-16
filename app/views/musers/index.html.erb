@@ -1,10 +1,12 @@
 <h1> Musers </h1>
-<% @musers.each do |muser| %>
+<% if @other_musers.any? %>
+<% @other_musers.each do |muser| %>	
+	<%= form_for(current_muser.active_subscribes.build) do |f| %>	
 	<p> <%= link_to muser.name, muser %>   </p>
-	<%= form_for(current_muser.active_subscribes.build) do |f| %>
   	<div><%= hidden_field_tag :followed_id, muser.id %></div>
   	<%= f.submit "Follow", class: "btn btn-primary" %>
-<% end %>
+	<% end %>
 <%end%>
-
-
+<% else %>
+<h2> No Musers left to subscribe </h2>
+<% end %>
