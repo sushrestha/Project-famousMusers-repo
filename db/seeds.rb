@@ -117,11 +117,6 @@ competition3 = Competition.create( name: 'Best',
                                    end: DateTime.parse("2015-03-31 11:59:59"),
                                    musings: [musing1,musing2,musing3])
 
-
- 				stars: Rating.create([
-			   	{stars: 1, musing_id: 2, muser_id: first.id}
-			   	])
-	)
 # Following relationships
 #musers = Muser.all
 #muser  = musers.first

@@ -61,6 +61,9 @@ Rails.application.routes.draw do
     end
   end
 
+# get 'musings/popular' => 'musings#popular', :as => 'popular_musings'
+  get 'musers/:id/other_musers' => 'musers#other_musers', :as => 'other_musers'
+
   resources :subscribes, only: [:create, :destroy]
 
   #resources :musings
