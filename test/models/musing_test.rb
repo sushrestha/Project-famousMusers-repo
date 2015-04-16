@@ -2,13 +2,14 @@
 #
 # Table name: musings
 #
-#  id         :integer          not null, primary key
-#  title      :string
-#  content    :text
-#  isPrivate  :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  muser_id   :integer
+#  id                       :integer          not null, primary key
+#  title                    :string
+#  content                  :text
+#  isPrivate                :integer
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  muser_id                 :integer
+#  averageCompetitionRating :float            default("0.0"), not null
 #
 
 require 'test_helper'
