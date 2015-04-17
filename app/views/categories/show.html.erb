@@ -11,7 +11,7 @@
 </p>
 
 <h3> Musings under this category </h3>
-<% Musing.where(category_id: @category.id).each do |product| %>
+<% Musing.where(category_id: @category.id).each do |musing| %>
 <li> <%= musing.name %> </li>
 <% end %>
 

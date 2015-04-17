@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   #resources :categories
 
   get 'categories' => 'categories#index', :as => 'categories'
-
+ # get 'categories/:id/edit' => 'categories#edit', :as => 'edit_category'
+  # patch 'categories/:id' => 'categories#update'
+   #put 'categories/:id' => 'categories#update'
+  
   get 'competitions/new'
   #see competition with :id
   get 'competitions/:id' => 'competitions#show', :as => 'competition_show'

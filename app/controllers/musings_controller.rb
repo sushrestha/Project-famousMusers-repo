@@ -40,21 +40,24 @@ end
   end
 
    def edit
-    @categories = Category.all.map{|c| [ c.name, c.id ] }
+   @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
 
   def update
+   @musing.category_id = params[:category_id]
+    
     unless params[:musing][:competition_ids].nil? then 
       @musing.competitions << Competition.find(params[:musing][:competition_ids])
     end
+    
   	if @musing.update(musing_params)
       flash[:success] = "Musing was successfully updated."
   		redirect_to musing_url(@musing)
   	else
   	 render 'edit' 	  		
   	end
-    @musing.category_id = params[:category_id]
+    
   end
 
  def destroy
