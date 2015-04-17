@@ -20,22 +20,27 @@ before_filter :muse_of_day, :only => [:index, :popular, :top]
 
   def new 
   	@musing = Musing.new
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def create
-    @musing  = current_muser.musings.build(musing_params)
+    @musing  = current_muser.musings.build(musing_params)    
+    @musing.category_id = params[:category_id]
   	if @musing.save
       flash[:success] = "musing was successfully created."
   		redirect_to musings_url()
   	else
       render 'new'
    	end
-  end
+end
+
+
 
   def show
   end
 
    def edit
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
 
@@ -49,6 +54,7 @@ before_filter :muse_of_day, :only => [:index, :popular, :top]
   	else
   	 render 'edit' 	  		
   	end
+    @musing.category_id = params[:category_id]
   end
 
  def destroy
@@ -116,9 +122,4 @@ end
       redirect_to musings_url
     end
   end
-
-
-
-
-
 end

@@ -1,0 +1,10 @@
+<% provide(:title, 'Musings-categories') %>
+
+
+
+ <div class = "jumbotron"> 
+
+<% @categories.each do |c| %>
+  <%= c.name %>
+<% end %>
+ </div>

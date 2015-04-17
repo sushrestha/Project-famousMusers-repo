@@ -17,7 +17,8 @@
               <% end %>
               <%= link_to "Submit to Competition", competition_submission_path(:id => musing.id), :class=> "btn btn-default"%>
             <% end %>
-          </span> 
+          </span>
+          <span class="content">Categories: <%= (musing.category_id != nil) ? Category.find(musing.category_id).name : 0 %></span> 
           <span class="content">Author: <%= link_to musing.muser.name, muser_url(musing.muser) %></span>
           </li>
         <% end %>
@@ -25,4 +26,7 @@
       </div>
       </div>
     </div>
+
+
+    
   <%= render :partial => "sidebar" %>
