@@ -40,14 +40,15 @@ end
   end
 
    def edit
+   @musing=Musing.find(params[:id])
+   @category=@musing.category_id
    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
 
   def update
-   @musing.category_id = params[:category_id]
-    
-    unless params[:musing][:competition_ids].nil? then 
+   #@musing.category_id = params[:category_id]
+     unless params[:musing][:competition_ids].nil? then 
       @musing.competitions << Competition.find(params[:musing][:competition_ids])
     end
     
@@ -57,7 +58,6 @@ end
   	else
   	 render 'edit' 	  		
   	end
-    
   end
 
  def destroy
@@ -108,7 +108,7 @@ end
   #DRY up code 
   #define params for musings
   def musing_params
-    params.require(:musing).permit(:title, :content, :isPrivate, :competition_ids => [])
+    params.require(:musing).permit(:title, :content, :category_id, :isPrivate, :competition_ids => [])
   end
 
   # find the musings by id

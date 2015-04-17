@@ -22,7 +22,7 @@
     <div class="col-sm-offset-2 col-sm-10">
       <div class="dropbox"> 
       <%= f.label "Category" %> 
-      <%= select(@categories, :category,Category.all.map{|c| [ c.name, c.id ] }.uniq , :placeholder => "Select one", :selected => params[:category_id]) %>
+      <%= f.select :category_id, Category.all.map{|c| [ c.name, c.id ] }.uniq , :placeholder => "Select one", :selected => @category %>
       </div> 
     </div>
   </div>
