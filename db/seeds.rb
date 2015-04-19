@@ -54,8 +54,22 @@ compRating2 = CompetitionRating.create([
 
 category1 = Category.create( name: 'Journal Entry',
                               desc: 'It is journal Entry')
-category2 = Category.create( name: 'another entry',
-                              desc: 'It is another Entry')
+category2 = Category.create( name: 'Song Lyrics',
+                              desc: 'These are lyrics of a song')
+category3 = Category.create( name: 'Stories',
+                              desc: 'It is a story')
+category4 = Category.create( name: 'Jokes',
+                              desc: 'It is a joke')
+category5 = Category.create( name: 'Rants',
+                              desc: 'It is a a tirade')
+category5 = Category.create( name: 'Nonsense',
+                              desc: 'It has no sense')
+category6 = Category.create( name: 'Ramblings',
+                              desc: 'Lengthy and degressive')
+category7 = Category.create( name: 'Thoughts',
+                              desc: 'Ideas')
+category8 = Category.create( name: 'Tweets',
+                              desc: 'A message')
 
 musing1 = Musing.create( title: 'Priorities',
 			   content: "Start by doing what's necessary; then do what's possible; and suddenly you are doing the impossible.",
