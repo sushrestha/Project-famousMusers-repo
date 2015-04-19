@@ -8,7 +8,8 @@
 		<li id="micropost-<%= @musing.id %>">
 			<span class="title"><%= @musing.title %></span>
 			<span class="content"><%= @musing.content %></br>
-    		Average Rating: <b><%= (average_ratings(@musing) == 0) ? 0: "*"*average_ratings(@musing) %></b>
+    		Average Rating: <b><%= (average_ratings(@musing) == 0) ? 0: "*"*average_ratings(@musing) %></b></br>
+    		Categories: <%= (@musing.category_id != nil) ? Category.find(@musing.category_id).name : 0 %>
     		</br><%= link_to " Show All Musings ", musings_path(),:class=> "btn btn-default" %>
 			<% if logged_in? %>
 			<%= link_to " Show My Musings ", muser_path(@current_muser.id), :class=> "btn btn-default"%>
