@@ -47,7 +47,7 @@ end
 
 
   def update
-   #@musing.category_id = params[:category_id]
+   @musing.category_id = params[:category_id]
      unless params[:musing][:competition_ids].nil? then 
       @musing.competitions << Competition.find(params[:musing][:competition_ids])
     end
