@@ -1,0 +1,44 @@
+Features in the project and its developers
+
+Sign-up feature : ctckett1
+Details: Login 
+Logout
+Display of the profile 
+Header of the website 
+Footer of the website
+
+Musers feature (users): ctckett1
+Details: User information
+
+Main page of the website : sshrsth1
+Muse of the day 
+Top ratings and Popular ratings 
+
+Musings feature (posts): sshrsth1
+Creating Musings (edit and delete)
+Rating musings
+
+Message feature: ctckett1
+Private communication from sender to receiver
+
+Competition feature: ctckett1
+Submitting musings to competition
+Rating the musings in competition
+
+Subscribe feature: rprakash
+Subscribing to a muser
+Following feature
+Follower Feature
+Showing list of all musers 
+
+Category feature : snnthnry
+Display different categories
+
+Feedback feature: rprakash (not displayed in the demo but the code had been implemented and was working fine with the previous commit.)
+
+Iteration-1
+Project Manager (aka Team Lead): sshrsth1
+Quality Assurance Czar: ctckett1
+Video demo:snnthnry and rprakash
+Document: snnthnry and rprakash
+
