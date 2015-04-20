@@ -5,5 +5,16 @@
   <%= @category.name %>
 </p>
 
+<p>
+  <strong>Desc:</strong>
+  <%= @category.desc %>
+</p>
+
+<h3> Musings under this category </h3>
+<% Musing.where(category_id: @category.id).each do |musing| %>
+<li> <%= musing.name %> </li>
+<% end %>
+
+
 <%= link_to 'Edit', edit_category_path(@category) %> |
 <%= link_to 'Back', categories_path %>

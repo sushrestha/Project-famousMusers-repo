@@ -14,10 +14,12 @@
               <td><%= link_to " Rate ", new_rating_path(musing), :class=> "btn btn-default"%>               
               <% if current_muser?(musing.muser) %>
                 <%= link_to " Edit ", edit_musing_path(musing), :class=> "btn btn-default" %><%= link_to " Delete ", musing, method: :delete, data: { confirm: 'Are you sure you want to delete?'} , :class=> "btn btn-default" %>
+                
               <% end %>
               <%= link_to "Submit to Competition", competition_submission_path(:id => musing.id), :class=> "btn btn-default"%>
             <% end %>
-          </span> 
+          </span>
+          <span class="content">Categories: <%= (musing.category_id != nil) ? Category.find(musing.category_id).name : 0 %></span> 
           <span class="content">Author: <%= link_to musing.muser.name, muser_url(musing.muser) %></span>
           </li>
         <% end %>
@@ -25,4 +27,9 @@
       </div>
       </div>
     </div>
+
+
+
+    
   <%= render :partial => "sidebar" %>
+

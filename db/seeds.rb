@@ -50,16 +50,38 @@ compRating2 = CompetitionRating.create([
             {competitionstars: 5, musing_id: 3, competition_id: 2}
             ])
 
+#sindhu
+
+category1 = Category.create( name: 'Journal Entry',
+                              desc: 'It is journal Entry')
+category2 = Category.create( name: 'Song Lyrics',
+                              desc: 'These are lyrics of a song')
+category3 = Category.create( name: 'Stories',
+                              desc: 'It is a story')
+category4 = Category.create( name: 'Jokes',
+                              desc: 'It is a joke')
+category5 = Category.create( name: 'Rants',
+                              desc: 'It is a a tirade')
+category5 = Category.create( name: 'Nonsense',
+                              desc: 'It has no sense')
+category6 = Category.create( name: 'Ramblings',
+                              desc: 'Lengthy and degressive')
+category7 = Category.create( name: 'Thoughts',
+                              desc: 'Ideas')
+category8 = Category.create( name: 'Tweets',
+                              desc: 'A message')
 
 musing1 = Musing.create( title: 'Priorities',
 			   content: "Start by doing what's necessary; then do what's possible; and suddenly you are doing the impossible.",
 			   isPrivate: 0,
-			   muser_id: muser4.id)
+			   muser_id: muser4.id,
+         category_id: category1.id)
 
 musing2 = Musing.create( title: 'Mission',
 			   content: "My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.",
 			   isPrivate: 1,
-         muser_id: muser5.id)
+         muser_id: muser5.id,
+         category_id: category1.id)
           
 musing3 = Musing.create( title: 'Stolen',
 			   content: 'It is one of the blessings of old friends that you can afford to be stupid with them.',
@@ -116,6 +138,7 @@ competition3 = Competition.create( name: 'Best',
                                    start: DateTime.parse("2015-03-01 08:00:00"),
                                    end: DateTime.parse("2015-03-31 11:59:59"),
                                    musings: [musing1,musing2,musing3])
+
 
 # Following relationships
 #musers = Muser.all

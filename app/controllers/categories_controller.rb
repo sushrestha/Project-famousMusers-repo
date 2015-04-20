@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @category = Category.find(params[ :id])
   end
 
   # GET /categories/new
@@ -19,6 +20,8 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+    @category = Category.find(params[ :id])
+
   end
 
   # POST /categories
@@ -26,11 +29,14 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
 
-    respond_to do |format|
+     respond_to do |format|
       if @category.save
+        flash[ :notice] = "Successfully created category."
+        ##redirect_to @category
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
+        render :action => 'new'
         format.html { render :new }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
@@ -49,7 +55,8 @@ class CategoriesController < ApplicationController
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end 
+  
 
   # DELETE /categories/1
   # DELETE /categories/1.json
@@ -61,14 +68,17 @@ class CategoriesController < ApplicationController
     end
   end
 
-  private
+
+ private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def category_params
-      params.require(:category).permit(:name)
+
+   def category_params
+      params.require(:category).permit(:name, :desc)
     end
-end
+end 
+

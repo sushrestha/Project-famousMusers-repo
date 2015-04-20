@@ -14,6 +14,10 @@
 
 class Musing < ActiveRecord::Base
 
+
+	belongs_to :category, :class_name => 'category', :foreign_key => 'category_id'
+	
+
 	belongs_to :muser # 1 musing belongs to 1 muser
 	default_scope -> { order(created_at: :desc) } #listing the musings in most recently created.
 	# 1 musing has 0..* stars
@@ -28,5 +32,6 @@ class Musing < ActiveRecord::Base
 	validates :content, presence: true, length: { maximum: 250 }
 	validates :isPrivate, presence: true
 	validates :muser_id, presence: true
+	validates :category_id, presence: true
 	#validates :averageCompetitionRating, presence: true
 end

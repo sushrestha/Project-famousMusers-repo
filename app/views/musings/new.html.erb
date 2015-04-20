@@ -25,6 +25,20 @@
       </div>
     </div>
   </div>
+
+
+   
+    <div class="field form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="dropbox"> 
+      <%= f.label "Category" %>         
+        <%= select_tag(:category_id, options_for_select(@categories), :prompt => "Select one!") %>
+      </div>
+    </div>
+  </div>
+
+  
+
   <div class="actions form-group">
      <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit  "Post", :class=> "btn btn-default" %>

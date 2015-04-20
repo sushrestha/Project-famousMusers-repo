@@ -20,29 +20,38 @@ before_filter :muse_of_day, :only => [:index, :popular, :top]
 
   def new 
   	@musing = Musing.new
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def create
-    @musing  = current_muser.musings.build(musing_params)
+    @musing  = current_muser.musings.build(musing_params)    
+    @musing.category_id = params[:category_id]
   	if @musing.save
       flash[:success] = "musing was successfully created."
   		redirect_to musings_url()
   	else
       render 'new'
    	end
-  end
+end
+
+
 
   def show
   end
 
    def edit
+   @musing=Musing.find(params[:id])
+   @category=@musing.category_id
+   @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
 
   def update
-    unless params[:musing][:competition_ids].nil? then 
+   @musing.category_id = params[:category_id]
+     unless params[:musing][:competition_ids].nil? then 
       @musing.competitions << Competition.find(params[:musing][:competition_ids])
     end
+    
   	if @musing.update(musing_params)
       flash[:success] = "Musing was successfully updated."
   		redirect_to musing_url(@musing)
@@ -99,7 +108,7 @@ end
   #DRY up code 
   #define params for musings
   def musing_params
-    params.require(:musing).permit(:title, :content, :isPrivate, :competition_ids => [])
+    params.require(:musing).permit(:title, :content, :category_id, :isPrivate, :competition_ids => [])
   end
 
   # find the musings by id
@@ -116,9 +125,4 @@ end
       redirect_to musings_url
     end
   end
-
-
-
-
-
 end
