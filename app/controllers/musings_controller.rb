@@ -32,25 +32,25 @@ before_filter :muse_of_day, :only => [:index, :popular, :top]
   	else
       render 'new'
    	end
-end
+  end
 
 
 
   def show
   end
 
-   def edit
-   @musing=Musing.find(params[:id])
-   @category=@musing.category_id
-   @categories = Category.all.map{|c| [ c.name, c.id ] }
+  def edit
+    @musing=Musing.find(params[:id])
+    @category=@musing.category_id
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
 
   def update
    @musing.category_id = params[:category_id]
-     unless params[:musing][:competition_ids].nil? then 
-      @musing.competitions << Competition.find(params[:musing][:competition_ids])
-    end
+   unless params[:musing][:competition_ids].nil? then 
+    @musing.competitions << Competition.find(params[:musing][:competition_ids])
+   end
     
   	if @musing.update(musing_params)
       flash[:success] = "Musing was successfully updated."
@@ -73,37 +73,36 @@ end
     end      
   end
 
-def muse_of_day
+  def muse_of_day
     #for muse of day
     @musing_all = Musing.all
     @list = Array.new
     @musing_all.each do |l|
       @list.push(l.id)
     end
-
+  
     @min = 0
     @max = @list.size
     @randnum = Random.rand(@min..@max)
     (@randnum == @list.size) ? (@id = @list.size-1) : (@id = @list[@randnum])
     @musing_of_the_day = Musing.find(@id)
-end
+  end
 
-def popular
-@musings = Musing.find_by_sql ["SELECT A.*  FROM musings A INNER JOIN ( SELECT musing_id, avg(stars) AS avgrating FROM ratings GROUP BY musing_id ) B 
-ON A.id = B.musing_id
-WHERE A.isPrivate = 0
-ORDER BY B.avgrating DESC 
-LIMIT 10"]
-end
+  def popular
+    @musings = Musing.find_by_sql ["SELECT A.*  FROM musings A INNER JOIN ( SELECT musing_id, avg(stars) AS avgrating FROM ratings GROUP BY musing_id ) B 
+    ON A.id = B.musing_id
+    WHERE A.isPrivate = 0
+    ORDER BY B.avgrating DESC 
+    LIMIT 10"]
+  end
 
-def top
-@musings = Musing.find_by_sql ["SELECT A.*  FROM musings A INNER JOIN ( SELECT musing_id, sum(stars) AS sumrating FROM ratings GROUP BY musing_id ) B 
-ON A.id = B.musing_id
-WHERE A.isPrivate = 0
-ORDER BY B.sumrating DESC 
-LIMIT 10"]
-
-end
+  def top
+    @musings = Musing.find_by_sql ["SELECT A.*  FROM musings A INNER JOIN ( SELECT musing_id, sum(stars) AS sumrating FROM ratings GROUP BY musing_id ) B 
+    ON A.id = B.musing_id
+    WHERE A.isPrivate = 0
+    ORDER BY B.sumrating DESC 
+    LIMIT 10"]
+  end
 
   #DRY up code 
   #define params for musings
@@ -115,7 +114,6 @@ end
   def find_musing
     @musing = Musing.find(params[:id])
   end
-
 
   # confirms the correct_user
   def correct_muserid
