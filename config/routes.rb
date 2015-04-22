@@ -1,14 +1,6 @@
 Rails.application.routes.draw do
 
-
-  
-
-
   resources :feedbacks
-
- 
-
-
   #resources :categories
 
   get 'categories' => 'categories#index', :as => 'categories'
@@ -16,11 +8,12 @@ Rails.application.routes.draw do
   # patch 'categories/:id' => 'categories#update'
    #put 'categories/:id' => 'categories#update'
   
-
-  get 'competitions/new'
+  post 'competition/submitPost' => 'competitions#submitPost'
+  get 'competitions' => 'competitions#index'
+  get 'competitions/new' => 'competitions#new'
   #see competition with :id
   get 'competitions/:id' => 'competitions#show', :as => 'competition_show'
-  get 'competitions/edit'
+  #get 'competitions/update' => 'competitions#update'
   post 'competitions/index' => 'competitionratings#create'
   get 'competitions/index' => 'competitionratings#index', :as => 'competition_ratings'
   get 'competitionratings/new' => 'competitionratings#new', :as => 'new_competitionrating'

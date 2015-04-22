@@ -11,8 +11,19 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
   end
 
-  def edit
-  end
+  #def update
+  #  unless params[:competition][:musing_id].nil? then 
+  #    @competition.musings << Musing.find(params[:competition][:musing_id])
+  #  end
+  #  
+  #  if @competition.update(competition_params)
+  #    flash[:success] = "Submitted to competition successfully."
+  #    redirect_to competition_url(@competition)
+  #  else
+  #   #root path
+  #   #render 'edit'        
+  #  end
+  #end
 
   def index
   end
@@ -20,24 +31,32 @@ class CompetitionsController < ApplicationController
   def submit
     @musing = Musing.find(params[:id])
     @competitions = Competition.all
+    @submission = Competition.new
   end
   
   def submitPost
-    @thecompetition = Competition.find(params[:musing][:competitions])
+    @competition = Competition.find(params[:competition][:competition_id])
+    unless params[:musing_id].nil? then 
+      @competition.musings << Musing.find(params[:musing_id])
+    end
     #competition is already over or not yet begun
     #if (@thecompetition.end < Time.now.to_datetime) or (@thecompetition.start > Time.now.to_datetime) then
     #  render 'submit', :id => params[@musing.id], :competitions => @thecompetition
     #  flash[:failure] = "Competition is not currently in progress."
     #end
-    @thecompetition.musings << @musing
-    if @thecompetition.save
+    if @competition.update(competition_params)
         redirect_to root_path
         flash[:success] = "Successfully submitted to competition."
     else
-      render 'submit', :id => params[@musing.id], :competitions => @thecompetition
-      @thecompetition.errors.full_messages.each do |m|
+      render 'submit', :id => params[@musing.id]
+      @competition.errors.full_messages.each do |m|
         flash[:failure] = m
       end
     end
+  end
+  
+  #define params for competitions
+  def competition_params
+    params.require(:competition).permit(:name, :start, :end, :musing_ids => [])
   end
 end
