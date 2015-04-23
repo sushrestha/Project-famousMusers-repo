@@ -1,11 +1,11 @@
 class MusingsController < ApplicationController
  
-before_action :logged_in_muser, :only => [:new, :create, :edit, :update, :destroy]
-before_action :correct_muserid,   only: [:edit, :destroy]
-before_filter :check_for_cancel, :only => [:create, :update]
-before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
-before_filter :muse_of_day, :only => [:index, :popular, :top]
-
+before_action :logged_in_muser,   :only => [:new, :create, :edit, :update, :destroy]
+before_action :correct_muserid,   :only => [:edit, :destroy]
+before_filter :check_for_cancel,  :only => [:create, :update]
+before_filter :find_musing,       :only => [:show, :edit, :update,  :destroy]
+before_filter :muse_of_day,       :only => [:index, :popular, :top]
+before_filter :categories,        :only => [:new, :create, :edit, :update]
 
   def index
     if logged_in?
@@ -14,56 +14,48 @@ before_filter :muse_of_day, :only => [:index, :popular, :top]
                                0, current_muser]
     else
       @musings = Musing.find_by_sql ["SELECT * FROM musings WHERE isPrivate = ?", 0]
-    end
- 
+    end 
   end
 
   def new 
-  	@musing = Musing.new
-    @categories = Category.all.map{|c| [ c.name, c.id ] }
+    @musing = Musing.new
   end
 
   def create
-    @musing  = current_muser.musings.build(musing_params)    
-    @musing.category_id = params[:category_id]
-  	if @musing.save
+    @musing  = current_muser.musings.build(musing_params) 
+    if @musing.save
       flash[:success] = "musing was successfully created."
-  		redirect_to musings_url()
-  	else
+      redirect_to musings_url()
+    else
       render 'new'
-   	end
+    end
   end
-
-
 
   def show
   end
 
   def edit
-    @musing=Musing.find(params[:id])
-    @category=@musing.category_id
-    @categories = Category.all.map{|c| [ c.name, c.id ] }
+    @category = @musing.category_id  
   end
 
-
   def update
-   @musing.category_id = params[:category_id]
-   unless params[:musing][:competition_ids].nil? then 
-    @musing.competitions << Competition.find(params[:musing][:competition_ids])
-   end
+    @category = @musing.category_id
+    unless params[:musing][:competition_ids].nil? then 
+      @musing.competitions << Competition.find(params[:musing][:competition_ids])
+    end
     
-  	if @musing.update(musing_params)
+    if @musing.update(musing_params)
       flash[:success] = "Musing was successfully updated."
-  		redirect_to musing_url(@musing)
-  	else
-  	 render 'edit' 	  		
-  	end
+      redirect_to musing_url(@musing)
+    else
+     render 'edit'        
+    end
   end
 
  def destroy
-  	@musing.destroy
-  	flash[:success] = " Musing '"+@musing.title+"' deleted"
-  	redirect_to musings_url
+    @musing.destroy
+    flash[:success] = " Musing '"+@musing.title+"' deleted"
+    redirect_to musings_url
   end
 
     #check_for_cancel
@@ -71,6 +63,10 @@ before_filter :muse_of_day, :only => [:index, :popular, :top]
     if params[:commit] == "Cancel"
       redirect_to musings_url
     end      
+  end
+
+  def categories
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def muse_of_day
