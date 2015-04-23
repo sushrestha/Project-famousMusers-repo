@@ -1,2 +1,26 @@
-<h1>Competitions#index</h1>
-<p>Find me in app/views/competitions/index.html.erb</p>
+<% provide(:title, 'Competition Index') %>
+
+<h1>Competitions</h1>
+
+<table border="1" width="100%" style="table-layout: fixed">
+	<tbody style="display:inline">
+  <tr style="display:inline">
+    <td style="text-align:center;display:inline"><b>Name</b></td>
+    <td style="text-align:center;display:inline"><b>Start</b></td>
+    <td style="text-align:center;display:inline"><b>End</b></td>
+    <td style="text-align:center;display:inline"><% if current_muser.isModerator %>
+    		Delete
+		  <% end %></td>
+  </tr>
+  <% @competitions.each do |competition| %>
+    <tr style="display:inline">
+      <td style="text-align:center;display:inline"><%= competition.name %></td>
+      <td style="text-align:center;display:inline"><%= competition.start %></td>
+      <td style="text-align:center;display:inline"><%= competition.end %></td>
+      <td style="text-align:center;display:inline"><% if current_muser.isModerator %>
+    		<%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" } %>
+		  <% end %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
