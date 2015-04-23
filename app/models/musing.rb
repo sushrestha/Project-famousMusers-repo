@@ -10,6 +10,7 @@
 #  updated_at               :datetime         not null
 #  muser_id                 :integer
 #  averageCompetitionRating :float            default("0.0"), not null
+#  category_id              :integer
 #
 
 class Musing < ActiveRecord::Base
