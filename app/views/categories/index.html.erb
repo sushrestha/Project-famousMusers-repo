@@ -17,7 +17,7 @@
       <% @categories.each do |cat| %>
         <tr>
           <td><%= @i %></td>
-          <td><%= cat.name %></td>
+          <td><%= link_to cat.name, category_path(cat) %></td>
           <td><%= cat.desc %></td>
           <td><%= link_to " Edit ", edit_category_path(cat), :class=> "btn btn-default" %> | <%= link_to " Delete ", cat, method: :delete, data: { confirm: 'Are you sure you want to delete?'} , :class=> "btn btn-default" %></td>
         </tr>
