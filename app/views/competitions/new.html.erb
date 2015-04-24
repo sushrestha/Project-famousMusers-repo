@@ -1,2 +1,20 @@
-<h1>Competitions#new</h1>
-<p>Find me in app/views/competitions/new.html.erb</p>
+<% provide(:title, 'New Competition') %>
+<h1>Competition#new</h1>
+
+<%= form_for(@competition) do |f| %>
+	<table>	
+		<tr>
+			<td><%= f.label :name %>:</td><td><%= f.text_field :name %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :start %>:</td><td><%= f.date_select :start %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :end %>:</td><td><%= f.date_select :end %></td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+	    	<td><%= f.submit  "Create" %>&nbsp;<%= submit_tag "Cancel"  %></td>
+	    </tr>
+	</table>
+<% end %>
