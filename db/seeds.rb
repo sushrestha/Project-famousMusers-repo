@@ -31,6 +31,10 @@ muser5 = Muser.create( email: 'mayaangelou@gmail.com',
               name: 'Maya Angelou',
               password: 'password',
               isModerator: 'f')
+muser6 = Muser.create( email: 'admin@admin.com',
+              name: 'Admin Admin',
+              password: 'password',
+              isModerator: 't')
 
 @myMessage = Message.create( content: 'test message',
                              author_id: muser1.id,
