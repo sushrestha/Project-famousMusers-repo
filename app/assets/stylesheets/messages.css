@@ -10,14 +10,14 @@ table td {
     border-top: none !important;
 }
 
-thead, tbody, tr, td, th { display: block; }
+/*thead, tbody, tr, td, th { display: block; }
 
 tr:after {
     content: ' ';
     display: block;
     visibility: hidden;
     clear: both;
-}
+}*/
 
 .messages {
 	height: 400px;

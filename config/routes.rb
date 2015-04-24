@@ -9,7 +9,7 @@ Rails.application.routes.draw do
    #put 'categories/:id' => 'categories#update'
   
   # competition index
-  get 'competitions' => 'competitions#index'
+  get 'competitions' => 'competitions#index', :as => 'competition'
   # to create new musing
   get 'competitions/new' => 'competitions#new', :as => 'new_competition'
   post 'competitions' => 'competitions#create'
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   patch 'competitions/:id' => 'competitions#update'
   put 'competitions/:id' => 'competitions#update'
   # delete competition
-  delete 'competitions/:id' => 'competitions#destroy'
+  delete 'competitions/:id' => 'competitions#destroy', :as => 'delete_competition'
   # adding musings to competition
   post 'competition/submitPost' => 'competitions#submitPost'
   

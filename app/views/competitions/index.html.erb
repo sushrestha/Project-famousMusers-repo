@@ -1,26 +1,28 @@
 <% provide(:title, 'Competition Index') %>
-
 <h1>Competitions</h1>
 
-<table border="1" width="100%" style="table-layout: fixed">
-	<tbody style="display:inline">
-  <tr style="display:inline">
-    <td style="text-align:center;display:inline"><b>Name</b></td>
-    <td style="text-align:center;display:inline"><b>Start</b></td>
-    <td style="text-align:center;display:inline"><b>End</b></td>
-    <td style="text-align:center;display:inline"><% if current_muser.isModerator %>
-    		Delete
-		  <% end %></td>
-  </tr>
-  <% @competitions.each do |competition| %>
-    <tr style="display:inline">
-      <td style="text-align:center;display:inline"><%= competition.name %></td>
-      <td style="text-align:center;display:inline"><%= competition.start %></td>
-      <td style="text-align:center;display:inline"><%= competition.end %></td>
-      <td style="text-align:center;display:inline"><% if current_muser.isModerator %>
-    		<%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" } %>
-		  <% end %></td>
-    </tr>
-  <% end %>
-  </tbody>
+<table class="table table-bordered">
+	<tbody>
+	  <tr>
+	    <th><b>Name</b></th>
+	    <th><b>Start</b></th>
+	    <th><b>End</b></th>
+	    <% if logged_in? && current_muser.isModerator %>
+	    	<th><b>Edit</b></th>
+		    <th><b>Delete</b></th>
+		<% end %>
+	  </tr>
+	  <% @competitions.each do |competition| %>
+	    <tr>
+	      <td><%= competition.name %></td>
+	      <td><%= competition.start %></td>
+	      <td><%= competition.end %></td>
+	      <% if logged_in? && current_muser.isModerator %>
+	      	<td><%= link_to "edit", edit_competition_path(competition) %></td>
+		  	<td><%= link_to "delete", delete_competition_path(competition), method: :delete, data: { confirm: "You sure?" } %></td>
+		  <% end %>
+	    </tr>
+	  <% end %>
+	</tbody>
 </table>
+<%= link_to "New", new_competition_path, :class => "btn btn-default"  %>

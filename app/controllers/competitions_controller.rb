@@ -5,7 +5,6 @@ class CompetitionsController < ApplicationController
   #before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
   #before_action :admin_muser,     only: :destroy
   
-  #new
   def index
     @competitions = Competition.all
   end
@@ -14,12 +13,10 @@ class CompetitionsController < ApplicationController
     @competition = Competition.find(params[:id])
   end
   
-  #new
   def new
     @competition = Competition.new
   end
   
-  #new
   def create
     @competition  = Competition.new(competition_params)   
      
@@ -34,12 +31,10 @@ class CompetitionsController < ApplicationController
     end
   end
   
-  #new
   def edit
     @competition = Competition.find(params[:id])
   end
 
-  #new
   def update
     @competition = Competition.find(params[:id])
 
@@ -51,10 +46,9 @@ class CompetitionsController < ApplicationController
     end
   end
   
-  #new
   def destroy
     Competition.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "Competition deleted"
     redirect_to competitions_url
   end
 

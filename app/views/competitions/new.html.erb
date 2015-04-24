@@ -3,8 +3,13 @@
 
 <%= form_for(@competition) do |f| %>
 	<table>	
-		<tr><td><%= f.label :name %>:</td><td><%= f.text_field :name %></td>
+		<tr>
+			<td><%= f.label :name %>:</td><td><%= f.text_field :name %></td>
+		</tr>
+		<tr>
 			<td><%= f.label :start %>:</td><td><%= f.date_select :start %></td>
+		</tr>
+		<tr>
 			<td><%= f.label :end %>:</td><td><%= f.date_select :end %></td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
@@ -13,5 +18,3 @@
 	    </tr>
 	</table>
 <% end %>
-
-debug(params)
