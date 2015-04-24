@@ -4,10 +4,16 @@ Rails.application.routes.draw do
   #resources :categories
 
   get 'categories' => 'categories#index', :as => 'categories'
- # get 'categories/:id/edit' => 'categories#edit', :as => 'edit_category'
-  # patch 'categories/:id' => 'categories#update'
-   #put 'categories/:id' => 'categories#update'
-  
+  get 'categories/new' => 'categories#new', :as => 'new_category'
+  post 'categories' => 'categories#create'
+  get 'categories/:id' => 'categories#show', :as => 'category'
+  get 'categories/:id/edit' => 'categories#edit', :as => 'edit_category'
+  patch 'categories/:id' => 'categories#update'
+  put 'categories/:id' => 'categories#update'
+  # to delete or destroy
+  delete 'categories/:id' => 'categories#destroy'
+
+
   # competition index
   get 'competitions' => 'competitions#index', :as => 'competition'
   # to create new musing
