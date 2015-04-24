@@ -8,8 +8,7 @@
 			<p>You are not a moderator</p>
 		<% end %>		
 		<p>Your email address: <%= @muser.email %></p>
-		<% end %>
-
+		
 		<div class="stats">
 			<%= render 'shared/stats' %>
 			<%= render 'follow_form'  %>
@@ -39,3 +38,4 @@
 		<p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
 	<% end %>
 	<p><%= link_to "Log out", logout_path, method: "delete" %></p>
+<% end %>

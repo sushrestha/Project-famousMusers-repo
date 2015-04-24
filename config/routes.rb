@@ -1,14 +1,6 @@
 Rails.application.routes.draw do
 
-
-  
-
-
   resources :feedbacks
-
- 
-
-
   #resources :categories
 
   get 'categories' => 'categories#index', :as => 'categories'
@@ -16,15 +8,24 @@ Rails.application.routes.draw do
   # patch 'categories/:id' => 'categories#update'
    #put 'categories/:id' => 'categories#update'
   
-
-  get 'competitions/new'
-  #see competition with :id
+  # competition index
+  get 'competitions' => 'competitions#index', :as => 'competition'
+  # to create new musing
+  get 'competitions/new' => 'competitions#new', :as => 'new_competition'
+  post 'competitions' => 'competitions#create'
+  # see competition with :id
   get 'competitions/:id' => 'competitions#show', :as => 'competition_show'
-  get 'competitions/edit'
-  post 'competitions/index' => 'competitionratings#create'
-  get 'competitions/index' => 'competitionratings#index', :as => 'competition_ratings'
+  # edit competition
+  get 'competitions/:id/edit' => 'competitions#edit', :as => 'edit_competition'
+  patch 'competitions/:id' => 'competitions#update'
+  put 'competitions/:id' => 'competitions#update'
+  # delete competition
+  delete 'competitions/:id' => 'competitions#destroy', :as => 'delete_competition'
+  # adding musings to competition
+  post 'competition/submitPost' => 'competitions#submitPost'
+  
   get 'competitionratings/new' => 'competitionratings#new', :as => 'new_competitionrating'
-
+  post 'competitionratings/new' => 'competitionratings#create'
 
   get 'messages' => 'messages#index'
   post 'messages' => 'messages#postMessage'

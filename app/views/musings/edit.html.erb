@@ -16,18 +16,14 @@
       <%= f.text_area :content, :class => "form-control", placeholder: "Enter The content"%>
     </div>
   </div>
-
-  
   <div class="field form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="dropbox"> 
-      <%= f.label "Category" %> 
-      <%= f.select :category_id, Category.all.map{|c| [ c.name, c.id ] }.uniq , :placeholder => "Select one", :selected => @category %>
-      </div> 
-    </div>
+      <%= f.label :category_id, :class => 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <div class="controls">        
+          <%= f.select :category_id, @categories, :prompt => "Select one", :class => "form-control"%>
+        </div>
+      </div>
   </div>
-
-
   <div class="field form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">          
@@ -36,10 +32,6 @@
       </div>
     </div>
   </div>
-
-
-   
-
   <div class="actions form-group">
      <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit  "Update", :class=> "btn btn-default" %>

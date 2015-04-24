@@ -1,7 +1,7 @@
 <% provide(:title, 'Musings-Rate-Competition') %>
 <h1>CompetitionRating#new</h1>
 
-<%= form_for(@competitionrating, :action => 'create') do |f| %>
+<%= form_for(@competitionrating, :action => 'create', :url => new_competitionrating_path) do |f| %>
 	<table>
 		<ul> 			
 			<tr><td><li>Title:</td><td><%= @competitionrating.musing.title %></li></td></tr>
