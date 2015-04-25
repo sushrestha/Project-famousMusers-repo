@@ -1,0 +1,31 @@
+<% provide(:title, 'Musings-Flag') %>
+
+<div class = "jumbotron">
+<h1>Flag Musing</h1>
+
+
+<%= form_for(@flag, html: {class: 'form-horizontal'}) do |f| %>
+	<ol class="microposts">
+		<li id="micropost-<%= @flag.musing_id %>">
+			<span class="title"><%= @flag.musing.title  %></span>
+			<span class="content"><%= @flag.musing.content %></br>
+				<%= f.hidden_field :id, :value => @flag.musing.id %>
+			</span>
+		</li>
+ 	<div class="field form-group">
+    	<%= f.label :description, :class => 'col-sm-2 control-label' %>
+	    <div class="col-sm-10">
+	      <%= f.text_area :description, :class => "form-control", placeholder: "Enter The Description"%>
+	    </div>
+    </div>
+	<div class="actions form-group">
+	     <div class="col-sm-offset-2 col-sm-10">
+		      <%= f.submit  "Flag", :class=> "btn btn-default" %>
+		      <%= submit_tag "Cancel", :class=> "btn btn-default"  %>    
+	     </div>
+  </div>
+
+	</ol>
+
+<% end %>
+</div>

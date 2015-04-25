@@ -1,0 +1,2 @@
+module FlaggedMusingsHelper
+end

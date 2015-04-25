@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'flagged_musings/index'
+
   resources :feedbacks
   #resources :categories
 
@@ -62,6 +64,14 @@ Rails.application.routes.draw do
   # to rate musing
   get 'ratings/:id/new' => 'ratings#new', :as => 'new_rating'
   post 'ratings' => 'ratings#create'
+
+
+
+
+  # Flagged_musings
+  get 'flagged_musings' => 'flagged_musings#index', :as => 'flagged_musings'
+  get 'flagged_musings/:id/new' => 'flagged_musings#new', :as => 'new_flag'
+  post 'flagged_musings' => 'flagged_musings#create'
 
   root 'musings#index'
 
