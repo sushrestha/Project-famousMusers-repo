@@ -23,3 +23,5 @@ tr:after {
 	height: 400px;
 	overflow-y: auto;
 }
+
+.messageContent { float:right }
