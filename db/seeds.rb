@@ -144,6 +144,23 @@ competition3 = Competition.create( name: 'Best',
                                    musings: [musing1,musing2,musing3])
 
 
+flag1 = FlaggedMusing.create( description: 'Most rediculous',
+                              musing_id: musing1.id,
+                              muser_id: muser1.id
+                            )
+flag2 = FlaggedMusing.create( description: 'Most irritated',
+                              musing_id: musing1.id,
+                              muser_id: muser2.id
+                            )
+flag3 = FlaggedMusing.create( description: 'Inappropriate',
+                              musing_id: musing2.id,
+                              muser_id: muser4.id
+                            )
+flag4 = FlaggedMusing.create( description: 'Most rediculous',
+                              musing_id: musing3.id,
+                              muser_id: muser5.id
+                            )
+
 # Following relationships
 #musers = Muser.all
 #muser  = musers.first
