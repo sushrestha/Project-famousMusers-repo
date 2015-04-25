@@ -23,6 +23,8 @@ class Musing < ActiveRecord::Base
 	default_scope -> { order(created_at: :desc) } #listing the musings in most recently created.
 	# 1 musing has 0..* stars
 	has_many :stars, :class_name => "Rating", :foreign_key => 'musing_id', dependent: :destroy
+	# 1 musing has 0..* flags
+	has_many :flags, :class_name => "FlaggedMusing", :foreign_key => 'musing_id'
 
 	has_many :competitionstars,
         class_name: 'CompetitionRating',
