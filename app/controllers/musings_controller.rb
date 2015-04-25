@@ -1,7 +1,6 @@
 class MusingsController < ApplicationController
  
-before_action :logged_in_muser,   :only => [:new, :create, :edit, :update, :destroy]
-before_action :moderator_user,    :only => [:destroy]
+before_action :logged_in_muser,   :only => [:new, :create, :show, :edit, :update, :destroy]
 before_action :correct_muserid,   :only => [:edit, :destroy]
 before_filter :check_for_cancel,  :only => [:create, :update]
 before_filter :find_musing,       :only => [:show, :edit, :update,  :destroy]
@@ -115,7 +114,7 @@ before_filter :categories,        :only => [:new, :create, :edit, :update]
   # confirms the correct_user
   def correct_muserid
     @musing = Musing.find(params[:id])
-    unless (current_muser.id == @musing.muser_id)
+    unless (current_muser.id == @musing.muser_id || current_muser.isModerator)
       flash[:danger] = "No Access!!!"
       redirect_to musings_url
     end
