@@ -24,7 +24,7 @@ class Musing < ActiveRecord::Base
 	# 1 musing has 0..* stars
 	has_many :stars, :class_name => "Rating", :foreign_key => 'musing_id', dependent: :destroy
 	# 1 musing has 0..* flags
-	has_many :flags, :class_name => "FlaggedMusing", :foreign_key => 'musing_id'
+	has_many :flags, :class_name => "FlaggedMusing", :foreign_key => 'musing_id', dependent: :destroy
 
 	has_many :competitionstars,
         class_name: 'CompetitionRating',

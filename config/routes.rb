@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   get 'flagged_musings' => 'flagged_musings#index', :as => 'flagged_musings'
   get 'flagged_musings/:id/new' => 'flagged_musings#new', :as => 'new_flag'
   post 'flagged_musings' => 'flagged_musings#create'
+  get 'flagged_musings/:id/' => 'flagged_musings#show', :as => 'flagged_musing'
 
   root 'musings#index'
 

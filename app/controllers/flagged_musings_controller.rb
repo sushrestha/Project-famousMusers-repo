@@ -2,11 +2,18 @@ class FlaggedMusingsController < ApplicationController
 
 
 	before_action :logged_in_muser
-	before_action :moderator_user, :only => [:index]	
+	before_action :moderator_user, :only => [:index, :show]	
 	before_filter :check_for_cancel
 
   def index
   	@flagged_musings = FlaggedMusing.all
+
+  	@musings = Musing.find_by_sql ["SELECT * FROM musings WHERE id IN (SELECT DISTINCT musing_id FROM flagged_musings)"]
+  end
+
+  def show
+  	@musing = Musing.find(params[:id])
+ 	@flags = FlaggedMusing.where("musing_id = ?",@musing.id) 
   end
 
   def new

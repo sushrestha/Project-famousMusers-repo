@@ -1,6 +1,7 @@
 class MusingsController < ApplicationController
  
 before_action :logged_in_muser,   :only => [:new, :create, :edit, :update, :destroy]
+before_action :moderator_user,    :only => [:destroy]
 before_action :correct_muserid,   :only => [:edit, :destroy]
 before_filter :check_for_cancel,  :only => [:create, :update]
 before_filter :find_musing,       :only => [:show, :edit, :update,  :destroy]
@@ -13,7 +14,7 @@ before_filter :categories,        :only => [:new, :create, :edit, :update]
                                UNION SELECT * FROM musings WHERE muser_id = ?",
                                0, current_muser]
     else
-      @musings = Musing.find_by_sql ["SELECT * FROM musings WHERE isPrivate = ?", 0]
+      @musings = Musing.where("isPrivate = ?", 0)
     end 
   end
 
