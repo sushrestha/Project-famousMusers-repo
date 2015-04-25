@@ -1,0 +1,15 @@
+<li class="list-group-item">
+  <% if message.author.name == @receiver_muser.name then %>
+  		<font color='firebrick'>
+  	<% else %>
+  		<font color='mediumblue'>
+  	<% end %>
+  	<%= message.author.name %>:</font>
+
+  <span class="messageContent"><% if message.author.name == @receiver_muser.name then %>
+  		<font color='firebrick'>
+  	<% else %>
+  		<font color='mediumblue'>
+  	<% end %>
+  	<%= message.content %></font></span>
+</li>

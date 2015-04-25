@@ -34,7 +34,9 @@ Rails.application.routes.draw do
   post 'competitionratings/new' => 'competitionratings#create'
 
   get 'messages' => 'messages#index'
-  post 'messages' => 'messages#postMessage'
+  #post 'messages' => 'messages#postMessage'
+  post 'messages' => 'messages#create'
+  get 'messages/new' => 'messages#new', :as => 'new_message'
 
   get 'submit/:id' => 'competitions#submit', :as => 'competition_submission'
 
