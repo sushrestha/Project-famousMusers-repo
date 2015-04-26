@@ -35,6 +35,7 @@
 
 
 <script>
+	$("#messages").scrollTop($("#messages")[0].scrollHeight);
 	channel = dispatcher.subscribe('<%= @channel_name %>');
 	channel.bind('new', function(message) {
 	  //console.log(message);
@@ -46,7 +47,8 @@
 	  }
 	  $('#messages').append("<li class='list-group-item'>" + font + message.authorname + 
 	  	":<span class='messageContent'>" + font + message.content + "</font></span></li>");
-	  $('#message-form').slideUp(350);
+	  //$('#message-form').slideUp(350);
+	  $("#messages").scrollTop($("#messages")[0].scrollHeight);
 	});
 	
 	$("#new_message").bind("ajax:beforeSend", function(event,xhr,status){
