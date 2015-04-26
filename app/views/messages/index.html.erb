@@ -2,9 +2,6 @@
 
 <h1>Conversation with <%= @receiver_muser.name %></h1>
 
-<!-- alert("channel name: <%= @channel_name %>"); -->
-
-
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h2>Messages</h2>
@@ -17,38 +14,42 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2" id="messages">
-  	<!--<table class="table table-striped" border="0">-->
-  			<%= render @messages %>
-  	<!--</table>-->
+  	<%= render @messages %>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-2">
-    <%= link_to 'New Message', new_message_path(id: @receiver_id), remote: true, :class => 'btn btn-default' %>
-  </div>
-</div>
+</br>
 
-<!--<div id="message-form" style="display:none;"></div>-->
+<table class="table table-striped" border="0">
+	<%= form_for @message, remote: true do |f| %>
+	<%= f.hidden_field :post_id, :value => @receiver_id %>
+	<%= f.hidden_field :channel_name, :value => @channel_name %>
+		<tr>
+			<td><%= f.text_area :content %></td>
+		</tr>
+		<tr>
+			<td><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
+		</tr>
+	<% end %>
+</table>
 
-<%= form_for @message, remote: true do |f| %>
-<%= f.hidden_field :post_id, :value => @receiver_id %>
-<%= f.hidden_field :channel_name, :value => @channel_name %>
-	<tr>
-		<td><%= f.text_area :content %></td>
-	</tr>
-	<tr>
-		<td><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
-	</tr>
-<% end %>
 
 <script>
-	$('#messages').append("<p>test</p>");
 	channel = dispatcher.subscribe('<%= @channel_name %>');
 	channel.bind('new', function(message) {
-	  console.log('a new post about '+message.content+' arrived!');
-	  
-	  $('#messages').append("<p>" + message.content + "</p>");
+	  //console.log(message);
+	  var font = "";
+	  if ("<%= current_muser.name %>" == message.authorname){
+	  	font = "<font color='mediumblue'>";
+	  }else{
+	  	font = "<font color='firebrick'>";
+	  }
+	  $('#messages').append("<li class='list-group-item'>" + font + message.authorname + 
+	  	":<span class='messageContent'>" + font + message.content + "</font></span></li>");
 	  $('#message-form').slideUp(350);
+	});
+	
+	$("#new_message").bind("ajax:beforeSend", function(event,xhr,status){
+  		$('#message_content').val('');
 	});
 </script>

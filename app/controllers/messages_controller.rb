@@ -21,11 +21,11 @@ class MessagesController < ApplicationController
     end
   end
   
-  def new
-    @message = Message.new
+  #def new
+  #  @message = Message.new
     #@messages = Message.all
-    @id = params[:id]
-  end
+  #  @id = params[:id]
+  #end
   
   def create
     @messages = Message.all
@@ -35,6 +35,8 @@ class MessagesController < ApplicationController
     @myreceiverid = params[:message][:post_id]
     @receiver_muser = Muser.find(@myreceiverid)
     @message.recipient = Muser.find(@myreceiverid)
+    @message.authorname = current_muser.name
+    puts("authorname:" + @message.authorname)
     #respond_to do |format|
       if @message.save
         #format.html { redirect_to messages_path(:receiver_id => @myreceiverid) }
