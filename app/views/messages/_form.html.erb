@@ -1,9 +1,0 @@
-<%= form_for @message, remote: true do |f| %>
-<%= f.hidden_field :post_id, :value => receiver_id %>
-	<tr>
-		<td><%= f.text_area :content %></td>
-	</tr>
-	<tr>
-		<td><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
-	</tr>
-<% end %>

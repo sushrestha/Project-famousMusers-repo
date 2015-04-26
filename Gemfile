@@ -32,6 +32,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jc-validates_timeliness'
 # Controller respond_to
 gem 'responders', '~> 2.0'
+# websocket gem
+gem 'websocket-rails'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'

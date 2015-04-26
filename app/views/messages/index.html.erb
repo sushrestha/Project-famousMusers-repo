@@ -2,6 +2,9 @@
 
 <h1>Conversation with <%= @receiver_muser.name %></h1>
 
+<!-- alert("channel name: <%= @channel_name %>"); -->
+
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h2>Messages</h2>
@@ -26,4 +29,26 @@
   </div>
 </div>
 
-<div id="message-form" style="display:none;"></div>
+<!--<div id="message-form" style="display:none;"></div>-->
+
+<%= form_for @message, remote: true do |f| %>
+<%= f.hidden_field :post_id, :value => @receiver_id %>
+<%= f.hidden_field :channel_name, :value => @channel_name %>
+	<tr>
+		<td><%= f.text_area :content %></td>
+	</tr>
+	<tr>
+		<td><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
+	</tr>
+<% end %>
+
+<script>
+	$('#messages').append("<p>test</p>");
+	channel = dispatcher.subscribe('<%= @channel_name %>');
+	channel.bind('new', function(message) {
+	  console.log('a new post about '+message.content+' arrived!');
+	  
+	  $('#messages').append("<p>" + message.content + "</p>");
+	  $('#message-form').slideUp(350);
+	});
+</script>

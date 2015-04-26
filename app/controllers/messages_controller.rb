@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
   respond_to :html, :js
   
   def index
-    #@message = Message.new
+    puts("index test")
+    @message = Message.new
     @messages = Message.all
     @current_muser = current_muser
     @current_muser_id = current_muser.id
@@ -13,6 +14,11 @@ class MessagesController < ApplicationController
     #@messages = Message.where("(author_id = '?' AND recipient_id = ?) OR (author_id = ? AND recipient_id = '?')", 
     #                            @current_muser.id, @receiver_id,
     #                            @receiver_id, @current_muser.id)
+    if @current_muser_id.to_i < @receiver_id.to_i
+      @channel_name = @current_muser.name + "_" + @receiver_muser.name
+    else
+      @channel_name = @receiver_muser.name + "_" + @current_muser.name
+    end
   end
   
   def new
@@ -32,6 +38,8 @@ class MessagesController < ApplicationController
     #respond_to do |format|
       if @message.save
         #format.html { redirect_to messages_path(:receiver_id => @myreceiverid) }
+        #@post.message = @message
+        WebsocketRails[params[:message][:channel_name]].trigger 'new', @message
       else
           @messages = Message.all
           flash.now[:error] = 'Failed to add post'
@@ -40,6 +48,8 @@ class MessagesController < ApplicationController
       end
     #end
   end
+  
+  
 
   def postMessage
     @message = Message.new(message_params)
