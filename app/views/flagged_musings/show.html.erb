@@ -1,0 +1,37 @@
+
+<% provide(:title, 'FlaggedMusing-Show') %>
+
+<div class = "jumbotron">
+  <h1> Flagged Musing Details: </h1>
+  <ol class="microposts">
+  	<li id="micropost-<%= @musing.id %>">
+          <span class="title"><b>Title: </b><%= @musing.title %></span>
+          <span class="content"><b>Content: </b>"<%= @musing.content %>"</span>
+          <span class="content"><b>Author: </b><%= @musing.muser.name %></span>
+    </li>
+  </ol>
+  <div class="table-responsive hover">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>SN</th>
+        <th>Description</th>
+        <th>Flagged By Muser</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @i = 1 %>
+      <% @flags.each do |flag| %>
+        <tr>
+          <td><%= @i %></td>
+          <td><%= flag.description %></td>
+          <td><%= flag.muser.name %>
+        </tr>
+        <% @i = @i + 1 %>
+      <% end %>
+    </tbody>
+  </table>
+  </div>   
+  <%= link_to " Show all Flagged Musings ", flagged_musings_path, :class=> "btn btn-default" %>
+
+</div>

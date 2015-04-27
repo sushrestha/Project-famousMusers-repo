@@ -26,4 +26,12 @@ module SessionsHelper
     @current_muser = nil
   end
 
+  #checking moderator user
+  def moderator_user
+    unless (current_muser.isModerator)
+      flash[:danger] = "No Access!!!"
+      redirect_to root_path
+    end
+  end
+
 end

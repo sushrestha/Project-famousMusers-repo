@@ -1,42 +1,32 @@
-<!--
-<p id="notice"><%= notice %></p>
+<% provide(:title, 'Categories') %>
 
-<h1>Listing Categories</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @categories.each do |category| %>
+<div class = "jumbotron">
+  <h1> List of Categories: </h1>
+  <div class="table-responsive hover">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= category.name %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>SN</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @i = 1 %>
+      <% @categories.each do |cat| %>
+        <tr>
+          <td><%= @i %></td>
+          <td><%= link_to cat.name, category_path(cat) %></td>
+          <td><%= cat.desc %></td>
+          <td><%= link_to " Edit ", edit_category_path(cat), :class=> "btn btn-default" %> | <%= link_to " Delete ", cat, method: :delete, data: { confirm: 'Are you sure you want to delete?'} , :class=> "btn btn-default" %></td>
+        </tr>
+        <% @i = @i + 1 %>
+      <% end %>
+    </tbody>
+  </table>
+  </div>   
+  <%= link_to " Create New Category ", new_category_path, :class=> "btn btn-default" %>
 
-<br>
-
-<%= link_to 'New Category', new_category_path %>
--->
-
-
-<% provide(:title, 'Musings-categories') %>
-
-
-
- <div class = "jumbotron"> 
-
-<% @categories.each do |c| %>
-  <%= c.name %>
-<% end %>
- </div>
+</div>
 

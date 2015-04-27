@@ -31,10 +31,15 @@ muser5 = Muser.create( email: 'mayaangelou@gmail.com',
               name: 'Maya Angelou',
               password: 'password',
               isModerator: 'f')
+muser6 = Muser.create( email: 'admin@admin.com',
+              name: 'Admin Admin',
+              password: 'password',
+              isModerator: 't')
 
 @myMessage = Message.create( content: 'test message',
                              author_id: muser1.id,
-                             recipient_id: muser2.id) 
+                             recipient_id: muser2.id,
+                             authorname: 'bob') 
 	
 
           
@@ -139,6 +144,23 @@ competition3 = Competition.create( name: 'Best',
                                    end: DateTime.parse("2015-03-31 11:59:59"),
                                    musings: [musing1,musing2,musing3])
 
+
+flag1 = FlaggedMusing.create( description: 'Most rediculous',
+                              musing_id: musing1.id,
+                              muser_id: muser1.id
+                            )
+flag2 = FlaggedMusing.create( description: 'Most irritated',
+                              musing_id: musing1.id,
+                              muser_id: muser2.id
+                            )
+flag3 = FlaggedMusing.create( description: 'Inappropriate',
+                              musing_id: musing2.id,
+                              muser_id: muser4.id
+                            )
+flag4 = FlaggedMusing.create( description: 'Most rediculous',
+                              musing_id: musing3.id,
+                              muser_id: muser5.id
+                            )
 
 # Following relationships
 #musers = Muser.all
