@@ -1,3 +1,5 @@
+<% provide(:title, 'Categories-Show') %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -9,12 +11,18 @@
   <strong>Desc:</strong>
   <%= @category.desc %>
 </p>
-
-<h3> Musings under this category </h3>
-<% Musing.where(category_id: @category.id).each do |musing| %>
-<li> <%= musing.name %> </li>
+<% if @musings.any? %>
+	<h3> Musings under this category </h3>
+	<hr>
+	<% @musings.each do |musing| %>
+	<li> <%= musing.title %> </br> <%= musing.content %></li>
+	<hr>
+	<% end %>
+<% else %>
+	<h3> No Musings under this category </h3>
 <% end %>
 
 
+
 <%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= link_to 'Show All Categories', categories_path %>

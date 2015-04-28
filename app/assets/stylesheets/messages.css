@@ -10,16 +10,18 @@ table td {
     border-top: none !important;
 }
 
-thead, tbody, tr, td, th { display: block; }
+/*thead, tbody, tr, td, th { display: block; }
 
 tr:after {
     content: ' ';
     display: block;
     visibility: hidden;
     clear: both;
-}
+}*/
 
-.messages {
+#messages {
 	height: 400px;
 	overflow-y: auto;
 }
+
+.messageContent { float:right }

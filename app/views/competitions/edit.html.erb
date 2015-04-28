@@ -1,2 +1,21 @@
-<h1>Competitions#edit</h1>
-<p>Find me in app/views/competitions/edit.html.erb</p>
+<% provide(:title, 'Competition-Update') %>
+
+<h1>Edit Competition</h1>
+
+<%= form_for(@competition, url: url_for(:action => 'update')) do |f| %>
+	<table>	
+		<tr>
+			<td><%= f.label :name %>:</td><td><%= f.text_field :name %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :start %>:</td><td><%= f.date_select :start %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :end %>:</td><td><%= f.date_select :end %></td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+	    	<td><%= f.submit  "Update" %>&nbsp;<%= submit_tag "Cancel"  %></td>
+	    </tr>
+	</table>
+<% end %>

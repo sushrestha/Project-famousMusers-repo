@@ -1,26 +1,44 @@
 Rails.application.routes.draw do
 
+  get 'flagged_musings/index'
+
   resources :feedbacks
   #resources :categories
 
   get 'categories' => 'categories#index', :as => 'categories'
- # get 'categories/:id/edit' => 'categories#edit', :as => 'edit_category'
-  # patch 'categories/:id' => 'categories#update'
-   #put 'categories/:id' => 'categories#update'
-  
-  post 'competition/submitPost' => 'competitions#submitPost'
-  get 'competitions' => 'competitions#index'
-  get 'competitions/new' => 'competitions#new'
-  #see competition with :id
-  get 'competitions/:id' => 'competitions#show', :as => 'competition_show'
-  #get 'competitions/update' => 'competitions#update'
-  post 'competitions/index' => 'competitionratings#create'
-  get 'competitions/index' => 'competitionratings#index', :as => 'competition_ratings'
-  get 'competitionratings/new' => 'competitionratings#new', :as => 'new_competitionrating'
+  get 'categories/new' => 'categories#new', :as => 'new_category'
+  post 'categories' => 'categories#create'
+  get 'categories/:id' => 'categories#show', :as => 'category'
+  get 'categories/:id/edit' => 'categories#edit', :as => 'edit_category'
+  patch 'categories/:id' => 'categories#update'
+  put 'categories/:id' => 'categories#update'
+  # to delete or destroy
+  delete 'categories/:id' => 'categories#destroy'
 
+
+  # competition index
+  get 'competitions' => 'competitions#index', :as => 'competition'
+  # to create new musing
+  get 'competitions/new' => 'competitions#new', :as => 'new_competition'
+  post 'competitions' => 'competitions#create'
+  # see competition with :id
+  get 'competitions/:id' => 'competitions#show', :as => 'competition_show'
+  # edit competition
+  get 'competitions/:id/edit' => 'competitions#edit', :as => 'edit_competition'
+  patch 'competitions/:id' => 'competitions#update'
+  put 'competitions/:id' => 'competitions#update'
+  # delete competition
+  delete 'competitions/:id' => 'competitions#destroy', :as => 'delete_competition'
+  # adding musings to competition
+  post 'competition/submitPost' => 'competitions#submitPost'
+  
+  get 'competitionratings/new' => 'competitionratings#new', :as => 'new_competitionrating'
+  post 'competitionratings/new' => 'competitionratings#create'
 
   get 'messages' => 'messages#index'
-  post 'messages' => 'messages#postMessage'
+  #post 'messages' => 'messages#postMessage'
+  post 'messages' => 'messages#create'
+  get 'messages/new' => 'messages#new', :as => 'new_message'
 
   get 'submit/:id' => 'competitions#submit', :as => 'competition_submission'
 
@@ -48,6 +66,15 @@ Rails.application.routes.draw do
   # to rate musing
   get 'ratings/:id/new' => 'ratings#new', :as => 'new_rating'
   post 'ratings' => 'ratings#create'
+
+
+
+
+  # Flagged_musings
+  get 'flagged_musings' => 'flagged_musings#index', :as => 'flagged_musings'
+  get 'flagged_musings/:id/new' => 'flagged_musings#new', :as => 'new_flag'
+  post 'flagged_musings' => 'flagged_musings#create'
+  get 'flagged_musings/:id/' => 'flagged_musings#show', :as => 'flagged_musing'
 
   root 'musings#index'
 
