@@ -1,7 +1,7 @@
 class MusersController < ApplicationController
   before_action :logged_in_muser, only: [:show, :following, :followers, :other_musers]
   #before_action :correct_muser, only: [:show]
-  
+
   def following
     @title = "Following"
     @muser  = Muser.find(params[:id])
@@ -22,9 +22,8 @@ class MusersController < ApplicationController
 
 
   def index
-    @musers = Muser.all 
+    @musers = Muser.all
     @other_musers = Muser.find_by_sql ["SELECT * FROM musers WHERE id != ? AND id NOT IN (SELECT followed_id FROM subscribes WHERE follower_id = ?)  ", current_muser, current_muser.id]
-  
   end
 
   def show
@@ -49,10 +48,16 @@ class MusersController < ApplicationController
     end
   end
 
+  def subscribed_musers
+    @title = 'Subscribed Musers'
+    @muser = Muser.find(params[:id])
+    @following = @muser.following
+  end
+
   private
 
   def muser_params
-    params.require(:muser).permit(:name, 
+    params.require(:muser).permit(:name,
                                  :email,
                                  :password,
                                  :password_confirmation)
