@@ -6,16 +6,17 @@
 			<p>You are a moderator</p>
 		<% else %>
 			<p>You are not a moderator</p>
-		<% end %>		
+		<% end %>
 		<p>Your email address: <%= @muser.email %></p>
-		
+
 		<div class="stats">
 			<%= render 'shared/stats' %>
 			<%= render 'follow_form'  %>
 		</div>
+    <%= link_to "Subscribed Musers", subscribed_musers_muser_path %>
 		<%= link_to "View Musers to Subscribe", musers_path %>
 
-		<!-- Display the user's musings if we're on their own page -->	
+		<!-- Display the user's musings if we're on their own page -->
 			<div class = "jumbotron">
 				<div class="row">
 					<div class="col-xs-12">
@@ -25,7 +26,7 @@
 						<%= render @musings %>
 		 			</ol>
 		 			</div>
-		 		</div>	
+		 		</div>
 		 		<div class="row">
 		 			<div class="col-xs-3">
 		 				<h2> <%= link_to "Create New Musing", new_musing_path, :class=> "btn btn-default"  %> </h2>
