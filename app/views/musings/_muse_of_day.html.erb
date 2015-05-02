@@ -3,7 +3,11 @@
       <div class="row">
         <div class = "center jumbotron ">
          <h2><b>Muse of The Day </b></h2>
-          <p><h2>"<%= @musing_of_the_day.content %>"</h2></p>
+          <% if !@musing_of_the_day.nil? %>
+              <p><h2>"<%= @musing_of_the_day.content %>"</h2></p>
+            <% else %>
+              <p><h2>"No musing found"</h2></p>
+          <% end %>
           <% if logged_in? %>
             <h3><%= link_to " Create New Musings", new_musing_path, :class=> "btn btn-default"  %></h3>
           <% end %>
