@@ -12,18 +12,18 @@ WebsocketRails::EventMap.describe do
   #   end
   # The above will handle an event triggered on the client like `product.new`.
   
-  #namespace :tasks do
+  namespace :async do
 
     # using a Hash to specify the target
-  #  subscribe :create, :to => TaskController, :with_method => :create
+    subscribe :clearNotifications, :to => AsyncController, :with_method => :clearNotifications
 
     # using the same syntax as routes.rb
-   # subscribe :update, 'task#update'
+    #subscribe :update, 'task#update'
 
     # if your controller is not a top-level object
     #subscribe :create_admin, :to => Admin::TaskController, :with_method => :create
 
     #subscribe :update_admin, 'admin/task#update'
 
-  #end
+  end
 end

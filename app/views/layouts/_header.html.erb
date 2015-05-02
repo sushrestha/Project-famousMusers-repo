@@ -47,7 +47,15 @@
 				var count = <%= notifications.count %>;
 				$('#notification-menu').click(function() { 
 					console.log("clicked"); 
-					return false; 
+					//recalculate count both js and server side
+					//change notifications to read server side and expire js ones
+					var info = {
+					  curid: <%= current_muser.id %>,
+					  completed: false
+					}
+					
+					dispatcher.trigger('async.clearNotifications', info);
+					return true; 
 				});
 				channel.bind('new', function(message) {
 				  //console.log(message);
