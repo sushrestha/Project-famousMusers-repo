@@ -20,12 +20,14 @@ Hozier:
   content: "She's the giggle at a funeral Knows everybody's disapproval I should've worshipped her sooner"
   isPrivate: 0
   muser: homer
+  category_id: 1
 
 poem:
   title: "Peoms about Love"
   content: "These poems touch my heart... I was involved with a beautiful lady. I first seen her at a Christian event J2X Aug 2011 and I was floored by her beauty"
   isPrivate: 0
   muser: sujit
+  category_id: 2
   created_at: <%= 2.hours.ago %>
 
 most_recent:
@@ -33,4 +35,5 @@ most_recent:
   content: "ttt"
   isPrivate: 0
   muser: sujit
+  category_id: 3
   created_at: <%= Time.zone.now %>

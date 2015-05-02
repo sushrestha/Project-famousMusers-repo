@@ -72,16 +72,20 @@ before_filter :categories,        :only => [:new, :create, :edit, :update]
   def muse_of_day
     #for muse of day
     @musing_all = Musing.all
-    @list = Array.new
-    @musing_all.each do |l|
-      @list.push(l.id)
+    if @musing_all.any?
+      @list = Array.new
+      @musing_all.each do |l|
+        @list.push(l.id)
+      end    
+      @min = 0
+      @max = @list.size-1
+      @randnum = Random.rand(@min..@max)
+      @id = @list[@randnum]
+      #(@randnum == 0) ? (@id = @list[@list.size-1]) : (@id = @list[@randnum])
+      unless Musing.find_by_id(@id).nil? then
+        @musing_of_the_day = Musing.find_by_id(@id)
+      end
     end
-  
-    @min = 0
-    @max = @list.size
-    @randnum = Random.rand(@min..@max)
-    (@randnum == @list.size) ? (@id = @list.size-1) : (@id = @list[@randnum])
-    @musing_of_the_day = Musing.find(@id)
   end
 
   def popular
