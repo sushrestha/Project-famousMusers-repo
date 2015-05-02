@@ -20,25 +20,26 @@
 
 </br>
 
-<table class="table table-striped" border="0">
-	<%= form_for @message, remote: true do |f| %>
+<%= form_for @message, remote: true do |f| %>
 	<%= f.hidden_field :post_id, :value => @receiver_id %>
 	<%= f.hidden_field :channel_name, :value => @channel_name %>
-		<tr>
-			<td><%= f.text_area :content %></td>
-		</tr>
-		<tr>
-			<td><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
-		</tr>
-	<% end %>
-</table>
+	
+	<table class="table table-striped" border="0">
+			<tr>
+				<td><%= f.text_area :content %></td>
+			</tr>
+			<tr>
+				<td><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
+			</tr>
+	</table>
+<% end %>
 
 
 <script>
 	$("#messages").scrollTop($("#messages")[0].scrollHeight);
 	channel = dispatcher.subscribe('<%= @channel_name %>');
 	channel.bind('new', function(message) {
-	  //console.log(message);
+	  console.log(message);
 	  var font = "";
 	  if ("<%= current_muser.name %>" == message.authorname){
 	  	font = "<font color='mediumblue'>";
@@ -47,7 +48,6 @@
 	  }
 	  $('#messages').append("<li class='list-group-item'>" + font + message.authorname + 
 	  	":<span class='messageContent'>" + font + message.content + "</font></span></li>");
-	  //$('#message-form').slideUp(350);
 	  $("#messages").scrollTop($("#messages")[0].scrollHeight);
 	});
 	

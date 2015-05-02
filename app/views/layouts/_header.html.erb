@@ -1,4 +1,3 @@
-
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <%= link_to "Musings – A Place for Journal-Sharing", root_path, id: "logo" %>
@@ -20,11 +19,44 @@
                   </ul>
                 </li>
               <% end %>
+              	<li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notification-menu">
+                    Notifications (<font id="notification-count"><%= notifications.count %></font>)<b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                  	<div id="notification-list">
+	                  	<% @notifications.each do |notification| %>
+		                  	<% if notification.linktype == 'message' %>
+		                  		<% @message_sender = Muser.find(notification.linkid) %>
+		                    	<li><%= link_to "New message from " + @message_sender.name, messages_path(:receiver_id => @message_sender.id) %></li>
+		                    <% else %>
+		                    	<!--Link to other types of notifications for later use-->
+		                    	<li>Other link type</li>
+		                    <% end %>
+	                    <% end %>
+                    </div>
+                  </ul>
+                </li>
               <li>
                 <%= link_to "Log out", logout_path, method: "delete" %>
               </li>
             </ul>
           </li>
+	    	<script>
+				channel = dispatcher.subscribe('notification_<%= current_muser.name %>');
+				var count = <%= notifications.count %>;
+				$('#notification-menu').click(function() { 
+					console.log("clicked"); 
+					return false; 
+				});
+				channel.bind('new', function(message) {
+				  //console.log(message);
+				  count++;
+				  $('#notification-count').html(count);
+				  var link = '<li><a href="/messages?receiver_id=' + message.linkid + '">New message from ' + message.name + '</a></li>';
+				  $('#notification-list').append(link);
+				});
+			</script>
         <% else %>
           <li><%= link_to "Log in", login_path %></li>
           <li><%= link_to "Sign Up", signup_path %></li>

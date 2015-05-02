@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  linktype: MyString
+  linkid: 1
+  unread: false
+
+two:
+  linktype: MyString
+  linkid: 1
+  unread: false
