@@ -23,8 +23,7 @@ class MusingTest < ActiveSupport::TestCase
 
   def setup
     @muser  = musers(:homer)
-    @musing = @muser.musings.build(title: "Cookie", content: "This is that. That is this.", isPrivate: 1)
-  	#@musing = Musing.new(title: "Cookie", content: "This is that. That is this.", isPrivate: 1)
+    @musing = @muser.musings.build(title: "Cookie", content: "This is that. That is this.", isPrivate: 1, category_id: 1)
   end
 
     # for valid input for all fields at once

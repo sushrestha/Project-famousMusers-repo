@@ -7,3 +7,4 @@ class ChatController < WebsocketRails::BaseController
       trigger_failure message
     end
 end
+end
