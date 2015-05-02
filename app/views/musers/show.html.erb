@@ -18,22 +18,22 @@
 		<!-- Display the user's musings if we're on their own page -->	
 			<div class = "jumbotron">
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-9">
 					<% if @muser.musings.any? %>
 					<h3>My Musings: ( <%= @muser.musings.count %> )</h3>
 					<ol class="microposts">
 						<%= render @musings %>
 		 			</ol>
+		 			<% else %>
+		 				<h3>My Musings: ( No Musings: )</h3>
+		 			<% end %>
 		 			</div>
-		 		</div>	
-		 		<div class="row">
 		 			<div class="col-xs-3">
 		 				<h2> <%= link_to "Create New Musing", new_musing_path, :class=> "btn btn-default"  %> </h2>
 		 			</div>
 		 			<div class="col-xs-9"></div>
 		 		</div>
-			</div>
-		<% end %>
+		 	</div>
 	<% else %>
 		<p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
 	<% end %>
