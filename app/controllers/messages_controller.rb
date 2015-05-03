@@ -32,8 +32,9 @@ class MessagesController < ApplicationController
         if @notification.save
           @notification_channel = "notification_" + @message.recipient.name
           event = {:linktype => "message", :linkid => current_muser.id, :name => current_muser.name}
-          #WebsocketRails[@notification_channel].trigger 'new', @notification
+          #push notification that a new notification should be made
           WebsocketRails[@notification_channel].trigger 'new', event
+          #push notification that a new message has been sent
           WebsocketRails[params[:message][:channel_name]].trigger 'new', @message
         else
           #Notification save failed, roll back message save
@@ -41,32 +42,8 @@ class MessagesController < ApplicationController
           flash.now[:error] = 'Failed to add post (notification creation error)'
         end
       else
-          #@messages = Message.all
           flash.now[:error] = 'Failed to add post'
-          #render action: 'index'
-          #redirect_to action: 'index', :receiver_id => @myreceiverid
       end
-  end
-  
-  
-
-  def postMessage
-    @message = Message.new(message_params)
-    @message.author = current_muser
-    @myreceiverid = params[:message][:post_id]
-    @message.recipient = Muser.find(@myreceiverid)
-    respond_to do |format|
-      if @message.save
-        format.html { redirect_to messages_path(:receiver_id => @myreceiverid) }
-      else
-        format.html  do
-          @messages = Message.all
-          flash.now[:error] = 'Failed to add post'
-          #render action: 'index'
-          redirect_to action: 'index', :receiver_id => @myreceiverid
-        end
-      end
-    end
   end
   
   private

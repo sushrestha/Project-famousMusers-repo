@@ -29,7 +29,7 @@
 				<td><%= f.text_area :content %></td>
 			</tr>
 			<tr>
-				<td><%= f.submit :value => "Submit" %>&nbsp;<%= f.button "Cancel" %></td>
+				<td><%= f.submit :value => "Submit" %>&nbsp;<%= button_tag "Cancel", type: :reset %></td>
 			</tr>
 	</table>
 <% end %>
