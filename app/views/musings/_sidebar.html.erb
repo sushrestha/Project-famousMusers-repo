@@ -9,11 +9,16 @@
           </div>
           <div class="row">
             <h3>Categories:</h3>
-            <h3><%= link_to " Journal Entry ", root_path, :class=> "btn btn-default" %></h3>
-            <h3><%= link_to " Song Lyrics ", root_path, :class=> "btn btn-default" %></h3>
-            <h3><%= link_to " Jokes ", root_path, :class=> "btn btn-default" %></h3>
-            <h3><%= link_to " Rants ", root_path, :class=> "btn btn-default" %></h3>
-            <h3><%= link_to " NonSense ", root_path, :class=> "btn btn-default" %></h3>
+
+            <h3><%= link_to " Journal Entry ",category_path(:id => 1), :class=> "btn btn-default" %></h3>
+            <h3><%= link_to " Song Lyrics ", category_path(:id => 2), :class=> "btn btn-default" %></h3>
+            <h3><%= link_to " Stories ", category_path(:id => 3), :class=> "btn btn-default" %></h3>
+            <h3><%= link_to " Jokes ", category_path(:id => 4), :class=> "btn btn-default" %></h3>
+            <h3><%= link_to " Rants ", category_path(:id => 5), :class=> "btn btn-default" %></h3>
+            <h3><%= link_to " NonSense ", category_path(:id => 6), :class=> "btn btn-default" %></h3>
+            <h3><%= link_to " Ramblings ", category_path(:id => 7), :class=> "btn btn-default" %></h3>
+            <h3><%= link_to " Thoughts ", category_path(:id => 8), :class=> "btn btn-default" %></h3>
+            <h3><%= link_to " Tweets ", category_path(:id => 9), :class=> "btn btn-default" %></h3>
         </div>
       </div>
     </div>
