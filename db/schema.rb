@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502180249) do
+ActiveRecord::Schema.define(version: 20150503175647) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -142,5 +142,10 @@ ActiveRecord::Schema.define(version: 20150502180249) do
   add_index "subscribes", ["followed_id"], name: "index_subscribes_on_followed_id"
   add_index "subscribes", ["follower_id", "followed_id"], name: "index_subscribes_on_follower_id_and_followed_id", unique: true
   add_index "subscribes", ["follower_id"], name: "index_subscribes_on_follower_id"
+
+  create_table "uploads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
