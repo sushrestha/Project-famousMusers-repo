@@ -123,4 +123,6 @@ before_filter :categories,        :only => [:new, :create, :edit, :update]
       redirect_to musings_url
     end
   end
+
+
 end
