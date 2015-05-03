@@ -23,7 +23,11 @@
 			<% if @competition.musings.count < 1 then %>
 				<li id="micropost-1">
 					<span class="content">
+					<% if @isFinished then %>
+						<h2>No submissions</h2>
+					<% else %>
 						<h2>No submissions yet</h2>
+					<% end %>
 					</span>
 				</li>
 			<% end %>
@@ -60,25 +64,27 @@
 				</li>
 			<% end %>
 			<% if @isFinished then %>
-			<% @winner = Musing.find(@highest_id)%>
-				<li id="micropost-<%= @winner.id %>">
-				  <span class="title">Winning Submission</span>
-				  <span class="title"><%= @winner.title %></span>
-				  <span class="content"><%= @winner.content %></br>
-				  	Competition Average:
-					<% sum = 0.0 %>
-				    <% i = 1.0 %>
-				    <% @winner.competitionstars.each do |s| %>
-				    <% (s.competitionstars != nil) ? (star = s.competitionstars) : (star = 0.0) %>
-				      <% sum = sum + star %>
-				      <% i = i + 1 %>
-				    <% end %>
-				    <% @average = (sum == 0.0) ? 0 : (sum/(i-1)).round(1)%>
-				    <%= @average %>
-				  </span> 
-				  <span class="content">
-				  	Author: <%= link_to @winner.muser.name, muser_url(@winner.muser) %>
-				  </span>
+				<% if @highest_id then %>
+				<% @winner = Musing.find(@highest_id)%>
+					<li id="micropost-<%= @winner.id %>">
+					  <span class="title">Winning Submission</span>
+					  <span class="title"><%= @winner.title %></span>
+					  <span class="content"><%= @winner.content %></br>
+					  	Competition Average:
+						<% sum = 0.0 %>
+					    <% i = 1.0 %>
+					    <% @winner.competitionstars.each do |s| %>
+					    <% (s.competitionstars != nil) ? (star = s.competitionstars) : (star = 0.0) %>
+					      <% sum = sum + star %>
+					      <% i = i + 1 %>
+					    <% end %>
+					    <% @average = (sum == 0.0) ? 0 : (sum/(i-1)).round(1)%>
+					    <%= @average %>
+					  </span> 
+					  <span class="content">
+					  	Author: <%= link_to @winner.muser.name, muser_url(@winner.muser) %>
+					  </span>
+				<% end %>
 			<% end %>
 		</ol>
 	</div>
