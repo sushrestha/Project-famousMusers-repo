@@ -14,8 +14,15 @@ class FlaggedMusingsController < ApplicationController
   end
 
   def new
-    @flag = FlaggedMusing.new
-    @flag.musing = Musing.find(params[:id]) 
+    @musing = Musing.find(params[:id])
+    @flagged = FlaggedMusing.where("muser_id = ? and musing_id = ?", current_muser.id, @musing.id)
+    if !@flagged.any?
+      @flag = FlaggedMusing.new
+      @flag.musing = Musing.find(params[:id])
+    else
+      flash[:danger] = "Musing already flagged!!!"
+      redirect_to root_path
+    end
   end
 
   def create
