@@ -3,19 +3,21 @@
 <h1>Edit Competition</h1>
 
 <%= form_for(@competition, url: url_for(:action => 'update')) do |f| %>
-	<table>	
-		<tr>
-			<td><%= f.label :name %>:</td><td><%= f.text_field :name %></td>
-		</tr>
-		<tr>
-			<td><%= f.label :start %>:</td><td><%= f.date_select :start %></td>
-		</tr>
-		<tr>
-			<td><%= f.label :end %>:</td><td><%= f.date_select :end %></td>
-		</tr>
-		<tr><td>&nbsp;</td></tr>
-		<tr>
-	    	<td><%= f.submit  "Update" %>&nbsp;<%= submit_tag "Cancel"  %></td>
-	    </tr>
-	</table>
+	  <div class="field">
+	    <%= f.label :name %><br>
+	    <%= f.text_field :name %>
+	  </div>
+	
+	  <div class="field">
+	    <%= f.label :start %><br>
+	    <%= f.date_select :start %>
+	  </div>
+	  
+	  <div class="field">
+	    <%= f.label :end %><br>
+	    <%= f.date_select :end %>
+	  </div>
+	  <div class="actions">
+	    <%= f.submit "Update", :class=> "btn btn-default" %>&nbsp;<%= submit_tag "Cancel", :class=> "btn btn-default" %>
+	  </div>
 <% end %>

@@ -18,5 +18,4 @@ class Message < ActiveRecord::Base
   validates :content, presence: true
   validates :author, presence: true
   validates :recipient, presence: true
-  validates :authorname, presence: true
 end

@@ -1,5 +1,5 @@
 class MusersController < ApplicationController
-  before_action :logged_in_muser, only: [:show, :following, :followers, :other_musers]
+  before_action :logged_in_muser, only: [:show, :following, :followers, :other_musers,:edit,:update]
   before_action :correct_muser, only: [:edit,:update]
   before_filter :check_for_cancel,  :only => [:create, :update]
 
