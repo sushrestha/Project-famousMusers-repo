@@ -1,7 +1,5 @@
 class SubscribeCategory < ActiveRecord::Base
-
-	validates :muser_id, presence: true
-	validates :name, presence: true
-	validates :category_id, presence: true
+	belongs_to :muser, :class_name => "Muser", :foreign_key => 'muser_id'
+	belongs_to :category, :class_name => "Category", :foreign_key => 'category_id'
 
 end
