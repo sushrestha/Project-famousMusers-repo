@@ -1,23 +1,37 @@
-
+<% provide(:title, 'Profile') %>
+<br>
+<div class = "jumbotron" style="padding:10px; padding-left: 60px; padding-right: 60px">
 <h1><%= @muser.name %></h1>
+
 <% if logged_in? %>
 	<% if @muser.id == current_muser.id then %>
-		<% if @muser.isModerator then %>
-			<p>You are a moderator</p>
-		<% else %>
-			<p>You are not a moderator</p>
-		<% end %>
-		<p>Your email address: <%= @muser.email %></p>
-
-		<div class="stats">
-			<%= render 'shared/stats' %>
-			<%= render 'follow_form'  %>
+			<% if @muser.isModerator then %>
+				<div class="field">You are a moderator</div>
+			<% else %>
+				<div class="field">You are not a moderator</div>
+			<% end %>
+			<div class="field">Your email address: <%= @muser.email %></div>
+			
+			<div class="field">
+				<%= link_to "Edit Profile", edit_muser_path(:id => current_muser.id) %>
+			</div>
+	
+			<div class="field">
+				<%= render 'shared/stats' %>
+			</div>
+			<div class="field">
+				<%= render 'follow_form'  %>
+			</div>
+			<div class="field">
+	    		<%= link_to "Subscribed Musers", subscribed_musers_muser_path %>
+	    	</div>
+	    	<div class="field">
+				<%= link_to "View Musers to Subscribe", musers_path %>
+			</div>
 		</div>
-    <%= link_to "Subscribed Musers", subscribed_musers_muser_path %>
-		<%= link_to "View Musers to Subscribe", musers_path %>
 
 		<!-- Display the user's musings if we're on their own page -->
-			<div class = "jumbotron">
+			<div class = "jumbotron" style="padding:10px; padding-left: 60px; padding-right: 60px">
 				<div class="row">
 					<div class="col-xs-9">
 					<% if @muser.musings.any? %>
@@ -38,5 +52,4 @@
 	<% else %>
 		<p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
 	<% end %>
-	<p><%= link_to "Log out", logout_path, method: "delete" %></p>
 <% end %>

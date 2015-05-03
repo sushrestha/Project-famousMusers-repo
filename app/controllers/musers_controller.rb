@@ -1,6 +1,7 @@
 class MusersController < ApplicationController
   before_action :logged_in_muser, only: [:show, :following, :followers, :other_musers]
-  #before_action :correct_muser, only: [:show]
+  before_action :correct_muser, only: [:edit,:update]
+  before_filter :check_for_cancel,  :only => [:create, :update]
 
   def following
     @title = "Following"
@@ -53,6 +54,23 @@ class MusersController < ApplicationController
     @muser = Muser.find(params[:id])
     @following = @muser.following
   end
+  
+  def edit
+    @current_muser = current_muser
+    @muser = @current_muser
+  end
+
+  def update
+    @current_muser = current_muser
+    @muser = Muser.find(params[:id])
+    
+    if @muser.update(muser_params)
+      flash[:success] = "Muser was successfully updated."
+      redirect_to muser_url(@muser)
+    else
+     render 'edit'        
+    end
+  end
 
   private
 
@@ -69,4 +87,9 @@ class MusersController < ApplicationController
     redirect_to(root_url) unless current_muser?(@muser)
   end
 
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to muser_url(:id => params[:id])
+    end      
+  end
 end

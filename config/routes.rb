@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'musers/edit'
+
+  get 'notifications/index'
+
   get 'flagged_musings/index'
 
   resources :feedbacks

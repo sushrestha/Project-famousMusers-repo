@@ -18,7 +18,11 @@
                 <% end %>
                 <%= link_to "Submit to Competition", competition_submission_path(:id => musing.id), :class=> "btn btn-default"%>
                 <% if !(current_muser?(musing.muser)) %>
-                  <%= link_to " Flag ", new_flag_path(musing), :class=> "btn btn-default" %>
+                  <% if !musing_flaggedby_currentmuser(current_muser,musing).any? %>
+                    <%= link_to " Flag ", new_flag_path(musing), :class=> "btn btn-default" %>
+                  <% else %>
+                    <%= link_to " Flagged ", "#", :disabled => true, :class=> "btn btn-default" %>
+                  <% end %>
                 <% end %>
               <% end %>
             </span>

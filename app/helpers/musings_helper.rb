@@ -19,6 +19,9 @@ def sum_ratings(musing)
 end
 
 
+ def musing_flaggedby_currentmuser(muser,musing)
+    @flag = FlaggedMusing.where("muser_id = ? and musing_id = ?", muser.id, musing.id)
+ end
 
 
 
