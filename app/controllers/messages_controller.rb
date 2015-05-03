@@ -26,7 +26,6 @@ class MessagesController < ApplicationController
     @myreceiverid = params[:message][:post_id]
     @receiver_muser = Muser.find(@myreceiverid)
     @message.recipient = Muser.find(@myreceiverid)
-    @message.authorname = current_muser.name
       if @message.save
         @notification = Notification.new(linktype: 'message',linkid: current_muser.id, unread: 't', muser_id: @myreceiverid)
         if @notification.save
@@ -34,8 +33,10 @@ class MessagesController < ApplicationController
           event = {:linktype => "message", :linkid => current_muser.id, :name => current_muser.name}
           #push notification that a new notification should be made
           WebsocketRails[@notification_channel].trigger 'new', event
+          
+          message = {:content => @message.content, :authorname => current_muser.name}
           #push notification that a new message has been sent
-          WebsocketRails[params[:message][:channel_name]].trigger 'new', @message
+          WebsocketRails[params[:message][:channel_name]].trigger 'new', message
         else
           #Notification save failed, roll back message save
           @message.delete

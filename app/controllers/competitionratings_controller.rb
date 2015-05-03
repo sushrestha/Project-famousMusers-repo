@@ -58,7 +58,7 @@ class CompetitionratingsController < ApplicationController
     #check_for_cancel
   def check_for_cancel
     if params[:commit] == "Cancel"
-      redirect_to competitions_url
+      redirect_to competition_show_url(:id => params[:competition_rating][:competition_id])
     end      
   end
 end

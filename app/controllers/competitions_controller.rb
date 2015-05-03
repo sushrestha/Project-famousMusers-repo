@@ -1,9 +1,8 @@
 class CompetitionsController < ApplicationController
   before_action :logged_in_muser
-  #before_action :correct_muserid,   only: [:edit, :update, :destroy]
-  #before_filter :check_for_cancel, :only => [:create, :update]
-  #before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
-  #before_action :admin_muser,     only: :destroy
+  before_filter :check_for_cancel, :only => [:new, :create, :update]
+  before_filter :check_for_cancel_main, :only => [:submit, :submitPost]
+  before_action :admin_muser,  :only => [:new, :create, :destroy, :edit, :update]
   
   def index
     @competitions = Competition.all
@@ -85,6 +84,21 @@ class CompetitionsController < ApplicationController
   end
   
   def admin_muser
-      redirect_to(competitions_url) unless current_user.isModerator
-    end
+      unless current_muser.isModerator then
+        redirect_to(competitions_url)
+        flash[:warning] = "You are not a moderator"
+      end
+  end
+  
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to competitions_url
+    end      
+  end
+  
+  def check_for_cancel_main
+    if params[:commit] == "Cancel"
+      redirect_to competitions_url
+    end      
+  end
 end

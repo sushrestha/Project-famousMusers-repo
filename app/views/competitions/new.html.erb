@@ -17,6 +17,6 @@
     <%= f.date_select :end %>
   </div>
   <div class="actions">
-    <%= f.submit %>&nbsp;<%= button_tag "Cancel", type: :reset %>
+    <%= f.submit "Submit", :class=> "btn btn-default" %>&nbsp;<%= submit_tag "Cancel", :class=> "btn btn-default" %>
   </div>
 <% end %>
