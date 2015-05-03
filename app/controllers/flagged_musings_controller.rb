@@ -5,7 +5,10 @@ class FlaggedMusingsController < ApplicationController
 	before_filter :check_for_cancel
 
   def index
-  	@musings = Musing.find_by_sql ["SELECT * FROM musings WHERE id IN (SELECT DISTINCT musing_id FROM flagged_musings)"]
+  	#@musings = Musing.find_by_sql ["SELECT * FROM musings WHERE id IN (SELECT DISTINCT musing_id FROM flagged_musings)"]
+    @musings = Musing.find_by_sql [ "SELECT * FROM musings  INNER JOIN  
+      ( SELECT musing_id, count(musing_id) AS flags FROM flagged_musings GROUP BY musing_id)  
+      ON id = musing_id ORDER BY flags desc"]
   end
 
   def show
