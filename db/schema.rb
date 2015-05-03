@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416160632) do
+ActiveRecord::Schema.define(version: 20150503175647) do
+
+  
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -58,12 +60,24 @@ ActiveRecord::Schema.define(version: 20150416160632) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "flagged_musings", force: :cascade do |t|
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "musing_id"
+    t.integer  "muser_id"
+  end
+
+  add_index "flagged_musings", ["muser_id"], name: "index_flagged_musings_on_muser_id"
+  add_index "flagged_musings", ["musing_id"], name: "index_flagged_musings_on_musing_id"
+
   create_table "messages", force: :cascade do |t|
     t.text     "content"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "author_id"
     t.integer  "recipient_id"
+    t.string   "authorname"
   end
 
   create_table "musers", force: :cascade do |t|
@@ -91,6 +105,17 @@ ActiveRecord::Schema.define(version: 20150416160632) do
   add_index "musings", ["category_id"], name: "index_musings_on_category_id"
   add_index "musings", ["muser_id"], name: "index_musings_on_muser_id"
 
+  create_table "notifications", force: :cascade do |t|
+    t.string   "linktype"
+    t.integer  "linkid"
+    t.boolean  "unread"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "muser_id"
+  end
+
+  add_index "notifications", ["muser_id"], name: "index_notifications_on_muser_id"
+
   create_table "ratings", force: :cascade do |t|
     t.integer  "stars",      default: 0
     t.datetime "created_at",             null: false
@@ -102,6 +127,13 @@ ActiveRecord::Schema.define(version: 20150416160632) do
   add_index "ratings", ["muser_id"], name: "index_ratings_on_muser_id"
   add_index "ratings", ["musing_id"], name: "index_ratings_on_musing_id"
 
+  create_table "subscribe_categories", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "muser_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "subscribes", force: :cascade do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
@@ -112,5 +144,10 @@ ActiveRecord::Schema.define(version: 20150416160632) do
   add_index "subscribes", ["followed_id"], name: "index_subscribes_on_followed_id"
   add_index "subscribes", ["follower_id", "followed_id"], name: "index_subscribes_on_follower_id_and_followed_id", unique: true
   add_index "subscribes", ["follower_id"], name: "index_subscribes_on_follower_id"
+
+  create_table "uploads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
