@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @musings = Musing.where(category_id: @category.id)
+    @musings = Musing.where("category_id = ?", @category.id)
   end
 
   # GET /categories/new
@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
      respond_to do |format|
       if @category.save
-        flash[ :notice] = "Successfully created category."
+        flash[ :success] = "Successfully created category."
         ##redirect_to @category
         format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
@@ -60,14 +60,17 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    #@musings = Musing.find_by_sql ["SELECT * FROM musings WHERE category_id = ?",@category.id]
-   # unless @musings.any? then
+    @musings = Musing.where("category_id = ?", @category.id)
+    if !@musings.any?
       @category.destroy
       respond_to do |format|
         format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
         format.json { head :no_content }
       end
-   # end
+    else
+      flash[:danger] = "Category not deleted. The Category is being used by the musing(s) !!!"
+      redirect_to categories_path 
+    end
   end
 
 def moderator_user
