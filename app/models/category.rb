@@ -11,7 +11,9 @@
 
 class Category < ActiveRecord::Base
 
+    has_many :categorysubsrciptions, :class_name => "SubscribeCategory", :foreign_key => 'category_id'
 	has_many :musings, :class_name => 'musing', :foreign_key => 'category_id'
+
 	validates :name, presence: true
 
 end
