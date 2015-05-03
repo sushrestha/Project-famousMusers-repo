@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502180249) do
+ActiveRecord::Schema.define(version: 20150503200511) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -125,11 +125,14 @@ ActiveRecord::Schema.define(version: 20150502180249) do
   add_index "ratings", ["musing_id"], name: "index_ratings_on_musing_id"
 
   create_table "subscribe_categories", force: :cascade do |t|
-    t.integer  "category_id"
-    t.integer  "muser_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "muser_id"
+    t.integer  "category_id"
   end
+
+  add_index "subscribe_categories", ["category_id"], name: "index_subscribe_categories_on_category_id"
+  add_index "subscribe_categories", ["muser_id"], name: "index_subscribe_categories_on_muser_id"
 
   create_table "subscribes", force: :cascade do |t|
     t.integer  "follower_id"
