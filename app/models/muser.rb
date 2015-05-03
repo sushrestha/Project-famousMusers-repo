@@ -12,7 +12,7 @@
 #
 
 class Muser < ActiveRecord::Base
-
+  has_many :notifications, :class_name => "Notification", :foreign_key => 'muser_id'
   has_many :musings, :class_name => "Musing", :foreign_key => 'muser_id', dependent: :destroy 
   has_many :active_subscribes, :class_name => "Subscribe", :foreign_key => 'follower_id', dependent: :destroy
   has_many :passive_subscribes, :class_name=> "Subscribe", :foreign_key=> "followed_id", dependent: :destroy
@@ -35,6 +35,7 @@ class Muser < ActiveRecord::Base
             uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: { minimum: 6 }
+  validates_confirmation_of :password
   validates :name, presence: true
   validates :isModerator, :inclusion => { :in => [true, false] }
 

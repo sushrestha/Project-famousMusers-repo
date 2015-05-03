@@ -2,19 +2,21 @@
 <h1>Competition#new</h1>
 
 <%= form_for(@competition) do |f| %>
-	<table>	
-		<tr>
-			<td><%= f.label :name %>:</td><td><%= f.text_field :name %></td>
-		</tr>
-		<tr>
-			<td><%= f.label :start %>:</td><td><%= f.date_select :start %></td>
-		</tr>
-		<tr>
-			<td><%= f.label :end %>:</td><td><%= f.date_select :end %></td>
-		</tr>
-		<tr><td>&nbsp;</td></tr>
-		<tr>
-	    	<td><%= f.submit  "Create" %>&nbsp;<%= submit_tag "Cancel"  %></td>
-	    </tr>
-	</table>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start %><br>
+    <%= f.date_select :start %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :end %><br>
+    <%= f.date_select :end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>&nbsp;<%= button_tag "Cancel", type: :reset %>
+  </div>
 <% end %>

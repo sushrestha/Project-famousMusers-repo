@@ -1,0 +1,26 @@
+<% provide(:title, 'Edit Profile') %>
+
+<div class = "jumbotron">
+<br>
+<h1>Edit <%= @current_muser.name %></h1>
+<%= form_for(@muser) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email, placeholder: @current_muser.email %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, placeholder: @current_muser.name %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :confirm_password, "Confirm Password"%><br>
+    <%= f.password_field :confirm_password %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class=> "btn btn-default" %>&nbsp;<%= submit_tag "Cancel", :class=> "btn btn-default"  %>
+  </div>
+<% end %>

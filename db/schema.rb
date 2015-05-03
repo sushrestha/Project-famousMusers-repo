@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426154459) do
+ActiveRecord::Schema.define(version: 20150502180249) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -102,6 +102,17 @@ ActiveRecord::Schema.define(version: 20150426154459) do
 
   add_index "musings", ["category_id"], name: "index_musings_on_category_id"
   add_index "musings", ["muser_id"], name: "index_musings_on_muser_id"
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "linktype"
+    t.integer  "linkid"
+    t.boolean  "unread"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "muser_id"
+  end
+
+  add_index "notifications", ["muser_id"], name: "index_notifications_on_muser_id"
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "stars",      default: 0
