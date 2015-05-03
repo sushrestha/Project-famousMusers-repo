@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 20150502180249) do
     t.datetime "updated_at",   null: false
     t.integer  "author_id"
     t.integer  "recipient_id"
-    t.string   "authorname"
   end
 
   create_table "musers", force: :cascade do |t|

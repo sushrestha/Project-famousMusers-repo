@@ -38,8 +38,7 @@ muser6 = Muser.create( email: 'admin@admin.com',
 
 @myMessage = Message.create( content: 'test message',
                              author_id: muser1.id,
-                             recipient_id: muser2.id,
-                             authorname: 'bob') 
+                             recipient_id: muser2.id) 
 	
 notification1 = Notification.create( linktype: "message",
                                       linkid: muser2.id,
