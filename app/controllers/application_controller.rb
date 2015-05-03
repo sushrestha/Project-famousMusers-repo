@@ -17,5 +17,4 @@ class ApplicationController < ActionController::Base
   def current_muser
     @current_muser ||= Muser.find_by(id: session[:muser_id])
   end
-
 end
