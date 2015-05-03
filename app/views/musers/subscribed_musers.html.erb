@@ -1,0 +1,12 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <div class="col-md-4">
+    <% @following.each do |fol| %>
+      <% fol.musings.each do |musing| %>
+        <% if musing.isPrivate == 0 %>
+          <%= musing.content %> - <%= link_to fol.name, "/musers/#{fol.id}/" %><br />
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

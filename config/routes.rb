@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   delete 'competitions/:id' => 'competitions#destroy', :as => 'delete_competition'
   # adding musings to competition
   post 'competition/submitPost' => 'competitions#submitPost'
-  
+
   get 'competitionratings/new' => 'competitionratings#new', :as => 'new_competitionrating'
   post 'competitionratings/new' => 'competitionratings#create'
 
@@ -84,10 +84,10 @@ Rails.application.routes.draw do
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  
+
   resources :musers do
     member do
-      get :following, :followers
+      get :following, :followers, :subscribed_musers
     end
   end
 
