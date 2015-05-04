@@ -15,6 +15,7 @@ before_filter :categories,        :only => [:new, :create, :edit, :update]
     else
       @musings = Musing.where("isPrivate = ?", 0)
     end 
+    @Categories = Category.all
   end
 
   def new 

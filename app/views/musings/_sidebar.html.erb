@@ -9,6 +9,10 @@
           </div>
           <div class="row">
             <h3>Categories:</h3>
+         <!--   <%= @Categories.each do |cat| %>
+            <h3> <%= link_to cat.name, category_path(:id => cat.id), :class => "btn btn-default" %></h3>
+            <%end%>
+        -->
             <h3><%= link_to " Journal Entry ",category_path(:id => 1), :class=> "btn btn-default" %></h3>
             <h3><%= link_to " Song Lyrics ", category_path(:id => 2), :class=> "btn btn-default" %></h3>
             <h3><%= link_to " Stories ", category_path(:id => 3), :class=> "btn btn-default" %></h3>
@@ -18,6 +22,7 @@
             <h3><%= link_to " Ramblings ", category_path(:id => 7), :class=> "btn btn-default" %></h3>
             <h3><%= link_to " Thoughts ", category_path(:id => 8), :class=> "btn btn-default" %></h3>
             <h3><%= link_to " Tweets ", category_path(:id => 9), :class=> "btn btn-default" %></h3>
+        
         </div>
       </div>
     </div>
