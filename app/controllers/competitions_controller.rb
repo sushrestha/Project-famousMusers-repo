@@ -1,9 +1,8 @@
 class CompetitionsController < ApplicationController
   before_action :logged_in_muser
-  #before_action :correct_muserid,   only: [:edit, :update, :destroy]
-  #before_filter :check_for_cancel, :only => [:create, :update]
-  #before_filter :find_musing, :only => [:show, :edit, :update,  :destroy]
-  #before_action :admin_muser,     only: :destroy
+  before_filter :check_for_cancel, :only => [:new, :create, :update]
+  before_filter :check_for_cancel_main, :only => [:submit, :submitPost]
+  before_action :admin_muser,  :only => [:new, :create, :destroy, :edit, :update]
   
   def index
     @competitions = Competition.all
@@ -60,21 +59,29 @@ class CompetitionsController < ApplicationController
   
   def submitPost
     @competition = Competition.find(params[:competition][:competition_id])
-    unless params[:musing_id].nil? then 
-      @competition.musings << Musing.find(params[:musing_id])
-    end
     #competition is already over or not yet begun
-    #if (@thecompetition.end < Time.now.to_datetime) or (@thecompetition.start > Time.now.to_datetime) then
-    #  render 'submit', :id => params[@musing.id], :competitions => @thecompetition
-    #  flash[:failure] = "Competition is not currently in progress."
-    #end
-    if @competition.update(competition_params)
-        redirect_to root_path
-        flash[:success] = "Successfully submitted to competition."
+    if (@competition.end < Time.now.to_datetime) or (@competition.start > Time.now.to_datetime) then
+      redirect_to :action => 'submit', :id => params[:musing_id]
+      flash[:warning] = "Competition is not current in progress"
     else
-      render 'submit', :id => params[@musing.id]
-      @competition.errors.full_messages.each do |m|
-        flash[:failure] = m
+      #if this musing has already been submitted
+      #Competition.first.musings.where(id=3).count > 0
+      if @competition.musings.where("musing_id=?",params[:musing_id]).count > 0
+        redirect_to :action => 'submit', :id => params[:musing_id]
+        flash[:warning] = "Musing already submitted to competition"
+      else
+        unless params[:musing_id].nil? then 
+          @competition.musings << Musing.find(params[:musing_id])
+        end
+        if @competition.update(competition_params)
+            redirect_to root_path
+            flash[:success] = "Successfully submitted to competition."
+        else
+          redirect_to :action => 'submit', :id => params[:musing_id]
+          @competition.errors.full_messages.each do |m|
+            flash[:failure] = m
+          end
+        end
       end
     end
   end
@@ -85,6 +92,21 @@ class CompetitionsController < ApplicationController
   end
   
   def admin_muser
-      redirect_to(competitions_url) unless current_user.isModerator
-    end
+      unless current_muser.isModerator then
+        redirect_to(competitions_url)
+        flash[:warning] = "You are not a moderator"
+      end
+  end
+  
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to competitions_url
+    end      
+  end
+  
+  def check_for_cancel_main
+    if params[:commit] == "Cancel"
+      redirect_to root_url
+    end      
+  end
 end

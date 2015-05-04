@@ -15,6 +15,7 @@
 
 class Musing < ActiveRecord::Base
 
+    
 
 	belongs_to :category, :class_name => 'category', :foreign_key => 'category_id'
 	
@@ -37,4 +38,5 @@ class Musing < ActiveRecord::Base
 	validates :muser_id, presence: true
 	validates :category_id, presence: true
 	#validates :averageCompetitionRating, presence: true
+
 end

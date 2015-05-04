@@ -14,7 +14,7 @@
 	  </tr>
 	  <% @competitions.each do |competition| %>
 	    <tr>
-	      <td><%= competition.name %></td>
+	      <td><%= link_to competition.name, competition_show_path(:id => competition.id) %></td>
 	      <td><%= competition.start %></td>
 	      <td><%= competition.end %></td>
 	      <% if logged_in? && current_muser.isModerator %>

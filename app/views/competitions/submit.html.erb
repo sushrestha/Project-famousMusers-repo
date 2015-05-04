@@ -2,20 +2,26 @@
 <h1>Submit to Competition</h1>
 
 <%= form_tag("/competition/submitPost", method: "post") do |f| %>
-<ul>
+  <div class="field">
+    <%= label_tag :Title %><br>
+    <%= @musing.title %>
 	<%= hidden_field_tag(:musing_id, @musing.id) %>
-	
-	<li>Title: <%= @musing.title%></li>
-	<li>Content: <%= @musing.content%></li>
-	<% if logged_in? %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :Content %><br>
+    <%= @musing.content %>
+  </div>
+  
+  <% if logged_in? %>
+  <div class="field">
 		<% options = options_from_collection_for_select(@competitions, 'id', 'name')%>
-		<li><%= label_tag(:competition_id, "Competitions") %>
-			<%= collection_select :competition, :competition_id, Competition.order(:name), :id, :name, {}, {multiple: false} %>
-			</li>
-		<li><%= submit_tag("Submit") %></li>
-	<% end %>
-</ul>
+		<%= label_tag(:competition_id, "Competitions") %>
+		<%= collection_select :competition, :competition_id, Competition.order(:name), :id, :name, {}, {multiple: false} %>
+  </div>
+  
+  <div class="actions">
+    <%= submit_tag "Submit", :class=> "btn btn-default" %>&nbsp;<%= submit_tag "Cancel", :class=> "btn btn-default" %>
+  </div>
+  <% end %>
 <% end %>
-
-<%= link_to "Show All Musings", musings_path() %>
-

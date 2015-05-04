@@ -38,8 +38,7 @@ muser6 = Muser.create( email: 'admin@admin.com',
 
 @myMessage = Message.create( content: 'test message',
                              author_id: muser1.id,
-                             recipient_id: muser2.id,
-                             authorname: 'bob') 
+                             recipient_id: muser2.id) 
 	
 notification1 = Notification.create( linktype: "message",
                                       linkid: muser2.id,
@@ -47,15 +46,15 @@ notification1 = Notification.create( linktype: "message",
                                       muser_id: muser1.id)
           
 compRating1 = CompetitionRating.create([
-            {competitionstars: 1, musing_id: 1, competition_id: 3},
-            {competitionstars: 3, musing_id: 2, competition_id: 3},
-            {competitionstars: 5, musing_id: 3, competition_id: 3}
+            {competitionstars: 1, musing_id: 1, competition_id: 3, muser_id: 1},
+            {competitionstars: 3, musing_id: 2, competition_id: 3, muser_id: 1},
+            {competitionstars: 5, musing_id: 3, competition_id: 3, muser_id: 1}
             ])
             
 compRating2 = CompetitionRating.create([
-            {competitionstars: 1, musing_id: 1, competition_id: 2},
-            {competitionstars: 3, musing_id: 2, competition_id: 2},
-            {competitionstars: 5, musing_id: 3, competition_id: 2}
+            {competitionstars: 1, musing_id: 1, competition_id: 2, muser_id: 1},
+            {competitionstars: 3, musing_id: 2, competition_id: 2, muser_id: 1},
+            {competitionstars: 5, musing_id: 3, competition_id: 2, muser_id: 1}
             ])
 
 #sindhu
@@ -70,13 +69,13 @@ category4 = Category.create( name: 'Jokes',
                               desc: 'It is a joke')
 category5 = Category.create( name: 'Rants',
                               desc: 'It is a a tirade')
-category5 = Category.create( name: 'Nonsense',
+category6 = Category.create( name: 'Nonsense',
                               desc: 'It has no sense')
-category6 = Category.create( name: 'Ramblings',
+category7 = Category.create( name: 'Ramblings',
                               desc: 'Lengthy and degressive')
-category7 = Category.create( name: 'Thoughts',
+category8 = Category.create( name: 'Thoughts',
                               desc: 'Ideas')
-category8 = Category.create( name: 'Tweets',
+category9 = Category.create( name: 'Tweets',
                               desc: 'A message')
 
 musing1 = Musing.create( title: 'Priorities',
@@ -94,22 +93,26 @@ musing2 = Musing.create( title: 'Mission',
 musing3 = Musing.create( title: 'Stolen',
 			   content: 'It is one of the blessings of old friends that you can afford to be stupid with them.',
 			   isPrivate: 0,
-         muser_id: muser1.id)
+         muser_id: muser1.id,
+         category_id: category8.id)
 
 musing4 = Musing.create( title: 'Jaden',
 			   content: "How can mirrors be real if our eyes aren't real",
 			   isPrivate: 0,
-         muser_id: muser1.id)
+         muser_id: muser1.id,
+         category_id: category7.id)
          
 musing5 = Musing.create( title: 'Everyday',
 			   content: 'Wake up? But I just got out of bed yesterday',
 			   isPrivate: 1,
+         muser_id: muser1.id,
+         category_id: category5.id)
 
-         muser_id: muser1.id)
 musing6 = Musing.create( title: 'Arthur C. Clarke/Sudden Clarity Clarence',
          content: "Magic is just science you don't know yet",
          isPrivate: 0,
-         muser_id: muser1.id)
+         muser_id: muser1.id,
+         category_id: category9.id)
 
 rating1 = Rating.create([
           {stars: 2, musing_id: 1, muser_id: muser2.id}
