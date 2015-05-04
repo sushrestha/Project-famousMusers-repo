@@ -8,7 +8,6 @@
 #  updated_at   :datetime         not null
 #  author_id    :integer
 #  recipient_id :integer
-#  authorname   :string
 #
 
 class Message < ActiveRecord::Base
