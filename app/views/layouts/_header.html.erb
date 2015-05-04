@@ -50,7 +50,7 @@
 					return true; 
 				});
 				channel.bind('new', function(message) {
-				  //console.log(message);
+				  console.log(message);
 				  count++;
 				  $('#notification-count').html(count);
 				  var link = '<li><a href="/messages?receiver_id=' + message.linkid + '">New message from ' + message.name + '</a></li>';

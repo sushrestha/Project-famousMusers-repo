@@ -46,15 +46,15 @@ notification1 = Notification.create( linktype: "message",
                                       muser_id: muser1.id)
           
 compRating1 = CompetitionRating.create([
-            {competitionstars: 1, musing_id: 1, competition_id: 3},
-            {competitionstars: 3, musing_id: 2, competition_id: 3},
-            {competitionstars: 5, musing_id: 3, competition_id: 3}
+            {competitionstars: 1, musing_id: 1, competition_id: 3, muser_id: 1},
+            {competitionstars: 3, musing_id: 2, competition_id: 3, muser_id: 1},
+            {competitionstars: 5, musing_id: 3, competition_id: 3, muser_id: 1}
             ])
             
 compRating2 = CompetitionRating.create([
-            {competitionstars: 1, musing_id: 1, competition_id: 2},
-            {competitionstars: 3, musing_id: 2, competition_id: 2},
-            {competitionstars: 5, musing_id: 3, competition_id: 2}
+            {competitionstars: 1, musing_id: 1, competition_id: 2, muser_id: 1},
+            {competitionstars: 3, musing_id: 2, competition_id: 2, muser_id: 1},
+            {competitionstars: 5, musing_id: 3, competition_id: 2, muser_id: 1}
             ])
 
 #sindhu
