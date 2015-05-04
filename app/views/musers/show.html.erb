@@ -22,9 +22,6 @@
 			<div class="field">
 				<%= render 'follow_form'  %>
 			</div>
-			<div class="field">
-	    		<%= link_to "Subscribed Musers", subscribed_musers_muser_path %>
-	    	</div>
 	    	<div class="field">
 				<%= link_to "View Musers to Subscribe", musers_path %>
 			</div>
@@ -50,6 +47,14 @@
 		 		</div>
 		 	</div>
 	<% else %>
-		<p><%= link_to "Send Message", messages_path(:receiver_id => @muser.id) %></p>
+		<div class="field">
+			<%= form_for(current_muser.active_subscribes.build) do |f| %>	
+		  		<%= hidden_field_tag :followed_id, params[:id] %>
+		  		<%= f.submit "Follow", class: "btn btn-default" %>
+			<% end %>
+		</div>
+		<div class="field">
+			<%= link_to "Send Message", messages_path(:receiver_id => @muser.id), :class => "btn btn-default" %>
+		</div>
 	<% end %>
 <% end %>
