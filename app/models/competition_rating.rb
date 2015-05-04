@@ -15,6 +15,9 @@ class CompetitionRating < ActiveRecord::Base
         class_name: 'Musing',
         foreign_key: 'musing_id'
   belongs_to :competition, foreign_key: 'competition_id'
+  belongs_to :muser,
+        class_name: 'Muser',
+        foreign_key: 'muser_id'
 
   validates :competitionstars, presence: true, inclusion:{in: 0..5}
   validates :musing_id, presence: true
