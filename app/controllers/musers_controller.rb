@@ -41,7 +41,13 @@ class MusersController < ApplicationController
     @muser = Muser.new(muser_params)
     #by default users aren't moderators
     @muser.isModerator = false
+    
     if @muser.save
+      
+      @categories = params[:category_subscriptions]
+      @categories.each do |category_id|
+        SubscribeCategory.create(:muser_id => @muser.id, :category_id => category_id)
+      end
       log_in @muser
       flash[:success] = "Signed up successfully!"
       redirect_to @muser

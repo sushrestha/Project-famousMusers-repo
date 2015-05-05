@@ -21,10 +21,21 @@
       <td><%= f.label :password_confirmation, "Confirmation" %></td>
       <td><%= f.password_field :password_confirmation %></td>
     </tr>
+    <tr>
+    	<td><%= label_tag :category_subscriptions, "Select categories to subscribe to"%></td>
+    	<td><select multiple name="category_subscriptions[]">
+		    <% Category.all.each do |category| %>
+		        <option value="<%= category.id %>"><%= category.name %></option>
+		    <% end %>
+		</select></td>
+    </tr>
+    <tr>
+    	<td><i>Hold down the control (ctrl) button to select multiple</i></td>
+    </tr>
   </table>
 
   <p>
-    <%= f.submit "Create my account" %>
+    <%= f.submit "Create my account", :class => "btn btn-default" %>
   </p>
 
 <% end %>

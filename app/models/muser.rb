@@ -13,7 +13,7 @@
 
 class Muser < ActiveRecord::Base
 
-  has_many :categorysubsrciptions, :class_name => "SubscribeCategory", :foreign_key => 'muser_id'
+  has_many :categorysubscriptions, :class_name => "SubscribeCategory", :foreign_key => 'muser_id'
   has_many :notifications, :class_name => "Notification", :foreign_key => 'muser_id'
   has_many :musings, :class_name => "Musing", :foreign_key => 'muser_id', dependent: :destroy 
   has_many :active_subscribes, :class_name => "Subscribe", :foreign_key => 'follower_id', dependent: :destroy
