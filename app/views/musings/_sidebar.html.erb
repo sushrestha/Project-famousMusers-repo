@@ -9,7 +9,7 @@
           </div>
           <div class="row">
             <h3>Categories:</h3>
-            <% @Categories.each do |cat| %>
+            <% @categories.each do |cat| %>
               <h3> <%= link_to cat.name, new_subscribe_category_path(:id => cat.id), :class => "btn btn-default" %></h3>
             <%end%>
         </div>

@@ -1,11 +1,11 @@
 class MusingsController < ApplicationController
  
-before_action :logged_in_muser,   :only => [:new, :create, :show, :edit, :update, :destroy]
-before_action :correct_muserid,   :only => [:edit, :destroy]
-before_filter :check_for_cancel,  :only => [:create, :update]
-before_filter :find_musing,       :only => [:show, :edit, :update,  :destroy]
-before_filter :muse_of_day,       :only => [:index, :popular, :top]
-before_filter :categories,        :only => [:new, :create, :edit, :update]
+before_action :logged_in_muser,             :only => [:new, :create, :show, :edit, :update, :destroy]
+before_action :correct_muserid,             :only => [:edit, :destroy]
+before_filter :check_for_cancel,            :only => [:create, :update]
+before_filter :find_musing,                 :only => [:show, :edit, :update,  :destroy]
+before_filter :muse_of_day,:all_categories,       :only => [:index, :popular, :top]
+before_filter :categories,                  :only => [:new, :create, :edit, :update]
 
   def index
     if logged_in?
@@ -15,7 +15,6 @@ before_filter :categories,        :only => [:new, :create, :edit, :update]
     else
       @musings = Musing.where("isPrivate = ?", 0)
     end 
-    @Categories = Category.all
   end
 
   def new 
@@ -89,12 +88,16 @@ before_filter :categories,        :only => [:new, :create, :edit, :update]
     end
   end
 
+  def all_categories
+    @categories = Category.all
+  end
+
   def popular
     @musings = Musing.find_by_sql ["SELECT A.*  FROM musings A INNER JOIN ( SELECT musing_id, avg(stars) AS avgrating FROM ratings GROUP BY musing_id ) B 
     ON A.id = B.musing_id
     WHERE A.isPrivate = 0
     ORDER BY B.avgrating DESC 
-    LIMIT 10"]
+    LIMIT 10"]    
   end
 
   def top
