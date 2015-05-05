@@ -8,6 +8,16 @@ Rails.application.routes.draw do
 
   resources :feedbacks
   #resources :categories
+  
+  #file upload
+  resources :upload
+  #get 'upload' => 'upload#get', :as => 'upload'
+  #get 'pictures/:id' => 'pictures#show', :as => 'upload'
+  #post 'upload/uploadFile' => 'upload#uploadFile'
+  #get 'upload' => 'upload#save'
+  #patch 'upload' => 'upload#save'
+  #post 'upload' => 'upload#save'
+  
 
   get 'categories' => 'categories#index', :as => 'categories'
   get 'categories/new' => 'categories#new', :as => 'new_category'

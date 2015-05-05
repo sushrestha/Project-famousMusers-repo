@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503200511) do
+ActiveRecord::Schema.define(version: 20150504042036) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -48,6 +48,11 @@ ActiveRecord::Schema.define(version: 20150503200511) do
 
   add_index "competitions_musings", ["competition_id"], name: "index_competitions_musings_on_competition_id"
   add_index "competitions_musings", ["musing_id"], name: "index_competitions_musings_on_musing_id"
+
+  create_table "datafiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "feedbacks", force: :cascade do |t|
     t.text     "response"
@@ -112,6 +117,15 @@ ActiveRecord::Schema.define(version: 20150503200511) do
   end
 
   add_index "notifications", ["muser_id"], name: "index_notifications_on_muser_id"
+
+  create_table "pictures", force: :cascade do |t|
+    t.string   "comment"
+    t.string   "name"
+    t.string   "content_type"
+    t.binary   "data"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "stars",      default: 0
