@@ -24,15 +24,18 @@
                   </a>
                   <ul class="dropdown-menu">
                   	<div id="notification-list">
-	                  	<% @notifications.each do |notification| %>
-		                  	<% if notification.linktype == 'message' %>
-		                  		<% @message_sender = Muser.find(notification.linkid) %>
-		                    	<li><%= link_to "New message from " + @message_sender.name, messages_path(:receiver_id => @message_sender.id) %></li>
-		                    <% else %>
-		                    	<!--Link to other types of notifications for later use-->
-		                    	<li>Other link type</li>
-		                    <% end %>
-	                    <% end %>
+                  		<% puts "notification map:"%>
+                  		<% puts @notifications %>
+                  		<% @map = notifications_map(@notifications) %>
+                  		<% puts @map %>
+                  		<% @num = 0 %>
+                  		<% @map.each do |key, value| %>
+							<% puts "#{key}-----" %>
+							<% puts value %>
+							<% @message_sender = Muser.find(key) %>
+							<li id="<%= @message_sender.name %>"><%= link_to "New message from " + @message_sender.name, messages_path(:receiver_id => @message_sender.id) %> (<%= value %>)</li>
+							<% @num = @num + 1 %>
+						<% end %>
                     </div>
                   </ul>
                 </li>
@@ -50,11 +53,65 @@
 					return true; 
 				});
 				channel.bind('new', function(message) {
-				  console.log(message);
-				  count++;
-				  $('#notification-count').html(count);
-				  var link = '<li><a href="/messages?receiver_id=' + message.linkid + '">New message from ' + message.name + '</a></li>';
-				  $('#notification-list').append(link);
+					if (message.linktype == 'message'){
+						console.log(message);
+						count++;
+						$('#notification-count').html(count);
+						console.log($('#notification-list').html());
+					  
+			    		var el = $( '<div></div>' );
+						el.html($('#notification-list').html());
+						console.log($('li',el));
+						var dict = {};
+						$('li', el).each(function(){
+							//Find linkid
+							var start = this.innerHTML.indexOf("_id=")+4;
+							var end = this.innerHTML.indexOf("\">N");
+							var linkid = this.innerHTML.substring(start,end);
+							//Find message sender name
+							start = this.innerHTML.indexOf("from ")+5;
+							end = this.innerHTML.indexOf("</a>");
+							var name = this.innerHTML.substring(start,end);
+							//Find number of messages from sender
+							start = this.innerHTML.indexOf("(")+1;
+							end = this.innerHTML.indexOf(")");
+							var count = this.innerHTML.substring(start,end);
+							console.log(this.innerHTML);
+							//store everything in a dictionary
+							dict[linkid] = [count,name];
+						})
+						//rewrite the link to increment the number of notifications from that user
+						if (message.linkid in dict){
+							var numNotifications = dict[message.linkid][0];
+							numNotifications++;
+							var senderName = dict[message.linkid][1];
+							console.log("array:" + $('li',el));
+							$('li', el).each(function(){
+							//Find linkid
+							var start = this.innerHTML.indexOf("_id=")+4;
+							var end = this.innerHTML.indexOf("\">N");
+							var linkid = this.innerHTML.substring(start,end);
+							//Find li id so we can update it below
+							start = this.outerHTML.indexOf("id=\"")+4;
+							end = this.outerHTML.indexOf("\">");
+							
+							if(linkid == message.linkid){
+								//Find number of messages from sender
+								start = this.innerHTML.indexOf("(")+1;
+								end = this.innerHTML.indexOf(")");
+								var count = this.innerHTML.substring(start,end);
+								var updatedCount = this.innerHTML.replace("(" + count + ")", "(" + (++count) + ")");
+								id = "#" + id;
+								$(id).html(updatedCount);
+								console.log($(id).html());
+							}
+						})
+						//if no notifications from the user yet we need to add that to the list
+						}else{
+							var link = '<li id="' + message.name + '"><a href="/messages?receiver_id=' + message.linkid + '">New message from ' + message.name + '</a> (1)</li>';
+							$('#notification-list').append(link);
+						}
+				 }
 				});
 			</script>
         <% else %>

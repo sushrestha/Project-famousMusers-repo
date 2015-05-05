@@ -17,7 +17,7 @@ class CompetitionratingsController < ApplicationController
     @musing_id = params[:competition_rating][:musing_id]
     @competition_id = params[:competition_rating][:competition_id]
     @muser_id = current_muser.id
-    #CompetitionRating.where("competition_id=3 AND musing_id=1 AND muser_id=1")
+    #If the muser has already rated this musing in this competition then disallow them from doing so again
     if CompetitionRating.where("competition_id=? AND musing_id=? AND muser_id=?",@competition_id,@musing_id,@muser_id).count > 0
       redirect_to :action => 'new', :currentcompetition => @competition_id, :musing_id => @musing_id
       flash[:warning] = "Already rated"
