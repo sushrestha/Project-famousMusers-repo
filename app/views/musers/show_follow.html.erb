@@ -19,7 +19,8 @@
           <div class="muser_avatars">
             <% @musers.each do |muser| %>
             <%= link_to muser.name, "/musers/#{muser.id}/" %>
-             <%= link_to 'Unfollow', subscribe_path(:id => muser.id), :method => :delete %><br />
+            <% subscribe = @muser.active_subscribes.where(followed_id: muser.id).first %>   
+             <%= link_to 'Unfollow', subscribe_path(:id => subscribe.id), :method => :delete %><br />
             <% end %>
           </div>
         <% end %>

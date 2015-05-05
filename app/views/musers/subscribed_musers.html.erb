@@ -1,10 +1,10 @@
 <% provide(:title, @title) %>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-12">
     <% @following.each do |fol| %>
       <% fol.musings.each do |musing| %>
         <% if musing.isPrivate == 0 %>
-          <%= musing.content %> - <%= link_to fol.name, "/musers/#{fol.id}/" %><br />
+          <li> <%= musing.content %> - <%= link_to fol.name, "/musers/#{fol.id}/" %><br /></li>
         <% end %>
       <% end %>
     <% end %>
