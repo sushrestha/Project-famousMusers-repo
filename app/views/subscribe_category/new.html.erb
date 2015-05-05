@@ -1,0 +1,37 @@
+<% provide(:title, 'Musings-Under Category'+@category.name) %>
+
+<h3>Category Details: </h3>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @category.desc %>
+</p>
+<% if @musings.any? %>
+	<h3> Musings under this category </h3>
+	<hr>
+	<% @musings.each do |musing| %>
+	<li> <%= musing.title %> </br> <%= musing.content %></li>
+	<hr>
+<% end %>
+<% else %>
+	<h3> Currently No Musings under this category </h3>
+<% end %>
+
+
+<%= form_for(@subscribe_category, html: {class: 'form-horizontal'}) do |f| %>
+	<%= f.hidden_field :id, :value => @subscribe_category.category.id %>
+	<% if @category.categorysubsrciptions.find_by(muser_id: current_muser.id).nil? %>
+    <%= f.submit  "Subsribe", :class=> "btn btn-default" %> 
+    <% else %> 
+    <%= link_to " Unsubsribe ", @category.categorysubsrciptions.find_by(muser_id: current_muser.id), method: :delete, data: { confirm: 'Are you sure you want to Unsubsribe?'} , :class=> "btn btn-default" %>
+    <% end %>
+<% end %>
+</br>
+
+<%= link_to 'Home', root_path , :class=> "btn btn-default"%>

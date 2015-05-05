@@ -18,6 +18,13 @@ Rails.application.routes.draw do
   #get 'upload/save' => 'upload#save' #, :as => 'upload'
  # patch 'upload' => 'upload#save'
  # post 'upload' => 'upload#save'
+
+
+ get 'subscribe_categories' => 'subscribe_category#index', :as => 'subscribe_categories'
+ get 'subscribe_categories/:id' => 'subscribe_category#show', :as => 'subscribe_category'
+ get 'subscribe_categories/:id/new' => 'subscribe_category#new', :as => 'new_subscribe_category'
+ post 'subscribe_categories' => 'subscribe_category#create'
+ delete 'subscribe_categories/:id' => 'subscribe_category#destroy'
   
 
   get 'categories' => 'categories#index', :as => 'categories'
