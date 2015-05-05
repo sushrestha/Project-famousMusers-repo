@@ -49,11 +49,6 @@ ActiveRecord::Schema.define(version: 20150504042036) do
   add_index "competitions_musings", ["competition_id"], name: "index_competitions_musings_on_competition_id"
   add_index "competitions_musings", ["musing_id"], name: "index_competitions_musings_on_musing_id"
 
-  create_table "datafiles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "feedbacks", force: :cascade do |t|
     t.text     "response"
     t.integer  "musing_id"

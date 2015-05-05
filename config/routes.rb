@@ -11,12 +11,13 @@ Rails.application.routes.draw do
   
   #file upload
   resources :upload
-  #get 'upload' => 'upload#get', :as => 'upload'
-  #get 'pictures/:id' => 'pictures#show', :as => 'upload'
-  #post 'upload/uploadFile' => 'upload#uploadFile'
-  #get 'upload' => 'upload#save'
-  #patch 'upload' => 'upload#save'
-  #post 'upload' => 'upload#save'
+  resources :picture
+  #get 'upload' => 'upload#get', :as => 'Upload'
+  #get 'pictures/:id' => 'pictures#show' #, :as => 'upload'
+ # post 'upload/uploadFile' => 'upload#uploadFile'
+  #get 'upload/save' => 'upload#save' #, :as => 'upload'
+ # patch 'upload' => 'upload#save'
+ # post 'upload' => 'upload#save'
   
 
   get 'categories' => 'categories#index', :as => 'categories'

@@ -2,6 +2,9 @@ class UploadController < ApplicationController
 	def get
        @picture = Picture.new
     end
+   # def index
+   # @picture = Picture.all
+ # end
 # . . .
 private
      # Never trust parameters from the scary internet, only allow the white
