@@ -8,6 +8,7 @@
 #  updated_at       :datetime         not null
 #  competition_id   :integer
 #  musing_id        :integer
+#  muser_id         :integer
 #
 
 class CompetitionRating < ActiveRecord::Base
