@@ -12,8 +12,12 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  stars: 1
+first:
+  stars: 5
+  musing_id: musings(:hozier).id
+  muser_id: musers(:homer).id
 
-two:
-  stars: 1
+second:
+  stars: 
+  musing_id: musings(:poem).id
+  muser_id: musers(:homer).id

@@ -11,12 +11,12 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+Lyrics:
+  name: "Lyrics"
+  desc: "This is Lyrics"
 
 
 
-two:
-  name: MyString
-  desc: MyText
-
+Stories:
+  name: Stories
+  desc: "This is Stories"

@@ -15,4 +15,27 @@ class CategoryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+  def setup
+  	@category = categories(:Lyrics)
+  end
+
+  test "must be valid" do
+  	assert @category.valid?
+  end
+
+  test "category name must be present" do
+  	@category.name = ""
+  	assert_not @category.valid?
+  end
+
+   test "blank mmust be allowed on descirption" do
+  	@category.desc = ""
+  	assert @category.valid?
+  end
+
+   test "descirption must be less than 250" do
+  	@category.desc = "this is test"*25
+  	assert_not @category.valid?
+  end
+
 end

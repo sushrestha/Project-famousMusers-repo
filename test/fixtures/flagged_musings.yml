@@ -12,8 +12,12 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  description: MyText
+flagmusing1:
+  description: "Riddiculous"
+  musing_id: musings(:hozier).id
+  muser_id: musers(:homer).id
 
-two:
-  description: MyText
+flagmusing2:
+  description: "Irritated"
+  musing_id: musings(:poem).id
+  muser_id: musers(:homer).id
