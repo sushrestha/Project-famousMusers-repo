@@ -1,0 +1,27 @@
+<% provide(:title, 'Musings-Under Category'+@subsribe_category.name) %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @subsribe_category.name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @subsribe_category.desc %>
+</p>
+<% if @musings.any? %>
+	<h3> Musings under this category </h3>
+	<hr>
+	<% @musings.each do |musing| %>
+	<li> <%= musing.title %> </br> <%= musing.content %></li>
+	<hr>
+	<% end %>
+<% else %>
+	<h3> Currently No Musings under this category </h3>
+<% end %>
+
+<%= link_to 'Subsribe', "#" , :class=> "btn btn-default" %> |
+<%= link_to 'Back', root_path , :class=> "btn btn-default"%>
+

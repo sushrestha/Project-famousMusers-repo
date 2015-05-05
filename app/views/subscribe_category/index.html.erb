@@ -1,0 +1,33 @@
+<% provide(:title, 'My Subscribed Categories') %>
+   
+<div class = "jumbotron">
+  <h1> List of My Subscribed Categories: </h1>
+  <% if @categories.any? %>
+	  <div class="table-responsive hover">
+	  <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <th>SN</th>
+	        <th>Category</th>
+	        <th>Description</th>
+	         <th>Action</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <% @i = 1 %>
+	      <% @categories.each do |cat| %>
+	        <tr>
+	          <td><%= @i %></td>
+	          <td><%= link_to cat.name, new_subscribe_category_path(:id => cat.id) %></td>
+	          <td><%= cat.desc %></td>
+	          <td><%= link_to " Unsubsribe ", cat.categorysubsrciptions.find_by(muser_id: current_muser.id), method: :delete, data: { confirm: 'Are you sure you want to Unsubsribe?'} , :class=> "btn btn-default" %></td>
+	        </tr>
+	        <% @i = @i + 1 %>
+	      <% end %>
+	    </tbody>
+	  </table>
+	  </div>
+	<% else %>
+			<h3> You have not subscribed to any category yet. </h3>
+	<% end %>  
+</div>
