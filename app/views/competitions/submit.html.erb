@@ -15,9 +15,9 @@
   
   <% if logged_in? %>
   <div class="field">
-		<% options = options_from_collection_for_select(@competitions, 'id', 'name')%>
 		<%= label_tag(:competition_id, "Competitions") %>
-		<%= collection_select :competition, :competition_id, Competition.order(:name), :id, :name, {}, {multiple: false} %>
+		<% @options = Competition.where("start<? AND end>?", Time.now, Time.now)%>
+		<%= collection_select :competition, :competition_id, @options, :id, :name, {}, {multiple: false} %>
   </div>
   
   <div class="actions">

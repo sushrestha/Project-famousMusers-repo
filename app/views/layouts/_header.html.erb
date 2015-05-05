@@ -47,12 +47,14 @@
 	    	<script>
 				channel = dispatcher.subscribe('notification_<%= current_muser.name %>');
 				var count = <%= notifications.count %>;
+				console.log("count: " + count);
 				$('#notification-menu').click(function() { 
 					//console.log("clicked"); 
 					dispatcher.trigger('async.clearNotifications');
 					return true; 
 				});
 				channel.bind('new', function(message) {
+					console.log("count: " + count);
 					if (message.linktype == 'message'){
 						console.log(message);
 						count++;
