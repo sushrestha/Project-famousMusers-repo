@@ -36,10 +36,10 @@ class FlaggedMusingsController < ApplicationController
       flash[:success] = "Musing succesfully flagged"
   		redirect_to musings_url()
   	else
-      @rating.errors.full_messages.each do |m|
+      @flag.errors.full_messages.each do |m|
         flash[:failure] = m
     end
-    redirect_to new_flag_path
+    redirect_to new_flag_path(@flag.musing_id)
     end
   end
 
