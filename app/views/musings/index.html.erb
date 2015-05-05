@@ -1,18 +1,19 @@
 <% provide(:title, 'Musings-Index') %>
 
- <%= render :partial => "muse_of_day" %>
-      <div class="row">
-        <div class = "jumbotron">        
-        <ol class="microposts">
-        <h1>HIVE MIND </h1>
-        <% if @musings.any? %>
-           <% @musings.each do |musing| %>          
-            <li id="micropost-<%= musing.id %>">
+<%= render :partial => "muse_of_day" %>
+<div class="row">
+  <div class = "jumbotron">
+    <ol class="microposts">
+      <h1>HIVE MIND </h1>
+      <% if @musings.any? %>
+        <% @musings.each do |musing| %>
+          <li id="micropost-<%= musing.id %>">
             <span class="title"><%= musing.title %></span>
             <span class="content">"<%= musing.content %>"</br>
             Average Rating: <b><%= (average_ratings(musing) == 0) ? 0: "*"*average_ratings(musing) %></b>
                <% if logged_in? %>
-                <td><%= link_to " Rate ", new_rating_path(musing), :class=> "btn btn-default"%>               
+                <td><%= link_to " Rate ", new_rating_path(musing), :class=> "btn btn-default"%>
+                <td><%= link_to " Save ", "#", :class=> "btn btn-default"%>
                 <% if current_muser?(musing.muser) %>
                   <%= link_to " Edit ", edit_musing_path(musing), :class=> "btn btn-default" %><%= link_to " Delete ", musing, method: :delete, data: { confirm: 'Are you sure you want to delete?'} , :class=> "btn btn-default" %>
                 <% end %>
@@ -26,7 +27,7 @@
                 <% end %>
               <% end %>
             </span>
-            <span class="content">Categories: <%= (musing.category_id != nil) ? Category.find(musing.category_id).name : 0 %></span> 
+            <span class="content">Categories: <%= (musing.category_id != nil) ? Category.find(musing.category_id).name : 0 %></span>
             <span class="content">Author: <%= link_to musing.muser.name, muser_url(musing.muser) %></span>
             </li>
           <% end %>
@@ -40,6 +41,6 @@
 
 
 
-    
+
   <%= render :partial => "sidebar" %>
 

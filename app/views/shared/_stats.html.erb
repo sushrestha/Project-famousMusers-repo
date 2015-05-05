@@ -1,5 +1,5 @@
 <% @muser ||= current_muser %>
-<div class="field">
+<div class="field" style="margin-bottom: 20px;">
   <a href="<%= following_muser_path(@muser) %>">
     <b><%= @muser.following.count %></b> following
   </a>
