@@ -10,7 +10,6 @@ module NotificationsHelper
     notifications.each do |notification|
       if notification.linktype == 'message'
         @message_sender = Muser.find(notification.linkid)
-        #link_to "New message from " + @message_sender.name, messages_path(:receiver_id => @message_sender.id)
       else
         #other types not yet implemented
       end

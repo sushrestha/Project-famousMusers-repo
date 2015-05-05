@@ -62,10 +62,9 @@ class CompetitionsController < ApplicationController
     #competition is already over or not yet begun
     if (@competition.end < Time.now.to_datetime) or (@competition.start > Time.now.to_datetime) then
       redirect_to :action => 'submit', :id => params[:musing_id]
-      flash[:warning] = "Competition is not current in progress"
+      flash[:warning] = "Competition is not currently in progress"
     else
       #if this musing has already been submitted
-      #Competition.first.musings.where(id=3).count > 0
       if @competition.musings.where("musing_id=?",params[:musing_id]).count > 0
         redirect_to :action => 'submit', :id => params[:musing_id]
         flash[:warning] = "Musing already submitted to competition"

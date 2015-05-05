@@ -34,6 +34,7 @@ class MusersController < ApplicationController
 
   def new
     @muser = Muser.new
+    @categories = Category.all
   end
 
   def create

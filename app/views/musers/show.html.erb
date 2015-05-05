@@ -51,9 +51,11 @@
 		 	</div>
 	<% else %>
 		<div class="field">
-			<%= form_for(current_muser.active_subscribes.build) do |f| %>	
-		  		<%= hidden_field_tag :followed_id, params[:id] %>
-		  		<%= f.submit "Follow", class: "btn btn-default" %>
+			<% unless Muser.find(current_muser.id).active_subscribes.where("followed_id=?", params[:id]).count > 0 %>
+				<%= form_for(current_muser.active_subscribes.build) do |f| %>	
+			  		<%= hidden_field_tag :followed_id, params[:id] %>
+			  		<%= f.submit "Follow", class: "btn btn-default" %>
+				<% end %>
 			<% end %>
 		</div>
 		<div class="field">

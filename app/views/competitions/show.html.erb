@@ -18,8 +18,6 @@
 			<h2><font size="26">Submissions</font></h2>
 			<% @highest_id %>
 			<% @highest_average = 0.0 %>
-<!-- Sort musings by average competition rating in ascending order-->
-<!--competition.musings.order(':averageCompetitionRating').each-->
 			<% if @competition.musings.count < 1 then %>
 				<li id="micropost-1">
 					<span class="content">

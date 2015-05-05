@@ -5,7 +5,7 @@ class SubscribesController < ApplicationController
     @muser = Muser.find(params[:followed_id])
     current_muser.follow(@muser)
     respond_to do |format|
-      format.html { redirect_to @muser }
+      format.html { redirect_to current_muser }
       format.js
     end
   end
@@ -14,7 +14,7 @@ class SubscribesController < ApplicationController
     @muser = Subscribe.find(params[:id]).followed
     current_muser.unfollow(@muser)
     respond_to do |format|
-      format.html { redirect_to @muser }
+      format.html { redirect_to current_muser }
       format.js
   end
   end
