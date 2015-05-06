@@ -1,26 +1,27 @@
 <% provide(:title, @title) %>
+<div class = "jumbotron" style="padding:10px; padding-left: 60px; padding-right: 60px">
+<h1><%= @title %></h1>
 <div class="row">
   <aside class="col-md-4">
+    <h3><%= @muser.name %></h3>
     <section class="muser_info">
-
-      <h1><%= @muser.name %></h1>
-      <span><%= link_to "view my profile", @muser %></span>
-      <span><b>Musings:</b> <%= @muser.musings.count %></span>
+      <div class="field"><%= link_to "view my profile", @muser %></div>
+      <div class="field">Musings: <%= @muser.musings.count %></div>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
   </aside>
-  <div class="col-md-8">
-    <h3><%= @title %></h3>
+  <!--<div class="col-md-8">-->
+    
     <% if @musers.any? %>
       <ul class="musers follow">
         <% if @musers.any? %>
           <div class="muser_avatars">
             <% @musers.each do |muser| %>
-            <%= link_to muser.name, "/musers/#{muser.id}/" %>
+            <h4><%= link_to muser.name, "/musers/#{muser.id}/" %>
             <% subscribe = @muser.active_subscribes.where(followed_id: muser.id).first %>   
-             <%= link_to 'Unfollow', subscribe_path(:id => subscribe.id), :method => :delete %><br />
+            <%= link_to 'Unfollow', subscribe_path(:id => subscribe.id), :method => :delete, :class=> "btn btn-default"  %></h4><br/>
             <% end %>
           </div>
         <% end %>
@@ -30,4 +31,4 @@
           Currently there are no <%= @title %>
     <% end %>
   </div>
-</div>
+<!--</div>-->
