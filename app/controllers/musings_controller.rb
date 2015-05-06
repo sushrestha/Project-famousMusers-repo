@@ -10,7 +10,8 @@ before_filter :categories,                  :only => [:new, :create, :edit, :upd
   def index
     if logged_in?
       @musings = Musing.find_by_sql ["SELECT * FROM musings WHERE isPrivate = ?
-                               UNION SELECT * FROM musings WHERE muser_id = ?",
+                               UNION SELECT * FROM musings WHERE muser_id = ?
+                               ORDER BY id desc",
                                0, current_muser]
     else
       @musings = Musing.where("isPrivate = ?", 0)
