@@ -3,5 +3,4 @@
 
 <h3>Comment: <%= @picture.comment %></h3>
 <h3>Content Type: <%= @picture.content_type %></h3>
-<img src="<%= url_for(:action => 'picture', :id => @picture.id) %>"/>
-<img src="http://localhost:3000/picture/"<%= @picture.id %>/>
+<img src="<%= url_for(:controller => 'upload', :action => 'picture', :id => @picture.id) %>"/>
