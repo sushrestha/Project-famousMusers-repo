@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
         @notification = Notification.new(linktype: 'message',linkid: current_muser.id, unread: 't', muser_id: @myreceiverid)
         if @notification.save
           @notification_channel = "notification_" + @message.recipient.name
-          event = {:linktype => "message", :linkid => current_muser.id, :name => current_muser.name}
+          event = {:linktype => "message", :linkid => current_muser.id, :name => current_muser.name, :messageid => @message.id}
           #push notification that a new notification should be made
           WebsocketRails[@notification_channel].trigger 'new', event
           
