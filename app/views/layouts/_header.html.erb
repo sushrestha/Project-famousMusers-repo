@@ -46,6 +46,7 @@
           </li>
 	    	<script>
 				channel = dispatcher.subscribe('notification_<%= current_muser.name %>');
+				var messageid = 0;
 				var count = <%= notifications.count %>;
 				console.log("count: " + count);
 				$('#notification-menu').click(function() { 
@@ -54,67 +55,64 @@
 					return true; 
 				});
 				channel.bind('new', function(message) {
-					console.log("count: " + count);
 					if (message.linktype == 'message'){
-						console.log("count inside match:" + count);
-						console.log(message);
-						count++;
-						console.log("count after inc: " + count);
-						$('#notification-count').html(count);
-						console.log($('#notification-list').html());
-					  
-			    		var el = $( '<div></div>' );
-						el.html($('#notification-list').html());
-						//console.log($('li',el));
-						var dict = {};
-						$('li', el).each(function(){
-							//Find linkid
-							var start = this.innerHTML.indexOf("_id=")+4;
-							var end = this.innerHTML.indexOf("\">N");
-							var linkid = this.innerHTML.substring(start,end);
-							//Find message sender name
-							start = this.innerHTML.indexOf("from ")+5;
-							end = this.innerHTML.indexOf("</a>");
-							var name = this.innerHTML.substring(start,end);
-							//Find number of messages from sender
-							start = this.innerHTML.indexOf("(")+1;
-							end = this.innerHTML.indexOf(")");
-							var messageCount = this.innerHTML.substring(start,end);
-							//console.log(this.innerHTML);
-							//store everything in a dictionary
-							dict[linkid] = [messageCount,name];
-						})
-						//rewrite the link to increment the number of notifications from that user
-						if (message.linkid in dict){
-							var numNotifications = dict[message.linkid][0];
-							numNotifications++;
-							var senderName = dict[message.linkid][1];
-							//console.log("array:" + $('li',el));
+						console.log("messageid:" + messageid + ", message.messageid:" + message.messageid);
+						if(messageid != message.messageid){
+							messageid = message.messageid;
+							console.log(message);
+							count++;
+							$('#notification-count').html(count);
+							console.log($('#notification-list').html());
+						  
+				    		var el = $( '<div></div>' );
+							el.html($('#notification-list').html());
+							var dict = {};
 							$('li', el).each(function(){
-							//Find linkid
-							var start = this.innerHTML.indexOf("_id=")+4;
-							var end = this.innerHTML.indexOf("\">N");
-							var linkid = this.innerHTML.substring(start,end);
-							//Find li id so we can update it below
-							start = this.outerHTML.indexOf("id=\"")+4;
-							end = this.outerHTML.indexOf("\">");
-							var id = this.outerHTML.substring(start,end);
-							if(linkid == message.linkid){
+								//Find linkid
+								var start = this.innerHTML.indexOf("_id=")+4;
+								var end = this.innerHTML.indexOf("\">N");
+								var linkid = this.innerHTML.substring(start,end);
+								//Find message sender name
+								start = this.innerHTML.indexOf("from ")+5;
+								end = this.innerHTML.indexOf("</a>");
+								var name = this.innerHTML.substring(start,end);
 								//Find number of messages from sender
 								start = this.innerHTML.indexOf("(")+1;
 								end = this.innerHTML.indexOf(")");
-								var senderCount = this.innerHTML.substring(start,end);
-								var updatedCount = this.innerHTML.replace("(" + senderCount + ")", "(" + (++senderCount) + ")");
-								id = "#" + id;
-								$(id).html(updatedCount);
-								console.log($(id).html());
+								var messageCount = this.innerHTML.substring(start,end);
+								//store everything in a dictionary
+								dict[linkid] = [messageCount,name];
+							})
+							//rewrite the link to increment the number of notifications from that user
+							if (message.linkid in dict){
+								var numNotifications = dict[message.linkid][0];
+								numNotifications++;
+								var senderName = dict[message.linkid][1];
+								$('li', el).each(function(){
+									//Find this list item linkid
+									var start = this.innerHTML.indexOf("_id=")+4;
+									var end = this.innerHTML.indexOf("\">N");
+									var linkid = this.innerHTML.substring(start,end);
+									//Find li id so we can update it below
+									start = this.outerHTML.indexOf("id=\"")+4;
+									end = this.outerHTML.indexOf("\">");
+									var id = this.outerHTML.substring(start,end);
+									if(linkid == message.linkid){
+										//Find number of messages from sender
+										start = this.innerHTML.indexOf("(")+1;
+										end = this.innerHTML.indexOf(")");
+										var senderCount = this.innerHTML.substring(start,end);
+										var updatedCount = this.innerHTML.replace("(" + senderCount + ")", "(" + (++senderCount) + ")");
+										id = "#" + id;
+										$('#notification-list').html($('#notification-list').html().replace(this.innerHTML,updatedCount));
+									}
+								})
+							//if no notifications from the user yet we need to add that to the list
+							}else{
+								var link = '<li id="' + message.name + '"><a href="/messages?receiver_id=' + message.linkid + '">New message from ' + message.name + '</a> (1)</li>';
+								$('#notification-list').append(link);
 							}
-						})
-						//if no notifications from the user yet we need to add that to the list
-						}else{
-							var link = '<li id="' + message.name + '"><a href="/messages?receiver_id=' + message.linkid + '">New message from ' + message.name + '</a> (1)</li>';
-							$('#notification-list').append(link);
-						}
+					 }
 				 }
 				});
 			</script>
