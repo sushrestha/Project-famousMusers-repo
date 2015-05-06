@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'notifications/index'
 
-  get 'flagged_musings/index'
+  #get 'flagged_musings/index'
 
   resources :feedbacks
   #resources :categories

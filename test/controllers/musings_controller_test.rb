@@ -6,7 +6,7 @@ def setup
 	
 end
   # test "should get index" do
-  #   get :index
+  #   get :categories
   #   assert_response :success
   # end
 
