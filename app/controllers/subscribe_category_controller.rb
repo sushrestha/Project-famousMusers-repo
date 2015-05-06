@@ -1,5 +1,6 @@
 class SubscribeCategoryController < ApplicationController
 
+before_action :logged_in_muser
 
 def index
     #@subscribe_category = SubscribeCategory.where("muser_id = ?", current_muser.id)
