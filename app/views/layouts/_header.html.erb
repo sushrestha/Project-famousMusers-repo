@@ -96,7 +96,7 @@
 							//Find li id so we can update it below
 							start = this.outerHTML.indexOf("id=\"")+4;
 							end = this.outerHTML.indexOf("\">");
-							
+							var id = this.outerHTML.substring(start,end);
 							if(linkid == message.linkid){
 								//Find number of messages from sender
 								start = this.innerHTML.indexOf("(")+1;
