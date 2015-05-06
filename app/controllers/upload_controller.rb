@@ -16,6 +16,9 @@ class UploadController < ApplicationController
    def save
      @picture = Picture.new(picture_params)
        if @picture.save
+
+     #@musing = Musing.find(params[:musing_id])
+     #@picture.musing = @musing 
           redirect_to(controller: 'upload', action: 'show', id: @picture.id)
        else
           render(action: :get)
