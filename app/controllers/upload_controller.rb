@@ -16,13 +16,14 @@ class UploadController < ApplicationController
    def save
      @picture = Picture.new(picture_params)
        if @picture.save
-          redirect_to(action: 'show', id: @picture.id)
+          redirect_to(controller: 'upload', action: 'show', id: @picture.id)
        else
           render(action: :get)
        end
    end
 
    def picture
+     
      @picture = Picture.find(params[:id])
      send_data(@picture.data,
      filename: @picture.name,
