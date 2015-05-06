@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   #resources :categories
   
   #file upload
+
+  get 'file_upload/:id/new' => 'upload#new', :as => 'new_file_upload'
   get 'picture/:id' => 'upload#picture'
-  get 'file_upload' => 'upload#get', :as => 'file_upload'
+  #get 'file_upload' => 'upload#get', :as => 'file_upload'
   post 'file_upload' => 'upload#save'
 
   get 'file_upload/:id' => 'upload#show', :as => 'file_show'

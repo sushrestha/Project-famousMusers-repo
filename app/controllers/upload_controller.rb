@@ -1,6 +1,11 @@
 class UploadController < ApplicationController
-	def get
-       @picture = Picture.new
+
+before_action :logged_in_muser 
+
+	def new
+       @picture = Picture.new       
+       @musing = Musing.find(params[:id])
+       @picture.musing = @musing
     end
    # def index
    # @picture = Picture.all
@@ -15,6 +20,7 @@ class UploadController < ApplicationController
 
    def save
      @picture = Picture.new(picture_params)
+     @picture.musing = Musing.find(params[:picture][:id])
        if @picture.save
 
      #@musing = Musing.find(params[:musing_id])
@@ -38,3 +44,4 @@ class UploadController < ApplicationController
      @picture = Picture.find(params[:id])
    end
 end
+

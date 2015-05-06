@@ -9,8 +9,7 @@
 #  data         :binary
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  musing       :string
-#  references   :string
+#  musing_id    :integer
 #
 
 require 'test_helper'

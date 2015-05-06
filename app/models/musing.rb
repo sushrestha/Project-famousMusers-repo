@@ -31,7 +31,9 @@ class Musing < ActiveRecord::Base
         class_name: 'CompetitionRating',
         foreign_key: 'musing_id'
   has_and_belongs_to_many :competitions #, join_table: :competitions_musings
-  
+  	#for picture file
+    has_one :file, :class_name => "Picture", :foreign_key => 'musing_id', dependent: :destroy
+
 	validates :title, presence: true, length: { maximum: 50 }
 	validates :content, presence: true, length: { maximum: 250 }
 	validates :isPrivate, presence: true

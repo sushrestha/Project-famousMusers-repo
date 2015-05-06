@@ -6,6 +6,11 @@
   Average Rating: <b><%= (average_ratings(musing) == 0) ? 0: "*"*average_ratings(musing) %></b>
  
     <% if current_muser?(musing.muser) %>
+    <% if !musing.file.nil? %>
+    	<%= link_to " View Picture " , file_show_path(musing.file.id), :class=> "btn btn-default" %>
+    <% else %>
+    	<%= link_to " Add Picture ", new_file_upload_path(musing), :class=> "btn btn-default" %>
+    <% end %>
       <%= link_to " Edit ", edit_musing_path(musing), :class=> "btn btn-default" %> <%= link_to " Delete ", musing, method: :delete, data: { confirm: 'Are you sure you want to delete?'}, :class=> "btn btn-default" %>
     <% end %>
   </span>

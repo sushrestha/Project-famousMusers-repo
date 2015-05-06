@@ -2,5 +2,5 @@
 <h1> your file </h1>
 
 <h3>Comment: <%= @picture.comment %></h3>
-<h3>Content Type: <%= @picture.content_type %></h3>
 <img src="<%= url_for(:controller => 'upload', :action => 'picture', :id => @picture.id) %>"/>
+
