@@ -6,7 +6,7 @@ class UploadController < ApplicationController
    # @picture = Picture.all
  # end
 # . . .
-private
+
      # Never trust parameters from the scary internet, only allow the white
      # list through.
    def picture_params
