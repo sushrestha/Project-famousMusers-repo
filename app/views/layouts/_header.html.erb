@@ -56,14 +56,16 @@
 				channel.bind('new', function(message) {
 					console.log("count: " + count);
 					if (message.linktype == 'message'){
+						console.log("count inside match:" + count);
 						console.log(message);
 						count++;
+						console.log("count after inc: " + count);
 						$('#notification-count').html(count);
 						console.log($('#notification-list').html());
 					  
 			    		var el = $( '<div></div>' );
 						el.html($('#notification-list').html());
-						console.log($('li',el));
+						//console.log($('li',el));
 						var dict = {};
 						$('li', el).each(function(){
 							//Find linkid
@@ -77,17 +79,17 @@
 							//Find number of messages from sender
 							start = this.innerHTML.indexOf("(")+1;
 							end = this.innerHTML.indexOf(")");
-							var count = this.innerHTML.substring(start,end);
-							console.log(this.innerHTML);
+							var messageCount = this.innerHTML.substring(start,end);
+							//console.log(this.innerHTML);
 							//store everything in a dictionary
-							dict[linkid] = [count,name];
+							dict[linkid] = [messageCount,name];
 						})
 						//rewrite the link to increment the number of notifications from that user
 						if (message.linkid in dict){
 							var numNotifications = dict[message.linkid][0];
 							numNotifications++;
 							var senderName = dict[message.linkid][1];
-							console.log("array:" + $('li',el));
+							//console.log("array:" + $('li',el));
 							$('li', el).each(function(){
 							//Find linkid
 							var start = this.innerHTML.indexOf("_id=")+4;
@@ -101,8 +103,8 @@
 								//Find number of messages from sender
 								start = this.innerHTML.indexOf("(")+1;
 								end = this.innerHTML.indexOf(")");
-								var count = this.innerHTML.substring(start,end);
-								var updatedCount = this.innerHTML.replace("(" + count + ")", "(" + (++count) + ")");
+								var senderCount = this.innerHTML.substring(start,end);
+								var updatedCount = this.innerHTML.replace("(" + senderCount + ")", "(" + (++senderCount) + ")");
 								id = "#" + id;
 								$(id).html(updatedCount);
 								console.log($(id).html());
