@@ -1,9 +1,6 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+== Information and neccessary stufss to run the application
 
 * Ruby version '2.2.0'
 
@@ -19,5 +16,5 @@ Run 'make s' to run server on localhost:3000/
 Sign up as a new user or use a testuser from seed.rb
 
 Example:
-	username: fake1@fake1.com password: password
-	username: admin@admin.com password: password   ( admin/moderator user)
+for normal user(non-moderator) use => username: fake1@fake1.com password: password
+for admin user (moderator) use =>     username: admin@admin.com password: password   
