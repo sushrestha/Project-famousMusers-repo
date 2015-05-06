@@ -27,9 +27,9 @@
 <%= form_for(@subscribe_category, html: {class: 'form-horizontal'}) do |f| %>
 	<%= f.hidden_field :id, :value => @subscribe_category.category.id %>
 	<% if @category.categorysubsrciptions.find_by(muser_id: current_muser.id).nil? %>
-    <%= f.submit  "Subsribe", :class=> "btn btn-default" %> 
+    <%= f.submit  "Subscribe", :class=> "btn btn-default" %> 
     <% else %> 
-    <%= link_to " Unsubsribe ", @category.categorysubsrciptions.find_by(muser_id: current_muser.id), method: :delete, data: { confirm: 'Are you sure you want to Unsubsribe?'} , :class=> "btn btn-default" %>
+    <%= link_to " Unsubscribe ", @category.categorysubsrciptions.find_by(muser_id: current_muser.id), method: :delete, data: { confirm: 'Are you sure you want to Unsubsribe?'} , :class=> "btn btn-default" %>
     <% end %>
 <% end %>
 </br>

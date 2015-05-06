@@ -45,12 +45,15 @@ class MusersController < ApplicationController
     if @muser.save
       
       @categories = params[:category_subscriptions]
-      @categories.each do |category_id|
-        SubscribeCategory.create(:muser_id => @muser.id, :category_id => category_id)
+      if(@categories) then
+        @categories.each do |category_id|
+          SubscribeCategory.create(:muser_id => @muser.id, :category_id => category_id)
+        end
       end
       log_in @muser
       flash[:success] = "Signed up successfully!"
       redirect_to @muser
+      
     else
       render 'new'
     end

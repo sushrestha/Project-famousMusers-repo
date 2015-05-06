@@ -35,15 +35,6 @@ muser6 = Muser.create( email: 'admin@admin.com',
               name: 'Admin Admin',
               password: 'password',
               isModerator: 't')
-
-@myMessage = Message.create( content: 'test message',
-                             author_id: muser1.id,
-                             recipient_id: muser2.id) 
-	
-notification1 = Notification.create( linktype: "message",
-                                      linkid: muser2.id,
-                                      unread: 't',
-                                      muser_id: muser1.id)
           
 compRating1 = CompetitionRating.create([
             {competitionstars: 1, musing_id: 1, competition_id: 3, muser_id: 1},
